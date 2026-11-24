@@ -1,0 +1,98 @@
+/* Tech Radar — styles riêng cho radar.html (dùng chung token --c-* từ style.css) */
+
+.radar-card {
+  transition: transform 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.radar-card:hover {
+  transform: translateY(-2px);
+  border-color: rgb(var(--c-accent) / 0.45);
+}
+
+.radar-score-bar {
+  height: 4px;
+  border-radius: 999px;
+  background: rgb(var(--c-surface-4));
+  overflow: hidden;
+}
+
+.radar-score-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgb(var(--c-accent)), rgb(var(--c-accent-2)));
+}
+
+.radar-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.55rem;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid rgb(var(--c-line) / 0.7);
+  background: rgb(var(--c-surface-3) / 0.6);
+  color: rgb(var(--c-fg-muted));
+  transition: all 0.15s ease;
+}
+
+.radar-chip:hover {
+  color: rgb(var(--c-fg-strong));
+}
+
+.radar-chip[aria-pressed="true"] {
+  background: rgb(var(--c-accent) / 0.15);
+  border-color: rgb(var(--c-accent) / 0.45);
+  color: rgb(var(--c-accent));
+}
+
+.radar-source-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.4rem;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  border: 1px solid transparent;
+}
+
+.radar-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgb(var(--c-surface-3) / 0.45) 25%,
+    rgb(var(--c-surface-3) / 0.75) 37%,
+    rgb(var(--c-surface-3) / 0.45) 63%
+  );
+  background-size: 400% 100%;
+  animation: radar-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes radar-shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+#refreshIcon.spinning {
+  animation: radar-spin 0.9s linear infinite;
+}
+
+@keyframes radar-spin {
+  to { transform: rotate(360deg); }
+}
+
+#toast.show {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .radar-card,
+  .radar-skeleton,
+  #refreshIcon.spinning {
+    animation: none;
+    transition: none;
+  }
+}

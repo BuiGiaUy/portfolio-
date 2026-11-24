@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Radar — Việc IT &amp; Facebook page thị trường Việt Nam | Bùi Gia Uy</title>
+  <meta name="description" content="Bảng tin việc làm IT thị trường Việt Nam (TopCV, vieclam24h, VietnamWorks, ITviec), bài từ Facebook page và tin công nghệ, chấm điểm theo hồ sơ AI Engineering / Full-stack.">
+  <meta name="robots" content="noindex">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            page: 'rgb(var(--c-page) / <alpha-value>)',
+            surface: {
+              DEFAULT: 'rgb(var(--c-surface) / <alpha-value>)',
+              2: 'rgb(var(--c-surface-2) / <alpha-value>)',
+              3: 'rgb(var(--c-surface-3) / <alpha-value>)',
+              4: 'rgb(var(--c-surface-4) / <alpha-value>)'
+            },
+            line: {
+              DEFAULT: 'rgb(var(--c-line) / <alpha-value>)',
+              2: 'rgb(var(--c-line-2) / <alpha-value>)'
+            },
+            fg: {
+              DEFAULT: 'rgb(var(--c-fg) / <alpha-value>)',
+              strong: 'rgb(var(--c-fg-strong) / <alpha-value>)',
+              muted: 'rgb(var(--c-fg-muted) / <alpha-value>)'
+            },
+            accent: {
+              DEFAULT: 'rgb(var(--c-accent) / <alpha-value>)',
+              2: 'rgb(var(--c-accent-2) / <alpha-value>)',
+              3: 'rgb(var(--c-accent-3) / <alpha-value>)',
+              4: 'rgb(var(--c-accent-4) / <alpha-value>)',
+              solid: 'rgb(var(--c-accent-solid) / <alpha-value>)'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', '"Be Vietnam Pro"', 'system-ui', '"Segoe UI"', 'Roboto', 'sans-serif'],
+            display: ['"Be Vietnam Pro"', 'Inter', 'system-ui', '"Segoe UI"', 'sans-serif'],
+            mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'Consolas', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/radar.css">
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+
+  <!-- Áp theme trước khi vẽ để không nháy màu -->
+  <script>
+    (function () {
+      var isLight = false;
+      try { isLight = localStorage.getItem('theme') === 'light'; } catch (e) { isLight = false; }
+      document.documentElement.classList.toggle('dark', !isLight);
+    })();
+  </script>
+</head>
+<body class="font-sans bg-page text-fg-strong min-h-screen selection:bg-accent/30 relative">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-page/85 backdrop-blur-xl border-b border-line/60">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 min-w-0">
+        <a href="index.html" class="shrink-0 w-9 h-9 rounded-lg border border-accent/40 bg-accent/10 flex items-center justify-center font-mono text-[11px] font-semibold text-accent hover:bg-accent/20 transition-colors" title="Về portfolio">
+          &lt;GU/&gt;
+        </a>
+        <div class="min-w-0">
+          <h1 class="text-sm sm:text-base font-bold leading-tight truncate">Tech Radar</h1>
+          <p class="text-[11px] text-fg-muted truncate">Việc IT Việt Nam · Facebook page · AI</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span id="lastUpdated" class="hidden sm:inline text-[11px] text-fg-muted font-mono">chưa tải</span>
+        <button id="refreshBtn" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-accent-solid hover:bg-accent text-white text-xs font-semibold transition-colors" title="Tải lại dữ liệu">
+          <svg id="refreshIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5M20 20v-5h-5M20 9A8 8 0 006.3 5.7L4 8m16 8l-2.3 2.3A8 8 0 014 15"></path></svg>
+          <span class="hidden sm:inline">Cập nhật</span>
+        </button>
+        <button id="themeToggleBtn" class="p-2 rounded-lg border border-line bg-surface-2 hover:bg-surface-3 transition-colors" aria-pressed="true" aria-label="Đổi theme sáng/tối">
+          <span id="themeIcon" class="block"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6">
+
+    <!-- Hero / giải thích ngắn -->
+    <section class="glass-panel rounded-2xl border border-line/60 p-5 sm:p-6">
+      <div class="flex flex-wrap items-start justify-between gap-4">
+        <div class="max-w-xl">
+          <h2 class="text-lg sm:text-xl font-bold">Cái gì đang nóng, lọc đúng việc của bạn</h2>
+          <p class="text-xs sm:text-sm text-fg-muted mt-1.5 leading-relaxed">
+            Việc IT thị trường Việt Nam (TopCV, vieclam24h, VietnamWorks, ITviec) và bài từ Facebook page,
+            cộng thêm tin công nghệ quốc tế. Điểm càng cao càng sát hồ sơ AI / Full-stack của bạn.
+          </p>
+        </div>
+        <div id="statStrip" class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center w-full sm:w-auto">
+          <div class="px-3 py-2 rounded-xl bg-surface-2 border border-line/60">
+            <div id="statTotal" class="text-base font-bold font-mono text-accent">0</div>
+            <div class="text-[10px] text-fg-muted">bài</div>
+          </div>
+          <div class="px-3 py-2 rounded-xl bg-surface-2 border border-line/60">
+            <div id="statSources" class="text-base font-bold font-mono text-accent-3">0/0</div>
+            <div class="text-[10px] text-fg-muted">nguồn live</div>
+          </div>
+          <div class="px-3 py-2 rounded-xl bg-surface-2 border border-line/60">
+            <div id="statScore" class="text-base font-bold font-mono text-accent-2">—</div>
+            <div class="text-[10px] text-fg-muted">điểm TB</div>
+          </div>
+          <div class="px-3 py-2 rounded-xl bg-surface-2 border border-line/60">
+            <div id="statSaved" class="text-base font-bold font-mono text-accent-4">0</div>
+            <div class="text-[10px] text-fg-muted">đã lưu</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trạng thái từng nguồn -->
+      <div id="sourceStatus" class="flex flex-wrap gap-2 mt-4"></div>
+    </section>
+
+    <!-- Bộ lọc -->
+    <section class="sticky top-[57px] z-30 -mx-4 sm:mx-0 px-4 sm:px-0 py-2 bg-page/90 backdrop-blur-md">
+      <div class="glass-panel rounded-2xl border border-line/60 p-3 sm:p-4 space-y-3">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <div class="relative flex-1">
+            <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-fg-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"></path></svg>
+            <input id="searchInput" type="search" placeholder="Tìm trong tiêu đề, mô tả, tag… (vd: rag, nestjs, tuyển dụng)"
+                   class="w-full bg-surface border border-line rounded-xl pl-9 pr-3 py-2.5 text-xs sm:text-sm text-fg-strong placeholder-slate-500 focus:outline-none focus:border-accent transition-colors">
+          </div>
+          <select id="windowSelect" class="bg-surface border border-line rounded-xl px-3 py-2.5 text-xs sm:text-sm text-fg-strong focus:outline-none focus:border-accent">
+            <option value="24">24 giờ</option>
+            <option value="168">7 ngày</option>
+            <option value="720" selected>30 ngày</option>
+            <option value="0">Mọi lúc</option>
+          </select>
+          <select id="locationSelect" class="bg-surface border border-line rounded-xl px-3 py-2.5 text-xs sm:text-sm text-fg-strong focus:outline-none focus:border-accent">
+            <option value="all" selected>Mọi địa điểm</option>
+            <option value="Hà Nội">Hà Nội</option>
+            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+            <option value="Đà Nẵng">Đà Nẵng</option>
+            <option value="remote">Remote</option>
+          </select>
+          <select id="sortSelect" class="bg-surface border border-line rounded-xl px-3 py-2.5 text-xs sm:text-sm text-fg-strong focus:outline-none focus:border-accent">
+            <option value="score" selected>Phù hợp nhất</option>
+            <option value="date">Mới nhất</option>
+            <option value="engagement">Tương tác cao</option>
+          </select>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="text-[11px] text-fg-muted mr-1">Chủ đề:</span>
+          <div id="topicChips" class="flex flex-wrap gap-1.5"></div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="text-[11px] text-fg-muted mr-1">Nguồn:</span>
+          <div id="sourceChips" class="flex flex-wrap gap-1.5"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feed -->
+    <section>
+      <div id="feed" class="grid grid-cols-1 lg:grid-cols-2 gap-3"></div>
+      <div id="feedEmpty" class="hidden glass-panel rounded-2xl border border-line/60 p-8 text-center">
+        <p class="text-sm text-fg-muted">Không có bài nào khớp bộ lọc hiện tại. Thử mở rộng thời gian hoặc bỏ bớt chủ đề.</p>
+      </div>
+    </section>
+
+    <!-- Social slot + ghi chú -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+      <div class="glass-panel rounded-2xl border border-line/60 p-5">
+        <h3 class="text-sm font-bold flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-accent-2"></span>
+          Nạp việc làm &amp; Facebook page
+        </h3>
+        <p class="text-xs text-fg-muted mt-2 leading-relaxed">
+          Chạy <code class="inline-code">node tools/job-collect.mjs</code> để lấy tin từ VietnamWorks &amp; vieclam24h
+          vào <code class="inline-code">assets/data/job-feed.json</code>. Facebook page cần Page access token
+          (Graph API), TopCV/ITviec cần cookie — xem ghi chú.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-3">
+          <button id="importSocialBtn" class="px-3 py-2 rounded-lg bg-surface-3 hover:bg-surface-4 border border-line text-xs font-semibold transition-colors">
+            Dán JSON (job / Facebook)
+          </button>
+          <button id="socialStatusBtn" class="px-3 py-2 rounded-lg bg-surface-3 hover:bg-surface-4 border border-line text-xs font-semibold transition-colors">
+            Kiểm tra file dữ liệu
+          </button>
+        </div>
+        <p id="socialHint" class="text-[11px] text-fg-muted mt-2 font-mono">chưa kiểm tra</p>
+      </div>
+
+      <div class="glass-panel rounded-2xl border border-line/60 p-5">
+        <h3 class="text-sm font-bold flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-accent-4"></span>
+          Nguồn nào đáng dùng?
+        </h3>
+        <ul class="text-xs text-fg-muted mt-2 space-y-1.5 leading-relaxed">
+          <li><strong class="text-fg">Chạy ngay:</strong> vieclam24h, VietnamWorks (đọc JSON server render, không cần key).</li>
+          <li><strong class="text-fg">TopCV, ITviec:</strong> Cloudflare chặn bot — cần cookie <code class="inline-code">cf_clearance</code> từ trình duyệt của bạn.</li>
+          <li><strong class="text-fg">Facebook page:</strong> cần Page access token (Graph API) hoặc dán JSON bài viết.</li>
+          <li><strong class="text-fg">TikTok / IG / X:</strong> không có quyền truy cập công khai — để trống hoặc dùng dịch vụ trả phí.</li>
+        </ul>
+        <a href="docs/radar-notes.md" class="inline-flex items-center gap-1 text-xs font-semibold text-accent mt-3 hover:underline">
+          Xem ghi chú chi tiết
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Đã lưu -->
+    <section class="glass-panel rounded-2xl border border-line/60 p-5">
+      <div class="flex items-center justify-between gap-3 flex-wrap">
+        <h3 class="text-sm font-bold">Đã lưu để đọc sau</h3>
+        <div class="flex gap-2">
+          <button id="exportMdBtn" class="px-3 py-1.5 rounded-lg bg-surface-3 hover:bg-surface-4 border border-line text-[11px] font-semibold transition-colors">Xuất Markdown</button>
+          <button id="exportJsonBtn" class="px-3 py-1.5 rounded-lg bg-surface-3 hover:bg-surface-4 border border-line text-[11px] font-semibold transition-colors">Xuất JSON</button>
+          <button id="clearSavedBtn" class="px-3 py-1.5 rounded-lg bg-surface-3 hover:bg-surface-4 border border-line text-[11px] font-semibold text-fg-muted transition-colors">Xoá hết</button>
+        </div>
+      </div>
+      <ul id="savedList" class="mt-3 space-y-2 text-xs text-fg-muted">
+        <li class="italic">Chưa lưu bài nào.</li>
+      </ul>
+    </section>
+
+    <footer class="pt-2 pb-8 text-center text-[11px] text-fg-muted">
+      Tech Radar · dữ liệu công khai, tự tải trong trình duyệt · không lưu lịch sử lên server
+      · <a href="index.html" class="text-accent hover:underline">về portfolio</a>
+    </footer>
+  </main>
+
+  <!-- Dialog dán JSON -->
+  <dialog id="importDialog" class="bg-transparent p-0 m-auto backdrop:bg-black/60 w-[min(680px,92vw)]">
+    <form method="dialog" class="glass-panel rounded-2xl border border-line/70 p-5 bg-surface">
+      <h3 class="text-sm font-bold">Dán JSON từ collector</h3>
+      <p class="text-[11px] text-fg-muted mt-1">
+        Mảng item hoặc object <code class="inline-code">{ "items": [...] }</code>. Mỗi item cần:
+        <code class="inline-code">source, title, url, createdAt</code>; tuỳ chọn <code class="inline-code">summary, tags, metrics, author</code>.
+      </p>
+      <textarea id="importText" rows="9" spellcheck="false"
+        class="w-full mt-3 bg-page border border-line rounded-xl p-3 text-[11px] font-mono text-fg-strong focus:outline-none focus:border-accent"
+        placeholder='[{"source":"tiktok","title":"RAG là gì","url":"https://...","createdAt":"2026-01-01T10:00:00Z","metrics":{"views":12000,"likes":800}}]'></textarea>
+      <div class="flex items-center justify-between gap-3 mt-3">
+        <p id="importError" class="text-[11px] text-rose-500"></p>
+        <div class="flex gap-2">
+          <button value="cancel" class="px-3 py-2 rounded-lg bg-surface-3 border border-line text-xs font-semibold">Huỷ</button>
+          <button id="importConfirm" value="ok" class="px-3 py-2 rounded-lg bg-accent-solid text-white text-xs font-semibold">Nạp vào feed</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 hidden"></div>
+
+  <script src="assets/js/radar.js"></script>
+</body>
+</html>

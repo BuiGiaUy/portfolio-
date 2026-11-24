@@ -1,0 +1,27 @@
+{
+  "updatedAt": "2026-11-24T08:00:00.000Z",
+  "items": [
+    {
+      "demo": true,
+      "source": "tiktok",
+      "title": "Mổ xẻ multi-agent LangGraph: khi nào nên dùng, khi nào không",
+      "url": "https://www.tiktok.com/@example/video/0000000001",
+      "summary": "Video 90 giây so sánh single-agent tool calling với multi-agent graph trên cùng một bài toán RAG.",
+      "author": "@example",
+      "tags": ["agent", "langgraph", "rag"],
+      "createdAt": "2026-11-23T10:00:00.000Z",
+      "metrics": { "views": 182000, "likes": 12400, "comments": 310 }
+    },
+    {
+      "demo": true,
+      "source": "youtube",
+      "title": "FastAPI + pgvector: dựng RAG nội bộ trong 20 phút",
+      "url": "https://www.youtube.com/watch?v=example0002",
+      "summary": "Hướng dẫn dựng pipeline ingest - embed - retrieve - guardrail với dữ liệu tiếng Việt.",
+      "author": "Example Channel",
+      "tags": ["fastapi", "pgvector", "rag", "python"],
+      "createdAt": "2026-11-22T04:30:00.000Z",
+      "metrics": { "views": 54000, "likes": 3100, "comments": 208 }
+    }
+  ]
+}

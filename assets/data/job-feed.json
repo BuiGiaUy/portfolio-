@@ -1,0 +1,554 @@
+{
+  "updatedAt": "2026-11-24T15:17:42.489Z",
+  "items": [
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/nhan-vien-kiem-thu-phan-mem-tester-c8p210000160id201001357.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Nhân Viên Kiểm Thử Phần Mềm (Tester)",
+      "url": "https://vieclam24h.vn/it-phan-mem/nhan-vien-kiem-thu-phan-mem-tester-c8p210000160id201001357.html",
+      "company": "Công Ty Cổ Phần Tập Đoàn Công Nghệ Thiên Hoàng",
+      "salary": "10–20 triệu",
+      "location": "Hà Nội",
+      "level": "",
+      "summary": "- Tốt nghiệp Đại học trở lên, ưu tiên chuyên ngành Công nghệ thông tin hoặc các lĩnh vực liên quan. - Có ít nhất 1 năm kinh nghiệm làm việc ở vị trí tương đương hoặc kiểm thử phần mềm. - Thành thạo Microsoft Word, Excel ",
+      "skills": [
+        "Testing",
+        "SQL"
+      ],
+      "createdAt": "2026-11-23T02:39:15.000Z",
+      "deadline": "2027-12-31T16:59:59.000Z",
+      "metrics": {
+        "views": 175,
+        "applicants": 3
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/fullstack-software-engineer-c8p210000187id201000892.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Fullstack Software Engineer",
+      "url": "https://vieclam24h.vn/it-phan-mem/fullstack-software-engineer-c8p210000187id201000892.html",
+      "company": "Công Ty Cổ Phần Gia Dụng Thông Minh 3Ae",
+      "salary": "25–35 triệu",
+      "location": "Hồ Chí Minh",
+      "level": "",
+      "summary": "a.Yêu cầu bắt buộc (Must-have): Năng lực làm việc cùng AI (Bắt buộc): Biết ứng dụng AI sâu vào quy trình công việc hàng ngày: thành thạo việc phối hợp với các AI Coding Agent / Assistant (như Claude Code, Cursor, Copilot",
+      "skills": [
+        "Node.js",
+        "NestJS",
+        "React",
+        "Next.js"
+      ],
+      "createdAt": "2026-11-21T03:38:05.000Z",
+      "deadline": "2026-12-20T16:59:59.000Z",
+      "metrics": {
+        "views": 643,
+        "applicants": 31
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/it-developer-c8p210000187id201000536.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "IT Developer",
+      "url": "https://vieclam24h.vn/it-phan-mem/it-developer-c8p210000187id201000536.html",
+      "company": "Công Ty Trách Nhiệm Hữu Hạn Kl Manufacturing",
+      "salary": "Thương lượng",
+      "location": "Hồ Chí Minh",
+      "level": "",
+      "summary": "Có từ 02 năm kinh nghiệm ở vị trí IT Developer hoặc tương đương. Thành thạo C#, ASP.NET Core, SQL và JavaScript. Ưu tiên ứng viên có kiến thức về PostgreSQL, Linux/VPS và triển khai ứng dụng web. Có kiến thức về IT Suppo",
+      "skills": [
+        "JavaScript",
+        "Java",
+        ".NET",
+        "C#"
+      ],
+      "createdAt": "2026-11-20T09:17:31.000Z",
+      "deadline": "2026-12-12T16:59:59.000Z",
+      "metrics": {
+        "views": 1334,
+        "applicants": 69
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/q2-full-stack-development-c8p210000187id200997018.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "[Q2] Full-Stack Development",
+      "url": "https://vieclam24h.vn/it-phan-mem/q2-full-stack-development-c8p210000187id200997018.html",
+      "company": "Công Ty Cổ Phần Kết Nối Du Lịch Sài Gòn",
+      "salary": "15–20 triệu",
+      "location": "Hồ Chí Minh",
+      "level": "",
+      "summary": "Có từ 1–2 năm kinh nghiệm lập trình, phát triển phần mềm. Có kinh nghiệm phát triển ứng dụng Web và Mobile App. Ưu tiên ứng viên từng tham gia xây dựng phần mềm quản lý bán hàng (POS), phần mềm quản lý cửa hàng hoặc hệ t",
+      "skills": [],
+      "createdAt": "2026-11-17T08:19:38.000Z",
+      "deadline": "2026-12-31T16:59:59.000Z",
+      "metrics": {
+        "views": 1047,
+        "applicants": 114
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/lap-trinh-vien-web-frontend-backend-pentasecurity-vina-c8p210000160id200995920.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Lập Trình Viên Web (Frontend / Backend) - Pentasecurity Vina",
+      "url": "https://vieclam24h.vn/it-phan-mem/lap-trinh-vien-web-frontend-backend-pentasecurity-vina-c8p210000160id200995920.html",
+      "company": "CÔNG TY TNHH PENTASECURITY VINA",
+      "salary": "12–20 triệu",
+      "location": "Hà Nội",
+      "level": "",
+      "summary": "- Có từ 1 đến 3 năm kinh nghiệm làm việc trong lĩnh vực phát triển web tương đương. - Nắm vững kiến thức về HTML/CSS, JavaScript, giao thức HTTP và xây dựng API. - Có kinh nghiệm thực tế khi sử dụng Git, React và thư việ",
+      "skills": [
+        "PHP",
+        "React",
+        "JavaScript",
+        "Java"
+      ],
+      "createdAt": "2026-11-16T09:38:18.000Z",
+      "deadline": "2026-11-30T16:59:59.000Z",
+      "metrics": {
+        "views": 946,
+        "applicants": 59
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/junior-fresher-tester-c8p210000160id200995809.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Junior / Fresher Tester",
+      "url": "https://vieclam24h.vn/it-phan-mem/junior-fresher-tester-c8p210000160id200995809.html",
+      "company": "Công Ty Cổ Phần Sáng Tạo Công Nghệ Atin",
+      "salary": "8–13 triệu",
+      "location": "Hà Nội",
+      "level": "",
+      "summary": "- Ứng viên là Nữ, tốt nghiệp hệ chính quy các trường Đại học hoặc Cao đẳng chuyên ngành Công nghệ thông tin. - Có kiến thức nền tảng vững chắc về kiểm thử phần mềm (Manual Testing) và quy trình phát triển phần mềm. - Nắm",
+      "skills": [
+        "Testing"
+      ],
+      "createdAt": "2026-11-16T08:44:46.000Z",
+      "deadline": "2026-12-16T16:59:59.000Z",
+      "metrics": {
+        "views": 557,
+        "applicants": 12
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/chuyen-vien-quan-tri-he-thong-system-admin-c8p210000187id200995363.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Chuyên Viên Quản Trị Hệ Thống (System Admin)",
+      "url": "https://vieclam24h.vn/it-phan-mem/chuyen-vien-quan-tri-he-thong-system-admin-c8p210000187id200995363.html",
+      "company": "Công Ty Cổ Phần Phát Triển Việt Úc",
+      "salary": "16–22 triệu",
+      "location": "Hồ Chí Minh",
+      "level": "",
+      "summary": "1.Kinh nghiệm & chuyên môn Tốt nghiệp Cao đẳng/Đại học chuyên ngành CNTT, Khoa học máy tính, Mạng máy tính hoặc tương đương; Kinh nghiệm tối thiểu 3 năm ở vị trí System Administrator hoặc tương đương; Thành thạo quản trị",
+      "skills": [
+        "AWS",
+        "GCP",
+        "Azure"
+      ],
+      "createdAt": "2026-11-16T04:52:17.000Z",
+      "deadline": "2026-12-15T16:59:59.000Z",
+      "metrics": {
+        "views": 1037,
+        "applicants": 48
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/senior-backend-developer-php-laravel-microservices-c8p210000187id200995200.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Senior Backend Developer (PHP / Laravel / Microservices)",
+      "url": "https://vieclam24h.vn/it-phan-mem/senior-backend-developer-php-laravel-microservices-c8p210000187id200995200.html",
+      "company": "Công Ty TNHH Lotte Innovate Việt Nam",
+      "salary": "30–50 triệu",
+      "location": "Hồ Chí Minh",
+      "level": "",
+      "summary": "• Experience & Language: Minimum 4 - 6+ years of hands-on backend engineering experience with PHP (PHP 8.2+), with deep proficiency in Laravel (9/10) and Lumen. • Software Architecture: Strong foundation in Object-Orient",
+      "skills": [
+        "PHP",
+        "Laravel",
+        "MySQL",
+        "Redis"
+      ],
+      "createdAt": "2026-11-16T03:48:35.000Z",
+      "deadline": "2026-12-16T16:59:59.000Z",
+      "metrics": {
+        "views": 731,
+        "applicants": 34
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/chuyen-vien-ky-thuat-tri-tue-nhan-tao-ai-engineer-c8p210000187id200994404.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Chuyên Viên Kỹ Thuật Trí Tuệ Nhân Tạo (Ai Engineer)",
+      "url": "https://vieclam24h.vn/it-phan-mem/chuyen-vien-ky-thuat-tri-tue-nhan-tao-ai-engineer-c8p210000187id200994404.html",
+      "company": "Trường Đại Học Kinh Tế - Tài Chính Thành Phố Hồ Chí Minh",
+      "salary": "Thương lượng",
+      "location": "Hồ Chí Minh",
+      "level": "",
+      "summary": "- Có ít nhất 1 năm kinh nghiệm làm việc với AI/ML (có thể qua công việc chính thức, dự án cá nhân, hoặc thực tập dài hạn). - Tốt nghiệp đại học chuyên ngành Trí tuệ nhân tạo, Khoa học máy tính, Khoa học dữ liệu hoặc lĩnh",
+      "skills": [
+        "Python"
+      ],
+      "createdAt": "2026-11-14T03:05:09.000Z",
+      "deadline": "2026-12-12T16:59:59.000Z",
+      "metrics": {
+        "views": 1203,
+        "applicants": 31
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/lap-trinh-vien-c8p210000187id200990622.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Lập Trình Viên",
+      "url": "https://vieclam24h.vn/it-phan-mem/lap-trinh-vien-c8p210000187id200990622.html",
+      "company": "Trường Đại Học Kinh Tế - Tài Chính Thành Phố Hồ Chí Minh",
+      "salary": "Thương lượng",
+      "location": "Hồ Chí Minh",
+      "level": "",
+      "summary": "- Có từ 2 - 5 năm kinh nghiệm trong lập trình phần mềm, ưu tiên với .NET Core và Microservices. - Tốt nghiệp Đại học chuyên ngành Công nghệ Thông tin, Khoa học Máy tính hoặc các ngành liên quan. - Có kinh nghiệm với các ",
+      "skills": [
+        ".NET",
+        "C#",
+        "PostgreSQL",
+        "MongoDB"
+      ],
+      "createdAt": "2026-11-11T01:55:29.000Z",
+      "deadline": "2026-12-09T16:59:59.000Z",
+      "metrics": {
+        "views": 2140,
+        "applicants": 70
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/full-stack-engineer-ky-su-van-hanh-he-thong-mang-di-lam-ngay-c8p210000187id200987164.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Full Stack Engineer (Kỹ Sư Vận Hành Hệ Thống - Mạng) - Đi Làm Ngay",
+      "url": "https://vieclam24h.vn/it-phan-mem/full-stack-engineer-ky-su-van-hanh-he-thong-mang-di-lam-ngay-c8p210000187id200987164.html",
+      "company": "Công Ty TNHH Zidc",
+      "salary": "15–25 triệu",
+      "location": "Hồ Chí Minh",
+      "level": "",
+      "summary": "Có kinh nghiệm làm việc ít nhất từ 1 năm trở lên. Thành thạo môi trường Linux ( Debian, Ubuntu ) và có kinh nghiệm vận hành server thực tế. Vận hành tối ưu, sử lý sự cố, tìm nguyên nhân và hướng khắc phục hiệu quả. Kinh ",
+      "skills": [
+        "Docker",
+        "AWS",
+        "Azure",
+        "Android"
+      ],
+      "createdAt": "2026-11-06T10:02:26.000Z",
+      "deadline": "2026-12-11T16:59:59.000Z",
+      "metrics": {
+        "views": 1595,
+        "applicants": 24
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/lap-trinh-vien-fullstack-c8p210000187id200986448.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Lập Trình Viên Fullstack",
+      "url": "https://vieclam24h.vn/it-phan-mem/lap-trinh-vien-fullstack-c8p210000187id200986448.html",
+      "company": "Công Ty TNHH Khoa Học Và Kỹ Thuật Reeco",
+      "salary": "14–22 triệu",
+      "location": "Hồ Chí Minh",
+      "level": "",
+      "summary": "Tốt nghiệp Đại học chuyên ngành CNTT, Khoa học máy tính... với tối thiểu 2 năm kinh nghiệm ở vị trí tương đương; từng làm hệ thống SaaS, đa tenant hoặc hệ thống nghiệp vụ phức tạp. Nắm vững và có kinh nghiệm thực tế với ",
+      "skills": [
+        "Node.js",
+        "React",
+        "Java",
+        "Docker"
+      ],
+      "createdAt": "2026-11-06T04:41:17.000Z",
+      "deadline": "2026-12-31T16:59:59.000Z",
+      "metrics": {
+        "views": 3508,
+        "applicants": 179
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/ky-su-truong-phan-mem-software-chief-engineer-solution-architect-c8p210000160id200983732.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Kỹ Sư Trưởng Phần Mềm (Software Chief Engineer / Solution Architect)",
+      "url": "https://vieclam24h.vn/it-phan-mem/ky-su-truong-phan-mem-software-chief-engineer-solution-architect-c8p210000160id200983732.html",
+      "company": "Viện Trí Tuệ Nhân Tạo",
+      "salary": "20–40 triệu",
+      "location": "Hà Nội",
+      "level": "",
+      "summary": "- Có kinh nghiệm thực tiễn trong phân tích nghiệp vụ (BA), thiết kế và triển khai các dự án phần mềm quy mô vừa và lớn. - Sở hữu tư duy kiến trúc hệ thống mạnh mẽ, khả năng thiết kế giải pháp tổng thể và tích hợp đa nền ",
+      "skills": [],
+      "createdAt": "2026-11-04T06:56:32.000Z",
+      "deadline": "2026-11-30T16:59:59.000Z",
+      "metrics": {
+        "views": 1377,
+        "applicants": 4
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/ky-su-truong-phan-mem-software-chief-engineer-solution-architect-c8p210000160id200983713.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Kỹ Sư Trưởng Phần Mềm (Software Chief Engineer / Solution Architect)",
+      "url": "https://vieclam24h.vn/it-phan-mem/ky-su-truong-phan-mem-software-chief-engineer-solution-architect-c8p210000160id200983713.html",
+      "company": "Công Ty Cổ Phần Viện Trí Tuệ Nhân Tạo",
+      "salary": "20–40 triệu",
+      "location": "Hà Nội",
+      "level": "",
+      "summary": "- Có kinh nghiệm thực tiễn trong phân tích nghiệp vụ (BA), thiết kế và triển khai các dự án phần mềm quy mô vừa và lớn. - Sở hữu tư duy kiến trúc hệ thống, thiết kế giải pháp tổng thể và tích hợp đa nền tảng vững chắc. -",
+      "skills": [],
+      "createdAt": "2026-11-04T06:53:39.000Z",
+      "deadline": "2026-11-30T16:59:59.000Z",
+      "metrics": {
+        "views": 1343,
+        "applicants": 6
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/lap-trinh-vien-javascript-hinh-thuc-lam-viec-hybrid-c8p210000160id200980646.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Lập Trình Viên Javascript - Hình Thức Làm Việc Hybrid",
+      "url": "https://vieclam24h.vn/it-phan-mem/lap-trinh-vien-javascript-hinh-thuc-lam-viec-hybrid-c8p210000160id200980646.html",
+      "company": "Công Ty Cổ Phần Dịch Vụ Truyền Thông Đa Phương Tiện Việt Nam",
+      "salary": "10–15 triệu",
+      "location": "Hà Nội",
+      "level": "",
+      "summary": "Yêu cầu bắt buộc: - Có từ 1 – 3 năm kinh nghiệm lập trình JavaScript/TypeScript, trong đó có kinh nghiệm thực tế với NestJS và Next.js. - Có kinh nghiệm xây dựng RESTful API (biết GraphQL là lợi thế), hiểu rõ về xác thực",
+      "skills": [
+        "NestJS",
+        "React",
+        "Next.js",
+        "TypeScript"
+      ],
+      "createdAt": "2026-11-02T03:59:57.000Z",
+      "deadline": "2026-12-02T16:59:59.000Z",
+      "metrics": {
+        "views": 1340,
+        "applicants": 42
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/java-backend-developer-c8p210000160id200980363.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Java Backend Developer",
+      "url": "https://vieclam24h.vn/it-phan-mem/java-backend-developer-c8p210000160id200980363.html",
+      "company": "Công Ty Cổ Phần Dịch Vụ Công Nghệ Tin Học Hpt",
+      "salary": "25–40 triệu",
+      "location": "Hà Nội",
+      "level": "",
+      "summary": "Học vấn: Tốt nghiệp Đại học chuyên ngành Công nghệ thông tin, Khoa học máy tính, Toán tin, Điện tử viễn thông hoặc các chuyên ngành liên quan. Kinh nghiệm: • Có 03 năm kinh nghiệm trở lên trong việc phát triển ứng dụng B",
+      "skills": [
+        "Java",
+        "Spring",
+        "PostgreSQL",
+        "MySQL"
+      ],
+      "createdAt": "2026-11-02T02:26:36.000Z",
+      "deadline": "2026-11-30T16:59:59.000Z",
+      "metrics": {
+        "views": 1165,
+        "applicants": 10
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/intern-ai-erp-software-developer-c8p210000187id200967644.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Intern Ai - Erp - Software Developer",
+      "url": "https://vieclam24h.vn/it-phan-mem/intern-ai-erp-software-developer-c8p210000187id200967644.html",
+      "company": "Công Ty TNHH T4 Tek",
+      "salary": "Thương lượng",
+      "location": "Hồ Chí Minh",
+      "level": "",
+      "summary": "Sinh viên đang học tại các trường Đại học, Cao đẳng; đam mê với ngành (có thể khác ngành nhưng có mong muốn làm việc trong ngành Công nghệ thông tin – phần mềm), mong muốn được tham gia công cuộc chuyển đổi số quốc gia c",
+      "skills": [],
+      "createdAt": "2026-10-18T04:16:36.000Z",
+      "deadline": "2026-11-29T16:59:59.000Z",
+      "metrics": {
+        "views": 4782,
+        "applicants": 107
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/junior-fullstack-developer-c8p210000187id200962196.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Junior Fullstack Developer",
+      "url": "https://vieclam24h.vn/it-phan-mem/junior-fullstack-developer-c8p210000187id200962196.html",
+      "company": "Công Ty TNHH Tập Đoàn Rita Võ",
+      "salary": "13–16 triệu",
+      "location": "Hồ Chí Minh",
+      "level": "",
+      "summary": "2 - 3 năm kinh nghiệm phát triển phần mềm, có kinh nghiệm triển khai dự án end-to-end Thành thạo Node.js/TypeScript và các framework Backend như Express hoặc NestJS. Có kinh nghiệm phát triển Frontend với React, Vue hoặc",
+      "skills": [
+        "Node.js",
+        "NestJS",
+        "Express",
+        "React"
+      ],
+      "createdAt": "2026-10-12T07:48:25.000Z",
+      "deadline": "2026-11-30T16:59:59.000Z",
+      "metrics": {
+        "views": 4644,
+        "applicants": 290
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/ai-engineer-intern-c8p119id200891072.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Ai Engineer Intern",
+      "url": "https://vieclam24h.vn/it-phan-mem/ai-engineer-intern-c8p119id200891072.html",
+      "company": "Công Ty Cổ Phần Công Nghệ Oryza Systems",
+      "salary": "1–3 triệu",
+      "location": "Hồ Chí Minh",
+      "level": "",
+      "summary": "- Là sinh viên năm 4 hoặc đã tốt nghiệp theo học chuyên ngành kỹ thuật phần mềm, hệ thống thông tin và các chuyên ngành liên quan CNTT. - Thực tập sinh cộng tác tối thiểu 3 tháng. - Có kiến thức nền tảng tốt về lập trình",
+      "skills": [
+        "Python",
+        "Java"
+      ],
+      "createdAt": "2026-07-24T02:14:14.000Z",
+      "deadline": "2026-12-09T16:59:59.000Z",
+      "metrics": {
+        "views": 4607,
+        "applicants": 100
+      }
+    },
+    {
+      "id": "job:vieclam24h:https://vieclam24h.vn/it-phan-mem/lap-trinh-vien-backend-php-node-js-c8p210000187id200805114.html",
+      "kind": "job",
+      "source": "vieclam24h",
+      "title": "Lập Trình Viên Backend (PHP, Node.Js)",
+      "url": "https://vieclam24h.vn/it-phan-mem/lap-trinh-vien-backend-php-node-js-c8p210000187id200805114.html",
+      "company": "Công Ty TNHH Cityclinic Việt Nam",
+      "salary": "25–35 triệu",
+      "location": "Hồ Chí Minh",
+      "level": "",
+      "summary": "- Ít nhất 5 năm kinh nghiệm thiết kế và lập trình API RESTful. - Bằng Cử nhân các chuyên ngành liên quan. - Ưu tiên ứng viên có kinh nghiệm làm việc trong lĩnh vực y tế hoặc bệnh viện. - Hiểu biết sâu sắc về hệ điều hành",
+      "skills": [
+        "PHP",
+        "Node.js",
+        "React",
+        "TypeScript"
+      ],
+      "createdAt": "2026-04-14T09:53:35.000Z",
+      "deadline": "2026-12-31T16:59:59.000Z",
+      "metrics": {
+        "views": 3907,
+        "applicants": 184
+      }
+    },
+    {
+      "id": "job:vietnamworks:https://www.vietnamworks.com/full-stack-developer-1794302751663017977-2129878-jv",
+      "kind": "job",
+      "source": "vietnamworks",
+      "title": "Full Stack Developer",
+      "url": "https://www.vietnamworks.com/full-stack-developer-1794302751663017977-2129878-jv",
+      "company": "Tokio Marine Insurance Viet Nam Company Limited",
+      "salary": "Thương lượng",
+      "location": "Hà Nội",
+      "level": "Nhân viên",
+      "summary": "QUALIFICATIONS *Experience: 3+ years of experience in Software development. Preferred experience in: Application maintenance, enhancement & support; Insurance, Banking, Finance, or Bancassurance projects. *Technical Skil",
+      "skills": [],
+      "createdAt": null,
+      "deadline": null,
+      "metrics": {}
+    },
+    {
+      "id": "job:vietnamworks:https://www.vietnamworks.com/cloud-security-engineer-1793098235707684461-2124438-jv/?utm_source_navi=vnw_homepage&utm_medium_navi=HotJob&utm_campaign_navi=HotJob&utm_term_navi=homepage2&source=homePage",
+      "kind": "job",
+      "source": "vietnamworks",
+      "title": "Cloud Security Engineer",
+      "url": "https://www.vietnamworks.com/cloud-security-engineer-1793098235707684461-2124438-jv/?utm_source_navi=vnw_homepage&utm_medium_navi=HotJob&utm_campaign_navi=HotJob&utm_term_navi=homepage2&source=homePage",
+      "company": "CÔNG TY CỔ PHẦN VINSMART FUTURE",
+      "salary": "Thương lượng",
+      "location": "",
+      "level": "Nhân viên",
+      "summary": "Kinh nghiệm & kỹ năng bắt buộc Tối thiểu 2 năm kinh nghiệm thực tế trong vai trò Cloud Security Engineer, Cloud Engineer, hoặc DevOps Engineer với trọng tâm bảo mật. Có kinh nghiệm thực tế trên cac AWS, GCP,... AWS, GCP,",
+      "skills": [],
+      "createdAt": null,
+      "deadline": null,
+      "metrics": {}
+    },
+    {
+      "id": "job:vietnamworks:https://www.vietnamworks.com/senior-ai-engineer-2118443-jv/?utm_source_navi=vnw_homepage&utm_medium_navi=HotJob&utm_campaign_navi=HotJob&utm_term_navi=homepage2&source=homePage",
+      "kind": "job",
+      "source": "vietnamworks",
+      "title": "Senior AI Engineer",
+      "url": "https://www.vietnamworks.com/senior-ai-engineer-2118443-jv/?utm_source_navi=vnw_homepage&utm_medium_navi=HotJob&utm_campaign_navi=HotJob&utm_term_navi=homepage2&source=homePage",
+      "company": "Trường Đại học VinUni",
+      "salary": "Thương lượng",
+      "location": "",
+      "level": "Nhân viên",
+      "summary": "Required - Bachelor’s or Master’s degree in Computer Science, AI, Data Science, Engineering, or related fields. - 4+ years of professional Backend/ Fullstack Engineering software development experience. - Strong proficie",
+      "skills": [],
+      "createdAt": null,
+      "deadline": null,
+      "metrics": {}
+    },
+    {
+      "id": "job:vietnamworks:https://www.vietnamworks.com/embedded-software-tester-automotive-domain-2130450-jv",
+      "kind": "job",
+      "source": "vietnamworks",
+      "title": "Embedded Software Tester (Automotive domain)",
+      "url": "https://www.vietnamworks.com/embedded-software-tester-automotive-domain-2130450-jv",
+      "company": "HCL Vietnam Company Limited",
+      "salary": "Thương lượng",
+      "location": "Hồ Chí Minh",
+      "level": "Mới Tốt Nghiệp",
+      "summary": "Knowledge and Skills Required Have at least 4 years of experience in Software Testing Major in Embedded Engineering, or a related field of study. Good Knowledge of micro-controllers and embedded system Experience in Soft",
+      "skills": [
+        "Testing"
+      ],
+      "createdAt": null,
+      "deadline": null,
+      "metrics": {}
+    },
+    {
+      "id": "job:vietnamworks:https://www.vietnamworks.com/data-analyst-1794889037760365515-2132080-jv",
+      "kind": "job",
+      "source": "vietnamworks",
+      "title": "Data Analyst",
+      "url": "https://www.vietnamworks.com/data-analyst-1794889037760365515-2132080-jv",
+      "company": "Avery Dennison VIETNAM",
+      "salary": "Thương lượng",
+      "location": "Long An",
+      "level": "Nhân viên",
+      "summary": "Bachelor or College degree in Data Analytics, Computer Science, Business, or related field. Good communication skills, both oral and written, in English. PREFERRED QUALIFICATIONS: Experience in the manufacturing or produ",
+      "skills": [],
+      "createdAt": null,
+      "deadline": null,
+      "metrics": {}
+    },
+    {
+      "id": "job:vietnamworks:https://www.vietnamworks.com/software-qa-qc-engineer-junior-mid-level-1793093589392104746-2124350-jv",
+      "kind": "job",
+      "source": "vietnamworks",
+      "title": "Software QA/QC Engineer (Junior – Mid Level)",
+      "url": "https://www.vietnamworks.com/software-qa-qc-engineer-junior-mid-level-1793093589392104746-2124350-jv",
+      "company": "Công Ty Cổ Phần Mastertran",
+      "salary": "Thương lượng",
+      "location": "Hà Nội",
+      "level": "Nhân viên",
+      "summary": "Trình độ và kinh nghiệm Kỹ năng và năng lực QUYỀN LỢI VÀ CƠ HỘI PHÁT TRIỂN Thu nhập và phúc lợi Cơ hội nghề nghiệp DOPPELHERZ VIỆT NAM – CÙNG NÂNG CAO CHẤT LƯỢNG, CÙNG PHÁT TRIỂN NĂNG LỰC CÔNG NGHỆ!",
+      "skills": [
+        "QA/QC"
+      ],
+      "createdAt": null,
+      "deadline": null,
+      "metrics": {}
+    }
+  ]
+}
