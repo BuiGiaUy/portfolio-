@@ -187,8 +187,9 @@
         </h3>
         <p class="text-xs text-fg-muted mt-2 leading-relaxed">
           Chạy <code class="inline-code">node tools/job-collect.mjs</code> để lấy tin từ VietnamWorks &amp; vieclam24h
-          vào <code class="inline-code">assets/data/job-feed.json</code>. Facebook page cần Page access token
-          (Graph API), TopCV/ITviec cần cookie — xem ghi chú.
+          vào <code class="inline-code">assets/data/job-feed.json</code>. Facebook page: không có token thì dùng
+          <code class="inline-code">node tools/fb-session-collect.mjs --pages=topcv.vn</code> với Chrome đã đăng nhập.
+          TopCV/ITviec cần cookie — xem ghi chú.
         </p>
         <div class="flex flex-wrap gap-2 mt-3">
           <button id="importSocialBtn" class="px-3 py-2 rounded-lg bg-surface-3 hover:bg-surface-4 border border-line text-xs font-semibold transition-colors">

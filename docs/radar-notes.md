@@ -57,6 +57,27 @@ Không có token thì vẫn dán tay được: nút **Dán JSON (job / Facebook)
 > (không nên đưa cho công cụ nào), HTML do JS dựng nên rất dễ vỡ, và Facebook thường khoá/checkpoint
 > tài khoản cào tự động. Đường ổn định là Graph token ở trên; cookie chỉ dùng cho site cho phép đọc HTML tĩnh.
 
+Lưu ý về token: Graph chỉ trả bài của page mà tài khoản của bạn có vai trò quản lý, trừ khi app được duyệt
+*Page Public Content Access*. Page của người khác (topcv.vn, itviec…) thường **không** đọc được bằng token cá nhân.
+
+### 3d. Không có token: cào bằng phiên Chrome đã đăng nhập
+
+```bash
+# 1. Đóng hết Chrome, mở lại kèm cổng gỡ lỗi và đăng nhập facebook.com trong cửa sổ đó
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\chrome-radar"
+
+# 2. Lấy bài
+node tools/fb-session-collect.mjs --pages=topcv.vn,itviec --limit=8 --merge
+node tools/fb-session-collect.mjs --pages=topcv.vn --dry --raw   # xem thử, không ghi file
+```
+
+Script mở `facebook.com/<page>/posts` trong chính Chrome đó, đọc các bài trong feed, lấy **link bài gốc**
+(`/posts/pfbid…`, `/permalink/…`) và ghi vào `assets/data/social-feed.json`. Nếu Chrome chưa đăng nhập,
+script báo rõ và không ghi file.
+
+Đây là đường duy nhất không cần token, nhưng dùng tài khoản thật nên rủi ro checkpoint/khoá nick:
+chạy thưa (1–2 ngày/lần), ít page, đừng để chạy nền liên tục.
+
 ## 3b. LinkedIn
 
 ```bash
