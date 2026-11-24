@@ -75,6 +75,17 @@ Script mở `facebook.com/<page>/posts` trong chính Chrome đó, đọc các b�
 (`/posts/pfbid…`, `/permalink/…`) và ghi vào `assets/data/social-feed.json`. Nếu Chrome chưa đăng nhập,
 script báo rõ và không ghi file.
 
+Tiêu đề và trích đoạn lấy từ `div[dir="auto"]` của bài: `innerText` của khối cha bị Facebook chèn ký tự
+rác (chống cào) nên không dùng được trực tiếp.
+
+Có thể dùng trình duyệt nhúng của Orca thay cho cửa sổ Chrome riêng — không cần cổng gỡ lỗi:
+
+```bash
+orca tab create --url "https://www.facebook.com/"   # đăng nhập trong tab vừa mở
+node tools/fb-session-collect.mjs --orca --pages=topcv.vn,itviec --limit=6 --merge
+orca screenshot                                      # xem lại trang trong Orca
+```
+
 Đây là đường duy nhất không cần token, nhưng dùng tài khoản thật nên rủi ro checkpoint/khoá nick:
 chạy thưa (1–2 ngày/lần), ít page, đừng để chạy nền liên tục.
 

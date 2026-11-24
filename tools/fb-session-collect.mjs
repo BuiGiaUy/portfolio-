@@ -15,13 +15,19 @@
  * Dùng:
  *   node tools/fb-session-collect.mjs --pages=topcv.vn,itviec --limit=8
  *   node tools/fb-session-collect.mjs --pages=topcv.vn --dry --raw
+ *   node tools/fb-session-collect.mjs --orca --pages=topcv.vn      # dùng tab của Orca, không cần cổng
  *
  * Rủi ro: cào tự động bằng tài khoản cá nhân vi phạm điều khoản Facebook và có thể bị
  * checkpoint/khoá tài khoản. Chạy thưa (1-2 ngày/lần), số page ít.
  */
 
+import { execFile } from 'node:child_process';
+import { readFileSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
+import { promisify } from 'node:util';
+
+const execFileAsync = promisify(execFile);
 
 function parseArgs(argv) {
   const args = {};
@@ -76,36 +82,7 @@ function cdp(webSocketUrl) {
   return { send, close: () => socket.close() };
 }
 
-const EXTRACT = `(() => {
-  const POST_RE = /\\/posts\\/(pfbid[0-9A-Za-z]+|\\d{6,})|\\/permalink\\/(\\d{6,})|story_fbid=\\d{6,}/;
-  const KEEP = ['story_fbid', 'id', 'fbid', 'v'];
-  const cleanHref = (href) => {
-    const url = new URL(href, location.origin);
-    const kept = [...url.searchParams].filter(([key]) => KEEP.includes(key));
-    url.search = kept.length ? '?' + kept.map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&') : '';
-    url.hash = '';
-    return url.href;
-  };
-  const articles = Array.from(document.querySelectorAll('div[role="article"]'));
-  const out = [];
-  const seen = new Set();
-  articles.forEach((article) => {
-    const text = (article.innerText || '').replace(/\\u00a0/g, ' ').trim();
-    const link = Array.from(article.querySelectorAll('a[href]'))
-      .map((a) => a.getAttribute('href') || '')
-      .find((href) => POST_RE.test(href));
-    if (!link || text.length < 60) return;
-    const href = cleanHref(link);
-    if (seen.has(href)) return;
-    seen.add(href);
-    out.push({ text: text.slice(0, 1500), href });
-  });
-  return JSON.stringify({
-    items: out,
-    loginWall: !!document.querySelector('form[action*="login"], input[name="email"]'),
-    title: (document.title || '').replace(/\\s*\\|\\s*Facebook\\s*$/, '').trim()
-  });
-})()`;
+const EXTRACT = readFileSync(new URL('./fb-extract.js', import.meta.url), 'utf8');
 
 function cleanLines(text) {
   return String(text)
@@ -130,7 +107,27 @@ function toItem(page, raw, pageTitle) {
   };
 }
 
-async function collectPage(client, page) {
+async function orcaJson(argv) {
+  const { stdout } = await execFileAsync('orca', [...argv, '--json'], { maxBuffer: 8 * 1024 * 1024, windowsHide: true });
+  const payload = JSON.parse(stdout.trim());
+  if (!payload.ok) throw new Error((payload.error && payload.error.message) || 'Orca trả lỗi');
+  return payload.result;
+}
+
+async function collectViaOrca(page) {
+  await orcaJson(['goto', '--url', `https://www.facebook.com/${page}/posts`]);
+  let payload = null;
+  for (let attempt = 0; attempt < 20; attempt += 1) {
+    await sleep(2000);
+    const result = await orcaJson(['eval', '--expression', EXTRACT]);
+    payload = JSON.parse(result.result || '{"items":[]}');
+    if (payload.items.length >= limit) break;
+    await orcaJson(['scroll', '--direction', 'down', '--amount', '1600']).catch(() => {});
+  }
+  return payload;
+}
+
+async function collectViaCdp(client, page) {
   const url = `https://www.facebook.com/${page}/posts`;
   const { targetId } = await client.send('Target.createTarget', { url: 'about:blank' });
   const { sessionId } = await client.send('Target.attachToTarget', { targetId, flatten: true });
@@ -138,46 +135,58 @@ async function collectPage(client, page) {
     await client.send('Page.enable', {}, sessionId);
     await client.send('Page.navigate', { url }, sessionId);
     let payload = null;
-    for (let attempt = 0; attempt < 12; attempt += 1) {
-      await sleep(1500);
+    for (let attempt = 0; attempt < 20; attempt += 1) {
+      await sleep(2000);
       const result = await client.send('Runtime.evaluate', { expression: EXTRACT, returnByValue: true }, sessionId);
       payload = JSON.parse(result.result.value || '{"items":[]}');
-      if (payload.items.length) break;
-      await client.send('Runtime.evaluate', { expression: 'window.scrollBy(0, 1400)' }, sessionId).catch(() => {});
+      if (payload.items.length >= limit) break;
+      await client.send('Runtime.evaluate', { expression: 'window.scrollTo(0, document.body.scrollHeight)' }, sessionId).catch(() => {});
     }
-    if (payload && payload.loginWall) {
-      console.warn(`  ! ${page}: Chrome chưa đăng nhập Facebook (thấy form đăng nhập) — đăng nhập trong cửa sổ đó rồi chạy lại`);
-      if (args.raw) console.log(`    tiêu đề trang: ${payload.title}`);
-      return [];
-    }
-    if (!payload || !payload.items.length) {
-      console.warn(`  ! ${page}: không thấy bài nào — page riêng tư, đổi URL, hoặc bài chưa tải xong`);
-      if (args.raw) console.log(`    tiêu đề trang: ${payload && payload.title}`);
-      return [];
-    }
-    const items = payload.items.slice(0, limit).map((raw) => toItem(page, raw, payload.title));
-    console.log(`  ↳ ${page}: ${items.length} bài`);
-    return items;
+    return payload;
   } finally {
     await client.send('Target.closeTarget', { targetId }).catch(() => {});
   }
 }
 
+async function collectPage(client, page) {
+  const payload = args.orca ? await collectViaOrca(page) : await collectViaCdp(client, page);
+  if (!payload || !payload.items.length) {
+    if (payload && payload.loginWall) {
+      const where = args.orca ? 'tab của Orca' : `cửa sổ Chrome ở cổng ${port}`;
+      console.warn(`  ! ${page}: chưa đăng nhập Facebook (thấy form đăng nhập) — đăng nhập trong ${where} rồi chạy lại`);
+    } else {
+      console.warn(`  ! ${page}: không thấy bài nào — page riêng tư, đổi URL, hoặc bài chưa tải xong`);
+    }
+    if (args.raw) console.log(`    tiêu đề trang: ${payload && payload.title}`);
+    return [];
+  }
+  const items = payload.items.slice(0, limit).map((raw) => toItem(page, raw, payload.title));
+  console.log(`  ↳ ${page}: ${items.length} bài`);
+  return items;
+}
+
 async function main() {
-  let version;
-  try {
-    const res = await fetch(`http://127.0.0.1:${port}/json/version`, { signal: AbortSignal.timeout(4000) });
-    version = await res.json();
-  } catch {
-    console.error(`✗ Không thấy Chrome ở cổng ${port}.`);
-    console.error(`  Đóng hết Chrome rồi mở lại kèm: --remote-debugging-port=${port}`);
-    console.error('  và đăng nhập facebook.com trong cửa sổ đó.');
-    process.exitCode = 1;
-    return;
+  let client = null;
+  if (args.orca) {
+    const { tabs } = await orcaJson(['tab', 'list']).catch(() => ({ tabs: [] }));
+    if (!tabs.length) await orcaJson(['tab', 'create', '--url', 'https://www.facebook.com/']);
+    console.log(`• Nguồn phiên: tab của Orca (${tabs.length || 1} tab)`);
+  } else {
+    let version;
+    try {
+      const res = await fetch(`http://127.0.0.1:${port}/json/version`, { signal: AbortSignal.timeout(4000) });
+      version = await res.json();
+    } catch {
+      console.error(`✗ Không thấy Chrome ở cổng ${port}.`);
+      console.error(`  Đóng hết Chrome rồi mở lại kèm: --remote-debugging-port=${port}`);
+      console.error('  và đăng nhập facebook.com trong cửa sổ đó.');
+      process.exitCode = 1;
+      return;
+    }
+    console.log(`• Chrome: ${version.Browser} (cổng ${port})`);
+    client = cdp(version.webSocketDebuggerUrl);
   }
 
-  console.log(`• Chrome: ${version.Browser} (cổng ${port})`);
-  const client = cdp(version.webSocketDebuggerUrl);
   let fresh = [];
   try {
     for (const page of pages) {
@@ -185,7 +194,7 @@ async function main() {
       await sleep(1200);
     }
   } finally {
-    client.close();
+    if (client) client.close();
   }
 
   if (!fresh.length) {
