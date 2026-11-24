@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bùi Gia Uy | AI Application Engineer & Full-Stack Developer</title>
+  <meta name="description" content="Portfolio cá nhân của Bùi Gia Uy (Bui Gia Uy) - AI Application Engineer & Full-Stack Developer chuyên về Multi-Agent Systems, Multi-stage RAG, FastAPI, NestJS, Laravel, Next.js.">
+  <meta name="keywords" content="Bùi Gia Uy, Bui Gia Uy, AI Engineer, Full-Stack Developer, LangGraph, RAG, FastAPI, NestJS, Laravel, VinUni, Vingroup, SFIA">
+  <meta name="author" content="Bùi Gia Uy">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Bùi Gia Uy | AI Application Engineer & Full-Stack Developer">
+  <meta property="og:description" content="Khám phá các dự án GenAI, Multi-stage RAG (HR GENIE 98.46% router, 1.400+ tests), Neural TTS và nền tảng Full-Stack hiện đại của Bùi Gia Uy.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              cyan: '#38bdf8',
+              purple: '#a855f7',
+              emerald: '#34d399',
+              dark: '#090d16',
+              card: '#0f172a'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-[#090d16] text-slate-100 min-h-screen selection:bg-sky-500/30 selection:text-sky-300 relative bg-grid-pattern">
+
+  <!-- Background Decorative Glowing Orbs -->
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION BAR
+       ========================================================================== -->
+  <header class="fixed top-0 left-0 right-0 z-40 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo / Monogram -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-sky-400 via-indigo-500 to-purple-600 p-[1.5px] shadow-lg shadow-sky-500/20 group-hover:shadow-sky-500/40 transition-shadow">
+          <div class="w-full h-full bg-[#090d16] rounded-[10px] flex items-center justify-center">
+            <span class="font-mono font-extrabold text-sm text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-purple-400">&lt;GU/&gt;</span>
+          </div>
+        </div>
+        <div>
+          <span class="text-lg font-extrabold tracking-tight text-white group-hover:text-sky-400 transition-colors">Bùi Gia Uy</span>
+          <span class="block text-[11px] font-mono text-sky-400/80 -mt-0.5">AI & Full-Stack</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-8 text-sm font-medium">
+        <a href="#about" class="desktop-nav-link text-slate-300 hover:text-sky-400 transition-colors">Giới thiệu</a>
+        <a href="#projects" class="desktop-nav-link text-slate-300 hover:text-sky-400 transition-colors">Dự án nổi bật</a>
+        <a href="#skills" class="desktop-nav-link text-slate-300 hover:text-sky-400 transition-colors">Kỹ năng</a>
+        <a href="#education" class="desktop-nav-link text-slate-300 hover:text-sky-400 transition-colors">Học vấn & Chứng chỉ</a>
+        <a href="#ai-assistant" class="desktop-nav-link text-slate-300 hover:text-sky-400 transition-colors flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+          Trợ lý AI
+        </a>
+        <a href="#contact" class="desktop-nav-link text-slate-300 hover:text-sky-400 transition-colors">Liên hệ</a>
+      </nav>
+
+      <!-- Right Action Items -->
+      <div class="flex items-center gap-3">
+        <!-- Status Pill -->
+        <div class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Open for Opportunities</span>
+        </div>
+
+        <!-- Dark/Light Theme Toggle -->
+        <button id="themeToggleBtn" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-300 hover:text-white transition-all shadow-sm" aria-label="Toggle Theme">
+          <span id="themeIcon">
+            <svg class="w-5 h-5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          </span>
+        </button>
+
+        <!-- CTA Button -->
+        <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 shadow-lg shadow-sky-500/25 transition-all transform hover:-translate-y-0.5">
+          <span>Liên hệ ngay</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobileMenuToggle" class="lg:hidden p-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-300 hover:text-white" aria-label="Open Mobile Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden glass-panel border-t border-slate-800 px-6 py-6 space-y-4">
+      <a href="#about" class="mobile-nav-link block text-base font-medium text-slate-200 hover:text-sky-400">Giới thiệu</a>
+      <a href="#projects" class="mobile-nav-link block text-base font-medium text-slate-200 hover:text-sky-400">Dự án nổi bật</a>
+      <a href="#skills" class="mobile-nav-link block text-base font-medium text-slate-200 hover:text-sky-400">Kỹ năng</a>
+      <a href="#education" class="mobile-nav-link block text-base font-medium text-slate-200 hover:text-sky-400">Học vấn & Chứng chỉ</a>
+      <a href="#ai-assistant" class="mobile-nav-link block text-base font-medium text-slate-200 hover:text-sky-400">Trợ lý AI của Uy</a>
+      <a href="#contact" class="mobile-nav-link block text-base font-medium text-slate-200 hover:text-sky-400">Liên hệ trực tiếp</a>
+      <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 font-mono">
+        <span>0947879049</span>
+        <span>giauy0987@gmail.com</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+  <section id="about" class="relative pt-36 pb-20 sm:pt-40 sm:pb-28 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Left Hero Text (7 Cols) -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <!-- Eyebrow Pill -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-semibold tracking-wide">
+            <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
+            <span>AI APPLICATION ENGINEER & FULL-STACK DEVELOPER</span>
+          </div>
+
+          <!-- Main Headline -->
+          <h1 class="text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
+            Kiến tạo Hệ thống <span class="text-gradient-cyan-purple">GenAI Tiên tiến</span> & Ứng dụng Full-Stack Bền vững
+          </h1>
+
+          <!-- Subtitle / Bio -->
+          <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
+            Xin chào, tôi là <strong class="text-white font-semibold">Bùi Gia Uy</strong>. Chuyên sâu thiết kế và hiện thực hóa các đường ống <span class="text-sky-300 font-medium">Multi-Stage RAG</span>, hệ thống <span class="text-purple-300 font-medium">Multi-Agent (LangGraph)</span>, và kiến trúc backend hiệu năng cao chuẩn hóa theo khung năng lực SFIA quốc tế.
+          </p>
+
+          <!-- Core Value Bullet Points -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div class="flex items-center gap-2.5 text-xs sm:text-sm text-slate-300">
+              <div class="w-5 h-5 rounded-md bg-sky-500/20 text-sky-400 flex items-center justify-center flex-shrink-0 font-bold">✓</div>
+              <span>RAG Router thông minh đạt <strong class="text-white">98.46%</strong></span>
+            </div>
+            <div class="flex items-center gap-2.5 text-xs sm:text-sm text-slate-300">
+              <div class="w-5 h-5 rounded-md bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 font-bold">✓</div>
+              <span><strong class="text-white">1.400+</strong> Automated Tests chuẩn SFIA</span>
+            </div>
+            <div class="flex items-center gap-2.5 text-xs sm:text-sm text-slate-300">
+              <div class="w-5 h-5 rounded-md bg-purple-500/20 text-purple-400 flex items-center justify-center flex-shrink-0 font-bold">✓</div>
+              <span>FastAPI, NestJS, Next.js & Laravel 10</span>
+            </div>
+            <div class="flex items-center gap-2.5 text-xs sm:text-sm text-slate-300">
+              <div class="w-5 h-5 rounded-md bg-amber-500/20 text-amber-400 flex items-center justify-center flex-shrink-0 font-bold">✓</div>
+              <span>LLMOps, Tracing (LangSmith) & Evaluation</span>
+            </div>
+          </div>
+
+          <!-- CTAs & Social Links -->
+          <div class="pt-4 flex flex-wrap items-center gap-4">
+            <a href="#projects" class="px-6 py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-sky-500 via-indigo-600 to-purple-600 hover:from-sky-400 hover:to-purple-500 shadow-xl shadow-sky-500/25 transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2">
+              <span>Khám phá Dự án</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            </a>
+
+            <a href="#contact" class="px-6 py-3.5 rounded-xl font-bold text-sm text-slate-200 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 transition-all hover:text-white inline-flex items-center gap-2">
+              <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              <span>Liên hệ & Trao đổi</span>
+            </a>
+
+            <!-- Social Links -->
+            <div class="flex items-center gap-2 pl-2">
+              <a href="https://github.com/BuiGiaUy" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/60 transition-colors" title="GitHub">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+              </a>
+              <a href="https://www.linkedin.com/in/uy-gia/" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-sky-400 hover:text-white border border-slate-700/60 transition-colors" title="LinkedIn">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <button onclick="copyToClipboard('giauy0987@gmail.com', 'email')" class="p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-emerald-400 hover:text-white border border-slate-700/60 transition-colors" title="Copy Email">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Visual Showcase / Live Terminal Simulation (5 Cols) -->
+        <div class="lg:col-span-5">
+          <div class="terminal-window glow-card border border-slate-700/60">
+            <!-- Terminal Header -->
+            <div class="terminal-header">
+              <div class="flex items-center gap-2">
+                <span class="terminal-dot bg-rose-500"></span>
+                <span class="terminal-dot bg-amber-500"></span>
+                <span class="terminal-dot bg-emerald-500"></span>
+              </div>
+              <div class="text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>rag_agent_orchestrator.py</span>
+              </div>
+              <div class="text-[10px] font-mono text-sky-400">v2.4.0</div>
+            </div>
+
+            <!-- Terminal Body -->
+            <div class="p-4 sm:p-5 font-mono text-xs space-y-3 leading-relaxed text-slate-300 bg-[#090d16]">
+              <div class="text-slate-500"># Initializing Multi-Stage RAG Pipeline</div>
+              
+              <div class="flex items-start gap-2">
+                <span class="text-sky-400 font-bold">&gt;</span>
+                <div>
+                  <span class="text-purple-400">intent_router.classify</span>(<span class="text-emerald-300">"Chính sách nghỉ phép thai sản 2026"</span>)
+                  <div class="text-[11px] text-sky-300 mt-0.5">↳ Route: <span class="text-white font-bold">HR_BENEFIT_POLICY</span> (Confidence: <span class="text-emerald-400 font-bold">98.46%</span>)</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-2">
+                <span class="text-sky-400 font-bold">&gt;</span>
+                <div>
+                  <span class="text-purple-400">rbac_guard.pre_filter</span>(<span class="text-amber-300">role="Employee", dept="Tech"</span>)
+                  <div class="text-[11px] text-emerald-400 mt-0.5">↳ Access Authorized: Scope Level 2 Passed</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-2">
+                <span class="text-sky-400 font-bold">&gt;</span>
+                <div>
+                  <span class="text-purple-400">pgvector.hybrid_search</span>(<span class="text-slate-300">k=5, hnsw_ef=64</span>)
+                  <div class="text-[11px] text-slate-400 mt-0.5">↳ Retrieved 4 chunks in 18ms (avg_sim: 0.941)</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-2">
+                <span class="text-sky-400 font-bold">&gt;</span>
+                <div>
+                  <span class="text-purple-400">evidence_gate.verify</span>(<span class="text-slate-300">strict=True</span>)
+                  <div class="text-[11px] text-emerald-400 mt-0.5">↳ Hallucination Score: 0.00 (Zero Hallucination Guaranteed)</div>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-slate-800 text-slate-400 text-[11px] flex items-center justify-between">
+                <span class="text-emerald-400 font-bold flex items-center gap-1.5">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  1,453 Automated Tests Passed
+                </span>
+                <span class="text-sky-400 font-mono">Total: 184ms</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Stats Grid -->
+      <div id="heroStats" class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Rendered by main.js -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FEATURED PROJECTS SECTION
+       ========================================================================== -->
+  <section id="projects" class="py-20 sm:py-28 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-semibold mb-3">
+          <span>PORTFOLIO & DỰ ÁN TIÊU BIỂU</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Các Dự Án <span class="text-gradient-cyan-purple">Thực Chiến Nổi Bật</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-400 mt-3">
+          Các giải pháp công nghệ cao do Bùi Gia Uy trực tiếp nghiên cứu, thiết kế kiến trúc và triển khai thực tế.
+        </p>
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mt-8">
+          <button data-filter="all" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-sky-500 text-white shadow-lg shadow-sky-500/25 transition-all">
+            Tất cả dự án (All)
+          </button>
+          <button data-filter="ai" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800/60 text-slate-400 hover:text-slate-200 border border-slate-700/50 transition-all">
+            AI / GenAI & RAG
+          </button>
+          <button data-filter="fullstack" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800/60 text-slate-400 hover:text-slate-200 border border-slate-700/50 transition-all">
+            Full-Stack & E-Commerce
+          </button>
+          <button data-filter="mobile" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800/60 text-slate-400 hover:text-slate-200 border border-slate-700/50 transition-all">
+            Mobile & Multi-Agent
+          </button>
+        </div>
+      </div>
+
+      <!-- Projects Grid (Dynamic) -->
+      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+        <!-- Injected by main.js -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SKILLS & EXPERTISE SECTION
+       ========================================================================== -->
+  <section id="skills" class="py-20 sm:py-28 relative bg-slate-950/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold mb-3">
+          <span>KỸ NĂNG & NĂNG LỰC CỐT LÕI</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Hệ Thống <span class="text-gradient-cyan-purple">Chuyên Môn & Công Nghệ</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-400 mt-3">
+          Tổng hợp các năng lực kỹ thuật từ thiết kế Agentic Workflows, RAG, Backend hiệu năng cao cho tới triển khai hạ tầng.
+        </p>
+      </div>
+
+      <!-- Skills 4-Card Grid -->
+      <div id="skillsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8">
+        <!-- Injected by main.js -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       EDUCATION & CERTIFICATIONS SECTION
+       ========================================================================== -->
+  <section id="education" class="py-20 sm:py-28 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-3">
+          <span>HỌC VẤN & BẰNG CẤP CHUYÊN MÔN</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Đào Tạo & <span class="text-gradient-emerald">Chứng Chỉ Quốc Tế</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-400 mt-3">
+          Nền tảng đào tạo bài bản gắn liền với khung năng lực SFIA quốc tế từ Vingroup & VinUniversity cùng các tổ chức uy tín.
+        </p>
+      </div>
+
+      <!-- Education Cards Grid -->
+      <div id="educationContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <!-- Injected by main.js -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       INTERACTIVE AI ASSISTANT SIMULATOR (Ask Uy's AI Assistant)
+       ========================================================================== -->
+  <section id="ai-assistant" class="py-20 sm:py-28 relative bg-slate-950/60">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-300 text-xs font-semibold mb-3">
+          <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
+          <span>LIVE INTERACTIVE SHOWCASE</span>
+        </div>
+        <h2 class="text-3xl font-extrabold text-white tracking-tight">
+          Trò Chuyện Cùng <span class="text-gradient-cyan-purple">Trợ Lý AI của Gia Uy</span>
+        </h2>
+        <p class="text-sm text-slate-400 mt-2">
+          Thử nghiệm tương tác hỏi đáp trực tiếp về kiến trúc HR GENIE, Multi-Agent, bộ test suite hoặc phương thức liên hệ.
+        </p>
+      </div>
+
+      <!-- Interactive Chat Card -->
+      <div class="glass-panel rounded-2xl border border-slate-700/60 overflow-hidden shadow-2xl">
+        <!-- Terminal / Chat Bar -->
+        <div class="bg-slate-900 px-5 py-3.5 border-b border-slate-800 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+            <span class="ml-2 text-xs font-mono text-slate-300 font-semibold">GiaUy_Knowledge_Engine.ai</span>
+          </div>
+          <span class="text-[11px] font-mono text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">Online</span>
+        </div>
+
+        <!-- Chat Output Window -->
+        <div id="aiChatOutput" class="p-5 sm:p-6 h-80 overflow-y-auto space-y-4 bg-[#090d16]/95">
+          <!-- Initial Welcome Message -->
+          <div class="flex items-start gap-2.5">
+            <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-purple-500 to-sky-400 flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0">
+              AI
+            </div>
+            <div class="bg-slate-900/90 border border-slate-700/70 text-slate-200 rounded-2xl rounded-tl-sm px-4 py-3 text-xs sm:text-sm max-w-[90%] leading-relaxed">
+              Xin chào! Tôi là trợ lý ảo đại diện cho <strong class="text-sky-300 font-semibold">Bùi Gia Uy</strong>. Hãy bấm vào các câu hỏi gợi ý bên dưới hoặc nhập câu hỏi trực tiếp để khám phá về kiến trúc dự án, năng lực công nghệ và kinh nghiệm thực chiến của Uy nhé!
+            </div>
+          </div>
+        </div>
+
+        <!-- Suggestion Prompt Chips -->
+        <div class="px-5 py-3 bg-slate-900/80 border-t border-slate-800/80 flex flex-wrap gap-2">
+          <button data-question="Kể cho tôi nghe về dự án HR GENIE và RAG pipeline?" class="ai-prompt-btn text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700/80 transition-colors">
+            ⚡ Về HR GENIE & RAG Pipeline (98.46%)
+          </button>
+          <button data-question="Kinh nghiệm của Gia Uy về LangGraph và Multi-Agent Systems như thế nào?" class="ai-prompt-btn text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-purple-300 border border-slate-700/80 transition-colors">
+            🤖 LangGraph & Multi-Agent Systems
+          </button>
+          <button data-question="Dự án VIENEU-TTS có điểm gì nổi bật?" class="ai-prompt-btn text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-slate-700/80 transition-colors">
+            🎙️ VIENEU-TTS Voice Cloning
+          </button>
+          <button data-question="Làm sao để liên hệ phỏng vấn hoặc hợp tác với Bùi Gia Uy?" class="ai-prompt-btn text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700/80 transition-colors">
+            📬 Thông tin liên hệ trực tiếp
+          </button>
+        </div>
+
+        <!-- Input Bar -->
+        <div class="p-4 bg-slate-900 border-t border-slate-800 flex items-center gap-3">
+          <input id="aiCustomInput" type="text" placeholder="Đặt câu hỏi cho AI của Gia Uy..." class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-sky-500 transition-colors">
+          <button id="aiSendBtn" class="px-4 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-white font-semibold text-xs sm:text-sm inline-flex items-center gap-1.5 transition-colors shadow-md shadow-sky-500/20">
+            <span>Gửi</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CONTACT & GET IN TOUCH SECTION
+       ========================================================================== -->
+  <section id="contact" class="py-20 sm:py-28 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-semibold mb-3">
+          <span>KẾT NỐI & HỢP TÁC</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Sẵn Sàng Cho Các <span class="text-gradient-cyan-purple">Cơ Hội Mới</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-400 mt-3">
+          Bạn đang tìm kiếm Kỹ sư AI hoặc Lập trình viên Full-Stack cho dự án đột phá? Hãy liên hệ ngay với tôi.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Contact Info Cards (5 Cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          
+          <!-- Email Card -->
+          <div class="glass-panel p-5 rounded-2xl glow-card border border-slate-700/50 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              </div>
+              <div>
+                <span class="text-xs text-slate-400 block font-medium">Hòm thư điện tử</span>
+                <span class="text-sm font-bold text-white font-mono">giauy0987@gmail.com</span>
+              </div>
+            </div>
+            <button onclick="copyToClipboard('giauy0987@gmail.com', 'email')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-400 text-xs font-semibold transition-colors" title="Sao chép email">
+              Sao chép
+            </button>
+          </div>
+
+          <!-- Phone Card -->
+          <div class="glass-panel p-5 rounded-2xl glow-card border border-slate-700/50 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+              </div>
+              <div>
+                <span class="text-xs text-slate-400 block font-medium">Số điện thoại liên hệ</span>
+                <span class="text-sm font-bold text-white font-mono">0947879049</span>
+              </div>
+            </div>
+            <a href="tel:0947879049" class="px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 text-xs font-semibold transition-colors">
+              Gọi ngay
+            </a>
+          </div>
+
+          <!-- Location Card -->
+          <div class="glass-panel p-5 rounded-2xl glow-card border border-slate-700/50 flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            </div>
+            <div>
+              <span class="text-xs text-slate-400 block font-medium">Địa điểm làm việc</span>
+              <span class="text-sm font-bold text-white">TP. Hồ Chí Minh, Việt Nam</span>
+              <span class="text-[11px] text-slate-400 block">Sẵn sàng làm việc On-site / Hybrid / Remote</span>
+            </div>
+          </div>
+
+          <!-- Social Links Quick Grid -->
+          <div class="grid grid-cols-2 gap-3 pt-2">
+            <a href="https://www.linkedin.com/in/uy-gia/" target="_blank" rel="noopener noreferrer" class="glass-panel p-4 rounded-xl flex items-center gap-3 border border-slate-700/50 hover:border-sky-500/40 transition-colors">
+              <div class="w-8 h-8 rounded-lg bg-sky-500/15 text-sky-400 flex items-center justify-center">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </div>
+              <div>
+                <span class="text-xs font-bold text-white block">LinkedIn</span>
+                <span class="text-[11px] text-slate-400">in/uy-gia</span>
+              </div>
+            </a>
+
+            <a href="https://github.com/BuiGiaUy" target="_blank" rel="noopener noreferrer" class="glass-panel p-4 rounded-xl flex items-center gap-3 border border-slate-700/50 hover:border-purple-500/40 transition-colors">
+              <div class="w-8 h-8 rounded-lg bg-purple-500/15 text-purple-400 flex items-center justify-center">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+              </div>
+              <div>
+                <span class="text-xs font-bold text-white block">GitHub</span>
+                <span class="text-[11px] text-slate-400">BuiGiaUy</span>
+              </div>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Interactive Contact Form (7 Cols) -->
+        <div class="lg:col-span-7">
+          <form id="contactForm" class="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-700/60 space-y-5">
+            <h3 class="text-xl font-bold text-white mb-2">Gửi Tin Nhắn Trực Tiếp</h3>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="contactName" class="block text-xs font-medium text-slate-300 mb-1.5">Họ và tên *</label>
+                <input id="contactName" type="text" required placeholder="Nguyễn Văn A" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-sky-500 transition-colors">
+              </div>
+              <div>
+                <label for="contactEmail" class="block text-xs font-medium text-slate-300 mb-1.5">Email của bạn *</label>
+                <input id="contactEmail" type="email" required placeholder="name@company.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-sky-500 transition-colors">
+              </div>
+            </div>
+
+            <div>
+              <label for="contactSubject" class="block text-xs font-medium text-slate-300 mb-1.5">Chủ đề thảo luận</label>
+              <input id="contactSubject" type="text" placeholder="Trao đổi cơ hội tuyển dụng AI Engineer / Full-Stack" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-sky-500 transition-colors">
+            </div>
+
+            <div>
+              <label for="contactMessage" class="block text-xs font-medium text-slate-300 mb-1.5">Nội dung tin nhắn *</label>
+              <textarea id="contactMessage" required rows="4" placeholder="Chia sẻ về dự án, yêu cầu kỹ thuật hoặc lời mời phỏng vấn..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-sky-500 transition-colors"></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-sky-500 via-indigo-600 to-purple-600 hover:from-sky-400 hover:to-purple-500 shadow-xl shadow-sky-500/25 transition-all inline-flex items-center justify-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+              <span>Gửi tin nhắn qua Email Client</span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PROJECT DETAIL MODAL
+       ========================================================================== -->
+  <div id="projectModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true">
+    <!-- Backdrop -->
+    <div id="modalBackdrop" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md transition-opacity"></div>
+
+    <!-- Modal Dialog -->
+    <div class="modal-container relative w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-panel rounded-3xl p-6 sm:p-8 border border-slate-700/80 shadow-2xl z-10 bg-[#090d16]">
+      
+      <!-- Close Button -->
+      <button id="closeModalBtn" class="absolute top-5 right-5 p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors" aria-label="Close Modal">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+
+      <!-- Dynamic Content Rendered Here -->
+      <div id="modalContent"></div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="border-t border-slate-800/80 bg-[#060910] py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-purple-600 p-[1.5px]">
+          <div class="w-full h-full bg-[#090d16] rounded-[9px] flex items-center justify-center">
+            <span class="font-mono font-bold text-xs text-sky-400">&lt;GU/&gt;</span>
+          </div>
+        </div>
+        <div>
+          <span class="text-sm font-bold text-white block">Bùi Gia Uy</span>
+          <span class="text-xs text-slate-400">AI Application Engineer & Full-Stack Developer</span>
+        </div>
+      </div>
+
+      <div class="text-center sm:text-right text-xs text-slate-500">
+        <p>© 2026 Bùi Gia Uy. Built with modern web standards, ready for GitHub Pages.</p>
+        <p class="mt-1 text-slate-400">TP. Hồ Chí Minh, Việt Nam • 0947879049 • giauy0987@gmail.com</p>
+      </div>
+
+      <div>
+        <a href="#" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white inline-flex items-center gap-1.5 text-xs font-semibold transition-colors" title="Lên đầu trang">
+          <span>Lên đầu trang</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Toast Container -->
+  <div id="toast"></div>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
