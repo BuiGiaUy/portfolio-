@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-24T17:39:13.627Z",
+  "updatedAt": "2026-11-24T18:01:29.397Z",
   "items": [
     {
       "source": "facebook",
@@ -43,6 +43,426 @@
       "url": "https://www.facebook.com/ITviec/posts/pfbid0tvFdQtk2vMXjzVoXFDF9X6LC1c8GjH5SD9EV5xcYNAKjC7k72PUc4KTCCr4Cd4UQl",
       "summary": "",
       "author": "itviec",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[TUYỂN DỤNG] CHUYÊN VIÊN AN NINH - SECURITY ANALYST (APP DU LỊCH)",
+      "url": "https://www.facebook.com/groups/1001557246671612/posts/3523626421131336",
+      "summary": "Địa điểm: Tòa nhà QTSC 9 (Orbital Building), Công viên Phần mềm Quang Trung, P. Tân Chánh Hiệp, Quận 12, TP.HCM Thu nhập: 10 – 12 triệu/tháng (Lương + Phụ cấp + Thưởng KPI + Phụ cấp ca đêm) Công việc chính:Giám sát, phân tích và điều tra",
+      "author": "Việc Làm & Thực Tập Ngành IT (Developer/Tester)",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "CÔNG TY SITC GIANG NAM LOGISTICS Tuyển dụng IT Software Developer",
+      "url": "https://www.facebook.com/groups/1001557246671612/posts/3523160014511310",
+      "summary": "Địa điểm làm việc: Trần Não, P.An Khánh, TPHCM *Ưu tiên ứng viên có thể nhận việc trong thời gian sớm nhất.",
+      "author": "Việc Làm & Thực Tập Ngành IT (Developer/Tester)",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "| KCN VSIP BẮC NINH TUYỂN DỤNG |SOFTWARE DEVELOPER – INTERNAL SYSTEM/ERP/SAP [BN2534]",
+      "url": "https://www.facebook.com/groups/1001557246671612/posts/3523505854476726",
+      "summary": "Lương: 15 – 20M Có xe đưa đón từ Hà NộiTốt nghiệp Cao đẳng/Đại học chuyên ngành CNTT, Khoa học máy tính, Hệ thống thông tin hoặc các ngành liên quan.",
+      "author": "Việc Làm & Thực Tập Ngành IT (Developer/Tester)",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "Tín nghĩa AMS tuyển dụng nhân sự: MANUAL TESTER ( QA/QC)",
+      "url": "https://www.facebook.com/groups/1001557246671612/posts/3523738727786772",
+      "summary": "LIên hệ đi làm ngay.",
+      "author": "Việc Làm & Thực Tập Ngành IT (Developer/Tester)",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[TP.HCM] TÌM CƠ HỘI THỰC TẬP IT DEVELOPER",
+      "url": "https://www.facebook.com/groups/159256273713608/posts/961696310136263/",
+      "summary": "Chào anh chị và mọi người! Em đang tìm kiếm cơ hội thực tập trong lĩnh vực phát triển phần mềm. Sau một thời gian tự xây dựng dự án cá nhân, em nhận ra mình có một vấn đề khá lớn: mỗi lần code xong, muốn xin ý kiến review thì chỉ có thể tự",
+      "author": "Việc làm IT Fullstack, Backend/Frontend/AI/Data",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[HN] Hi mn",
+      "url": "https://www.facebook.com/groups/159256273713608/posts/961427840163110/",
+      "summary": ", Chinh tìm Full-Stack Dev (Java/Python + React, 3–5 năm KN) về đội . Dự án fintech Mỹ , dùng AI coding thực chiến , tiếng Anh giao tiếp tự tin. Inbox mình trao đổi nhanh nhé!",
+      "author": "Việc làm IT Fullstack, Backend/Frontend/AI/Data",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "WE ARE HIRING | HCMC - full time office",
+      "url": "https://www.facebook.com/groups/159256273713608/posts/960779760227918/",
+      "summary": "Competitive salary | Night shift allowance: 150% pay 1/ Implementation Specialist – 3–8 YOE Background: Software Engineer / Implementation Enterprise Software, SaaS, Technical Troubleshooting English C1 | Night Shift (3 PM – 12 AM) 2/ Custo",
+      "author": "Việc làm IT Fullstack, Backend/Frontend/AI/Data",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[HN_VCS] - DỰ ÁN AI CẦN TUYỂN MIDDLE/SENIOR PQA",
+      "url": "https://www.facebook.com/groups/159256273713608/posts/960777466894814/",
+      "summary": "YÊU CẦU CÔNG VIỆC • Có ít nhất 3 năm kinh nghiệm ở vị trí PQA, QA, SQA cho các dự án IT. Ưu tiên làm cho các dự án về dữ liệu, machine learning • Hiểu rõ quy trình phát triển phần mềm (SDLC). • Hiểu về quy trình QA và quản lý chất lượng phầ",
+      "author": "Việc làm IT Fullstack, Backend/Frontend/AI/Data",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "HCM | Fullstack Developer (Java, TypeScript)",
+      "url": "https://www.facebook.com/groups/159256273713608/posts/960680106904550/",
+      "summary": "WATATECH đang tìm Fullstack Developer đồng hành cùng team 2+ năm kinh nghiệm Fullstack thực tế Java Spring Boot (backend) + TypeScript với React/Angular/Vue (frontend) Sử dụng tốt AI tools (Copilot, Cursor, Claude, ChatGPT…) trong công việc",
+      "author": "Việc làm IT Fullstack, Backend/Frontend/AI/Data",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[HN] SAPO TUYỂN DỤNG | TECHNICAL LEAD – SABI WORK",
+      "url": "https://www.facebook.com/groups/1648138182163022/posts/4402720123371467/",
+      "summary": "Sapo đang tìm Technical Lead xây dựng Sabi Work – sản phẩm Agentic AI mới cho thương mại điện tử, từ 0 → 1. · Bạn sẽ được làm gì? · Tự quyết kiến trúc Backend/Fullstack, AI Agent, Data & Integration. · Biến AI Agent thành hệ thống thực tế…",
+      "author": "Tuyển Dụng Việc Làm IT",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "Software Developer - Internal System/ERP/SAP - Lương: 15 - 20M",
+      "url": "https://www.facebook.com/groups/1648138182163022/posts/4402718340038312/",
+      "summary": "KCN Vsip, Bắc Ninh · - Công ty sản xuất của Nhật · - TN CĐ/ĐH CNTT, Khoa học máy tính, Hệ thống thông tin hoặc các ngành liên quan. · - Từ 1 năm kinh nghiệm trong lĩnh vực phát triển phần mềm, quản trị hệ thống, IT, ưu tiên Python/Odoo/ERP",
+      "author": "Tuyển Dụng Việc Làm IT",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[BÌNH DƯƠNG – VSIP II] TUYỂN DỤNG AI ENGINEER & MES PROJECT ENGINEER",
+      "url": "https://www.facebook.com/groups/1648138182163022/posts/4402389683404511/",
+      "summary": "Địa điểm: KCN VSIP II, Bình Dương · Mức lương: Upto 25M · 1. AI ENGINEER · 2. MES PROJECT ENGINEER (DX/ SMART FACTORY)",
+      "author": "Tuyển Dụng Việc Làm IT",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "CYBERUNI TUYỂN DỤNG – NHÂN VIÊN VẬN HÀNH HỆ THỐNG",
+      "url": "https://www.facebook.com/groups/1648138182163022/posts/4401712940138852/",
+      "summary": "Thu nhập: 8–12 triệu/tháng + thưởng. · Địa điểm: Kim Mã, Giảng Võ, Hà Nội. · Mô tả công việc: · • Triển khai, quản lý và giám sát môi trường hệ thống phần mềm.",
+      "author": "Tuyển Dụng Việc Làm IT",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[HCM/Tân Bình] - CẦN TUYỂN VỊ TRÍ SECURITY STANDARDS & COMPLIANCE SPECIALIST (Junior/Middle Level)",
+      "url": "https://www.facebook.com/groups/1696546370626089/posts/4596657543948276",
+      "summary": "Yêu cầu: - Tốt nghiệp Đại học chuyên ngành Công nghệ thông tin, An toàn thông tin, Khoa học máy tính hoặc các chuyên ngành liên quan. - Có từ 01–03 năm kinh nghiệm trong lĩnh vực Information Security, Security Engineering, Security Research",
+      "author": "Tuyển dụng IT - Công nghệ thông tin",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "CHIA SẺ DÀNH CHO CÁC BẠN ĐANG HỌC TẬP VÀ LÀM VIỆC TRONG NGÀNH IT",
+      "url": "https://www.facebook.com/groups/1743442856334227/posts/2013883685956808/",
+      "summary": "",
+      "author": "Việc Làm IT - Developer, Tester, QA, BA, PM, Intern",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "các bạn quan tâm vui lòng inbox",
+      "url": "https://www.facebook.com/groups/1743442856334227/posts/2012595412752302/",
+      "summary": "",
+      "author": "Việc Làm IT - Developer, Tester, QA, BA, PM, Intern",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "các bạn quan tâm vui lòng inbox ạ",
+      "url": "https://www.facebook.com/groups/1743442856334227/posts/2012553909423119/",
+      "summary": "",
+      "author": "Việc Làm IT - Developer, Tester, QA, BA, PM, Intern",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "DỰ ÁN FREE GIÚP NGƯỜI LÀM IT RÈN LUYỆN TƯ DUY GIẢI QUYẾT VẤN ĐỀ",
+      "url": "https://www.facebook.com/groups/1743442856334227/posts/2011786749499835/",
+      "summary": "",
+      "author": "Việc Làm IT - Developer, Tester, QA, BA, PM, Intern",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[QTSC Q12 TUYỂN DỤNG TTS NGÀNH CNTT ] Chúng tôi đang tìm kiếm vị trí Thực tập sinh để cùng học hỏi và phát triển: Thực tập sinh BA/ CNTT Yêu cầu chung: Sinh viên mới tốt nghiệp",
+      "url": "https://www.facebook.com/groups/2305193253333989/posts/2592745837912061/",
+      "summary": "các ngành liên quan",
+      "author": "Tìm Việc IT - Backend, FrontEnd, Tester, QA, BA, PM",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[HN_VCS] - DỰ ÁN AI CẦN TUYỂN MIDDLE/SENIOR PQA YÊU CẦU CÔNG VIỆC • Có ít nhất 3 năm kinh nghiệm ở vị trí PQA, QA, SQA cho các dự án IT. Ưu tiên làm cho các dự án về dữ liệu",
+      "url": "https://www.facebook.com/groups/2305193253333989/posts/2592563634596948/",
+      "summary": "machine learning • Hiểu rõ quy trình phát triển phần mềm (SDLC). • Hiểu về quy trình QA và quản lý chất lượng phần mềm",
+      "author": "Tìm Việc IT - Backend, FrontEnd, Tester, QA, BA, PM",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[HCM] TUYỂN DỤNG LEAD RUBY ON RAILS LEAD CHO DỰ ÁN QUỐC TẾ 3+ năm kinh nghiệm Ruby on Rails Có khả năng dẫn dắt team, code review, mentoring Tiếng Anh giao tiếp tốt Upto 60M",
+      "url": "https://www.facebook.com/groups/2305193253333989/posts/2592251941294784/",
+      "summary": "",
+      "author": "Tìm Việc IT - Backend, FrontEnd, Tester, QA, BA, PM",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[HYBRID - QUẬN 3, HCM] TÌM ỨNG VIÊN IT BA - Business Application Analyst Product Company tìm kiếm ứng viên cho vị trí IT BA, background IT / Software Engineer / Computer Science /",
+      "url": "https://www.facebook.com/groups/2305193253333989/posts/2592249244628387/",
+      "summary": "MIS, có ít nhất 3 năm kinh nghiệm tại các vị trí tương đương (Business Analyst / System Analyst) Hình thức làm việc: Hybrid (3 ngày làm việc tại VP Quận 3 + 2 ngày WFH) Thời gian làm việc: Thứ 2 – Thứ 6 (8:30 – 12:00 & 13:00 – 17:30). Nghỉ",
+      "author": "Tìm Việc IT - Backend, FrontEnd, Tester, QA, BA, PM",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "MakinaRocksVN Tp.HCM đang tìm đồng đội!! Onboard ngay tháng 12, anh em onboard cuối năm vẫn nhận thưởng Tết bình thường nha!! MakinaRocks là công ty AI chuyên cung cấp các giải",
+      "url": "https://www.facebook.com/groups/2305193253333989/posts/2592135587973086/",
+      "summary": "pháp AI trong công nghiệp và quốc phòng hàng đầu tại Hàn Quốc, đã có pháp nhân tại Mỹ, Nhật Bản và đã được niêm yết trên sàn KOSDAQ của Hàn. Hiện MakinaRocks VN đang tìm các bạn FE với JD như ảnh: Lương thưởng hấp dẫn Onsite full time",
+      "author": "Tìm Việc IT - Backend, FrontEnd, Tester, QA, BA, PM",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "TÌM KIẾM AI RESEARCHER VÀ LLM INFERENCE OPTIMIZATION ENGINEER - Hạ tầng cụm 20 node NVIDIA B300 - Lĩnh vực An ninh mạng",
+      "url": "https://www.facebook.com/groups/3989249071208661/posts/4205240396276193/",
+      "summary": "Nam Từ Liêm, Hà Nội | Signing bonus 1 tháng lương. Khách hàng xây LLM song ngữ Việt–Anh (100B+ và bản dưới 30B) on-premise, hạ tầng 20 node NVIDIA B300, dữ liệu an ninh mạng độc quyền.",
+      "author": "Tuyển Dụng AI Engineer Việt Nam",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[HÀ NỘI] LLM OPS / PLATFORM ENGINEER – OPEN LƯƠNG",
+      "url": "https://www.facebook.com/groups/3989249071208661/posts/4205001102966789/",
+      "summary": "Tìm kỹ sư LLM Ops/Platform có kinh nghiệm thực chiến huấn luyện mô hình và vận hành cụm máy chủ GPU, tham gia giải các bài toán AI quy mô lớn; lương thương lượng.",
+      "author": "Tuyển Dụng AI Engineer Việt Nam",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[HN] AI-Enabled Full-Stack Engineer (Middle/Senior)",
+      "url": "https://www.facebook.com/groups/3989249071208661/posts/4203791393087760/",
+      "summary": "3–5 năm KN, thạo Java/Python & React, dùng tốt AI coding tools; dự án fintech của Mỹ, làm việc cùng team Mỹ, tiếng Anh tốt; inbox trao đổi nhanh.",
+      "author": "Tuyển Dụng AI Engineer Việt Nam",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[Hà Nội] Tuyển 3 Senior AI Augmented Software Engineer – dự án AI về ATTT",
+      "url": "https://www.facebook.com/groups/3989249071208661/posts/4202201676580065/",
+      "summary": "Cần Senior Backend/Techlead biết dùng AI để vibe code, kiểm chứng chất lượng code, chọn công nghệ và lên kiến trúc sản phẩm; thu nhập cạnh tranh, BHXH và BH sức khỏe đầy đủ.",
+      "author": "Tuyển Dụng AI Engineer Việt Nam",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "ONSITE BANK HN- HIRING IT UPTO 45M GROSS",
+      "url": "https://www.facebook.com/groups/748141517905607/posts/29439504109034904",
+      "summary": "1. DEVSECOPS * Kinh nghiệm: 3+ năm",
+      "author": "IT TUYỂN DỤNG (AI, DATA, DevOps, BA, PL/PM, BrSE)",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "TUYỂN PROJECT COORDINATOR (TIẾNG NHẬT N1–N2) – ĐÀ NẴNG",
+      "url": "https://www.facebook.com/groups/748141517905607/posts/1185902444129510",
+      "summary": "Bạn giỏi tiếng Nhật, thích điều phối dự án và muốn làm ở nơi gần như không OT? Hãy làm cầu nối giữa đội ngũ Việt Nam và khách hàng Nhật Bản cùng chúng mình. Lương: 15 – 25 triệu Gross (Middle) Địa điểm: Tầng 8, Tòa nhà Thông tấn xã Việt",
+      "author": "IT TUYỂN DỤNG (AI, DATA, DevOps, BA, PL/PM, BrSE)",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "JOIN OUR TECH TEAM AT FPT SOFTWARE",
+      "url": "https://www.facebook.com/groups/748141517905607/posts/1185855154134239",
+      "summary": "FPT Software đang open các vị trí: AI Engineer Data Engineer Business Analysis Từ 3 năm kinh nghiệm Khả năng giao tiếp tiếng Anh tốt Cơ hội tham gia các dự án quốc tế quy mô lớn",
+      "author": "IT TUYỂN DỤNG (AI, DATA, DevOps, BA, PL/PM, BrSE)",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[HYBRID - DISTRICT 3, HCMC] TÌM ỨNG VIÊN IT BA - Business Application Analyst",
+      "url": "https://www.facebook.com/groups/748141517905607/posts/1185776514142103",
+      "summary": "Product Company tìm kiếm ứng viên cho vị trí IT BA, background IT / Software Engineer / Computer Science / MIS, có ít nhất 3 năm kinh nghiệm tại các vị trí tương đương (Business Analyst / System Analyst) - Định hướng Product Owner Mức",
+      "author": "IT TUYỂN DỤNG (AI, DATA, DevOps, BA, PL/PM, BrSE)",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "HN - CHIÊU MỘ FULLSTACK ENGINEER – AETOSKY",
+      "url": "https://www.facebook.com/groups/timvieclamcntt/posts/4625868391014357/",
+      "summary": "Yêu cầu: Có từ 3-5 năm kinh nghiệm phát triển thực tế fullstack, vững frontend với Vue, TypeScript hoặc tương đương cho các giao diện xử lý nhiều dữ liệu. Có kiến thức tốt về backend và thiết kế API RESTful (Python, Go, Node hoặc tương tự);",
+      "author": "Tuyển dụng việc làm IT - CNTT",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[HÀ NỘI] VIETTEL TELECOM TUYỂN DỤNG IT – ƯU TIÊN ONBOARD SỚM!",
+      "url": "https://www.facebook.com/groups/timvieclamcntt/posts/4625951204339409/",
+      "summary": "Cuối năm rồi, anh em IT nào đang tìm kiếm cơ hội mới với dự án dài hạn, sản phẩm quy mô lớn và môi trường công nghệ chuyên nghiệp thì đừng bỏ lỡ nhé! DỰ ÁN TAMMI – VIETTEL TELECOM đang tìm kiếm đồng đội ở các vị trí: Java Backend Developer ",
+      "author": "Tuyển dụng việc làm IT - CNTT",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[HANOI] CHỐT SỔ NĂM 2026 - NHẬN NGAY SIGNING BONUS 1 THÁNG LƯƠNG KHI ONBOARD THÁNG 12!",
+      "url": "https://www.facebook.com/groups/timvieclamcntt/posts/4620125424921987/",
+      "summary": "--- NHÓM DATA & BI (PHÚC LỢI CỰC KHỦNG) --- 1. BI ARCHITECT (Banking Domain) Địa điểm: Hoàn Kiếm Lương: Upto 50.000.000 VNĐ Gross Yêu cầu: 5 năm exp BI + 5 năm domain Banking. Product mindset cực tốt. BONUS: 01 tháng lương khi onboard tháng",
+      "author": "Tuyển dụng việc làm IT - CNTT",
+      "tags": [
+        "facebook"
+      ],
+      "createdAt": null,
+      "metrics": {}
+    },
+    {
+      "source": "facebook",
+      "title": "[QTSC Q12 TUYỂN DỤNG TTS NGÀNH CNTT ]",
+      "url": "https://www.facebook.com/groups/timvieclamcntt/posts/4589901971277666/",
+      "summary": "Chúng tôi đang tìm kiếm vị trí Thực tập sinh để cùng học hỏi và phát triển: Thực tập sinh BA/ CNTT Yêu cầu chung: Sinh viên mới tốt nghiệp các ngành liên quan",
+      "author": "Tuyển dụng việc làm IT - CNTT",
       "tags": [
         "facebook"
       ],
