@@ -43,6 +43,7 @@ Portfolio chính không còn Tailwind CDN, Lucide hay dependency runtime. `radar
 │   ├── js/main.js             # Render, i18n, modal, theme, chat, form
 │   ├── images/avatar.jpg
 │   ├── images/og-cover-ai-web.jpg # Ảnh social 1200×630
+│   ├── images/projects/       # UI screenshots cho project cards/modal
 │   ├── cv/Bui-Gia-Uy-CV.pdf          # CV AI Engineer, 1 trang
 │   └── cv/Bui-Gia-Uy-CV-FullStack.pdf # CV Full-Stack Web, 1 trang
 ├── cv/

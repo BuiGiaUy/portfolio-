@@ -285,6 +285,12 @@ window.PORTFOLIO_DATA = {
           badge: "Dự án chính",
           status: "Capstone",
           size: "wide",
+          image: "assets/images/projects/hr-genie-chat.webp",
+          imageAlt: "Giao diện chat HR GENIE với câu trả lời chính sách có trích dẫn nguồn",
+          gallery: [
+            { src: "assets/images/projects/hr-genie-chat.webp", alt: "Chat HR GENIE với badge độ tin cậy và nguồn tham chiếu" },
+            { src: "assets/images/projects/hr-genie-citations.webp", alt: "HR GENIE trả lời quy trình bán hàng với nhiều citation" }
+          ],
           summary:
             "Trợ lý chính sách nhân sự trả lời từ tài liệu nội bộ với citation, evidence gate, refusal khi thiếu căn cứ và chuyển HR cho câu hỏi nhạy cảm.",
           problem:
@@ -341,6 +347,12 @@ window.PORTFOLIO_DATA = {
           badge: "E-commerce",
           status: "Đã hoàn thiện",
           size: "normal",
+          image: "assets/images/projects/wine-home.webp",
+          imageAlt: "Trang chủ BIGBA Wine với hero ảnh rượu vang và CTA khám phá",
+          gallery: [
+            { src: "assets/images/projects/wine-home.webp", alt: "Trang chủ cửa hàng rượu vang BIGBA" },
+            { src: "assets/images/projects/wine-admin.webp", alt: "Dashboard admin BIGBA với đơn hàng và doanh thu" }
+          ],
           summary:
             "Nền tảng thương mại điện tử rượu vang với catalog, cart, checkout, thanh toán VNPay, realtime comment và admin CMS.",
           problem:
@@ -387,6 +399,12 @@ window.PORTFOLIO_DATA = {
           badge: "Lab nghiên cứu",
           status: "Track nâng cao",
           size: "normal",
+          image: "assets/images/projects/colosseum-projector.webp",
+          imageAlt: "Projector UI của Colosseum với bracket, trận đấu và bảng điểm",
+          gallery: [
+            { src: "assets/images/projects/colosseum-projector.webp", alt: "Colosseum projector: bracket, featured duel và ticker" },
+            { src: "assets/images/projects/colosseum-spar.webp", alt: "Colosseum spar HUD với năm giai đoạn của một hiệp" }
+          ],
           summary:
             "Python gateway kiểm tra permission, budget và citation trước khi forward agent tool calls; ghi lý do khi agent abstain.",
           problem:
@@ -481,6 +499,12 @@ window.PORTFOLIO_DATA = {
           badge: "React & Node",
           status: "Hoàn thành",
           size: "normal",
+          image: "assets/images/projects/crypto-login.webp",
+          imageAlt: "Giao diện đăng nhập Binance-style của Crypto Trade",
+          gallery: [
+            { src: "assets/images/projects/crypto-login.webp", alt: "Trang đăng nhập Binance-style" },
+            { src: "assets/images/projects/crypto-register.webp", alt: "Trang đăng ký Binance-style với form đầy đủ" }
+          ],
           summary:
             "Dashboard theo dõi thị trường crypto, tách frontend React, API layer Next.js và auth server Express/MongoDB với JWT.",
           problem:
@@ -1037,6 +1061,12 @@ window.PORTFOLIO_DATA = {
           badge: "Flagship",
           status: "Capstone",
           size: "wide",
+          image: "assets/images/projects/hr-genie-chat.webp",
+          imageAlt: "HR GENIE chat UI with a policy answer and source citations",
+          gallery: [
+            { src: "assets/images/projects/hr-genie-chat.webp", alt: "HR GENIE chat with confidence badge and source references" },
+            { src: "assets/images/projects/hr-genie-citations.webp", alt: "HR GENIE answer with multiple policy citations" }
+          ],
           summary:
             "An HR policy assistant that answers from internal documents with citations; insufficient evidence triggers refusal and sensitive personal cases go to HR.",
           problem:
@@ -1093,6 +1123,12 @@ window.PORTFOLIO_DATA = {
           badge: "E-commerce",
           status: "Shipped",
           size: "normal",
+          image: "assets/images/projects/wine-home.webp",
+          imageAlt: "BIGBA Wine storefront with a wine hero image and a discovery CTA",
+          gallery: [
+            { src: "assets/images/projects/wine-home.webp", alt: "BIGBA wine storefront homepage" },
+            { src: "assets/images/projects/wine-admin.webp", alt: "BIGBA admin dashboard with orders and revenue" }
+          ],
           summary:
             "A wine e-commerce platform with catalog, cart, checkout, VNPay payments, real-time comments and an admin CMS.",
           problem:
@@ -1139,6 +1175,12 @@ window.PORTFOLIO_DATA = {
           badge: "Research lab",
           status: "Advanced track",
           size: "normal",
+          image: "assets/images/projects/colosseum-projector.webp",
+          imageAlt: "Colosseum projector UI with the bracket, featured duel and scoreboard",
+          gallery: [
+            { src: "assets/images/projects/colosseum-projector.webp", alt: "Colosseum projector: bracket, featured duel and ticker" },
+            { src: "assets/images/projects/colosseum-spar.webp", alt: "Colosseum spar HUD with the five stages of an exchange" }
+          ],
           summary:
             "A Python gateway that checks permissions, budgets and citations before forwarding agent tool calls; records the reason when the agent abstains.",
           problem:
@@ -1233,6 +1275,12 @@ window.PORTFOLIO_DATA = {
           badge: "React & Node",
           status: "Completed",
           size: "normal",
+          image: "assets/images/projects/crypto-login.webp",
+          imageAlt: "Binance-style login screen for Crypto Trade",
+          gallery: [
+            { src: "assets/images/projects/crypto-login.webp", alt: "Binance-style login screen" },
+            { src: "assets/images/projects/crypto-register.webp", alt: "Binance-style registration form" }
+          ],
           summary:
             "A crypto market dashboard split into a React frontend, a Next.js API layer and an Express/MongoDB auth server with JWT.",
           problem:

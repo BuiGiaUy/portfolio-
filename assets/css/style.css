@@ -1131,6 +1131,32 @@ html:not(.dark) .trace-bar {
   line-height: 1.7;
 }
 
+.project-preview {
+  margin: 15px 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface-2);
+  aspect-ratio: 16 / 9;
+}
+
+.project-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.35s ease;
+}
+
+.project-card:hover .project-preview img {
+  transform: scale(1.015);
+}
+
+.project-card.is-wide .project-preview {
+  aspect-ratio: 16 / 7.5;
+}
+
 .project-metrics {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2052,6 +2078,32 @@ html:not(.dark) .chat-form {
   line-height: 1.7;
 }
 
+.modal-gallery {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0 4px;
+}
+
+.modal-shot {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.modal-shot a {
+  display: block;
+}
+
+.modal-shot img {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  background: var(--surface-2);
+}
+
 .modal-metrics {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2291,6 +2343,8 @@ html:not(.dark) .chat-form {
   .metric-value { font-size: 22px; }
   .stack-strip { gap: 4px 0; }
   .project-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-card.is-wide .project-preview { aspect-ratio: 16 / 10; }
+  .modal-shot img { max-height: 280px; }
   .project-metric:nth-child(2) { border-right: 0; }
   .project-metric:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
   .timeline-item { grid-template-columns: 1fr; gap: 12px; padding: 24px 0; }

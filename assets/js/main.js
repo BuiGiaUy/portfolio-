@@ -419,6 +419,7 @@ function renderProjects(filter = 'all') {
             <span class="project-badge">${project.badge}</span>
             <span class="project-status">${project.status}</span>
           </div>
+          ${project.image ? `<figure class="project-preview"><img src="${project.image}" alt="${escapeHtml(project.imageAlt || project.title)}" loading="lazy" decoding="async"></figure>` : ''}
           <h3 class="project-title">${project.title}</h3>
           <p class="project-sub">${project.subtitle}</p>
           <p class="project-summary">${project.summary}</p>
@@ -592,6 +593,31 @@ function buildArchitecture(project) {
     .join('');
 }
 
+function buildProjectGallery(project) {
+  const shots =
+    project.gallery && project.gallery.length
+      ? project.gallery
+      : project.image
+        ? [{ src: project.image, alt: project.imageAlt || project.title }]
+        : [];
+
+  if (!shots.length) return '';
+
+  return `
+    <div class="modal-gallery">
+      ${shots
+        .map(
+          (shot, index) => `
+            <figure class="modal-shot${index === 0 ? ' is-main' : ''}">
+              <a href="${escapeHtml(shot.src)}" target="_blank" rel="noopener noreferrer" aria-label="Open full screenshot: ${escapeHtml(shot.alt || project.title)}">
+                <img src="${escapeHtml(shot.src)}" alt="${escapeHtml(shot.alt || project.title)}" loading="${index === 0 ? 'eager' : 'lazy'}" decoding="async">
+              </a>
+            </figure>`
+        )
+        .join('')}
+    </div>`;
+}
+
 function openProject(projectId, trigger) {
   const modal = document.getElementById('projectModal');
   const panel = document.getElementById('modalPanel');
@@ -634,6 +660,8 @@ function openProject(projectId, trigger) {
           .join('')}
       </div>
     </header>
+
+    ${buildProjectGallery(project)}
 
     <section class="modal-section">
       <h3 class="modal-section-title">${t('modal.problem')}</h3>
