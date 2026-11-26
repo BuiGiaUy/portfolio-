@@ -1040,7 +1040,13 @@ html:not(.dark) .trace-bar {
   background: var(--card-bg);
   border: 1px solid var(--line);
   border-radius: var(--radius);
+  cursor: pointer;
   transition: border-color 0.22s ease, background 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.project-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .project-card:hover {

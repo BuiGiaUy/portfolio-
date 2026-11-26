@@ -276,7 +276,7 @@ function setLanguage(lang, options) {
   }
 
   if (modalWasOpen && openProjectId) {
-    const trigger = document.querySelector(`[data-project="${openProjectId}"]`);
+    const trigger = document.querySelector(`[data-project-card="${openProjectId}"]`);
     openProject(openProjectId, trigger || lastFocused);
   }
 }
@@ -413,7 +413,7 @@ function renderProjects(filter = 'all') {
   container.innerHTML = projects
     .map(
       (project, index) => `
-        <article class="project-card ${project.size === 'wide' ? 'is-wide' : ''} reveal" style="--delay: ${index * 45}ms">
+        <article class="project-card ${project.size === 'wide' ? 'is-wide' : ''} reveal" style="--delay: ${index * 45}ms" data-project-card="${project.id}" tabindex="0" role="button" aria-label="${escapeHtml(project.title)} — ${escapeHtml(project.subtitle)}">
           <div class="project-top">
             <span class="project-index">${project.index}</span>
             <span class="project-badge">${project.badge}</span>
@@ -442,17 +442,26 @@ function renderProjects(filter = 'all') {
             ${project.tech.length > 8 ? `<span class="tech">+${project.tech.length - 8}</span>` : ''}
           </div>
           <div class="project-foot">
-            <button type="button" class="project-link" data-project="${project.id}">
+            <span class="project-link" aria-hidden="true">
               ${t('work.view')} <span aria-hidden="true">↗</span>
-            </button>
+            </span>
             <span class="project-note">${project.note}</span>
           </div>
         </article>`
     )
     .join('');
 
-  container.querySelectorAll('[data-project]').forEach((button) => {
-    button.addEventListener('click', () => openProject(button.getAttribute('data-project'), button));
+  container.querySelectorAll('[data-project-card]').forEach((card) => {
+    const open = (event) => {
+      if (event && event.target.closest('a, button')) return;
+      openProject(card.getAttribute('data-project-card'), card);
+    };
+    card.addEventListener('click', open);
+    card.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      openProject(card.getAttribute('data-project-card'), card);
+    });
   });
 
   observeReveals();

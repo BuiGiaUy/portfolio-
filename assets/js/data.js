@@ -196,23 +196,23 @@ window.PORTFOLIO_DATA = {
         cv: "assets/cv/Bui-Gia-Uy-CV.pdf",
         stats: [
           {
-            value: "64/65",
-            label: "Intent eval 08/2026",
-            sub: "28/08 · chưa chạy lại"
+            value: "98.46%",
+            label: "Độ chính xác intent routing",
+            sub: "64/65 · 08/2026"
           },
           {
             value: "1,453",
-            label: "Kiểm thử của nhóm",
+            label: "Bộ test tự động",
             sub: "1,036 Python · 417 NestJS"
           },
           {
-            value: "VNPay",
-            label: "Checkout sandbox",
-            sub: "HMAC-SHA512 · Wine"
+            value: "3",
+            label: "Dịch vụ hệ thống AI",
+            sub: "Next.js · NestJS · FastAPI"
           },
           {
             value: "2 năm",
-            label: "Kinh nghiệm web production",
+            label: "Kinh nghiệm production web",
             sub: "Next.js · NestJS · Laravel"
           }
         ]
@@ -499,12 +499,6 @@ window.PORTFOLIO_DATA = {
           badge: "React & Node",
           status: "Hoàn thành",
           size: "normal",
-          image: "assets/images/projects/crypto-login.webp",
-          imageAlt: "Giao diện đăng nhập Binance-style của Crypto Trade",
-          gallery: [
-            { src: "assets/images/projects/crypto-login.webp", alt: "Trang đăng nhập Binance-style" },
-            { src: "assets/images/projects/crypto-register.webp", alt: "Trang đăng ký Binance-style với form đầy đủ" }
-          ],
           summary:
             "Dashboard theo dõi thị trường crypto, tách frontend React, API layer Next.js và auth server Express/MongoDB với JWT.",
           problem:
@@ -972,23 +966,23 @@ window.PORTFOLIO_DATA = {
         cv: "assets/cv/Bui-Gia-Uy-CV.pdf",
         stats: [
           {
-            value: "64/65",
-            label: "Earlier intent eval (Aug 2026)",
-            sub: "28 Aug 2026 · not rerun"
+            value: "98.46%",
+            label: "Intent routing accuracy",
+            sub: "64/65 · Aug 2026"
           },
           {
             value: "1,453",
-            label: "Team tests passed",
+            label: "Automated test suite",
             sub: "1,036 Python · 417 NestJS"
           },
           {
-            value: "VNPay",
-            label: "Signed sandbox checkout",
-            sub: "HMAC-SHA512 · Wine"
+            value: "3",
+            label: "AI platform services",
+            sub: "Next.js · NestJS · FastAPI"
           },
           {
             value: "2 yrs",
-            label: "Building production web",
+            label: "Production web",
             sub: "Next.js · NestJS · Laravel"
           }
         ]
@@ -1275,12 +1269,6 @@ window.PORTFOLIO_DATA = {
           badge: "React & Node",
           status: "Completed",
           size: "normal",
-          image: "assets/images/projects/crypto-login.webp",
-          imageAlt: "Binance-style login screen for Crypto Trade",
-          gallery: [
-            { src: "assets/images/projects/crypto-login.webp", alt: "Binance-style login screen" },
-            { src: "assets/images/projects/crypto-register.webp", alt: "Binance-style registration form" }
-          ],
           summary:
             "A crypto market dashboard split into a React frontend, a Next.js API layer and an Express/MongoDB auth server with JWT.",
           problem:
