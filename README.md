@@ -1,123 +1,124 @@
-# Bùi Gia Uy (Bui Gia Uy) - Personal Portfolio Website
+# Bùi Gia Uy — Portfolio
 
-[![GitHub Pages](https://img.shields.io/badge/Deployment-GitHub%20Pages-blue?logo=github)](https://buigiauy.github.io/portfolio-/)
-[![Tech Stack](https://img.shields.io/badge/Tech-HTML5%20%7C%20TailwindCSS%20%7C%20JavaScript%20ES6+-38bdf8)](https://buigiauy.github.io/portfolio-/)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+AI Engineer & Full-Stack Web Developer based in Ho Chi Minh City.
 
-> **Bùi Gia Uy** — AI Application Engineer & Full-Stack Developer  
-> 📍 TP. Hồ Chí Minh, Việt Nam  
-> 📧 Email: [giauy0987@gmail.com](mailto:giauy0987@gmail.com) | 📞 SĐT: `0947879049`  
-> 🔗 LinkedIn: [linkedin.com/in/uy-gia/](https://www.linkedin.com/in/uy-gia/) | 🐙 GitHub: [github.com/BuiGiaUy](https://github.com/BuiGiaUy)
+- Portfolio (intended GitHub Pages URL): <https://buigiauy.github.io/portfolio-/>
+- GitHub: <https://github.com/BuiGiaUy>
+- LinkedIn: <https://www.linkedin.com/in/uy-gia/>
+- Email: <giauy0987@gmail.com>
 
----
-
-## 🌟 Giới Thiệu (About Me)
-
-Kỹ sư ứng dụng AI & Lập trình viên Full-Stack chuyên sâu về kiến trúc **Multi-Agent Systems**, **Multi-Stage RAG**, **LLMOps** và phát triển hệ thống phần mềm doanh nghiệp hiệu năng cao. Sở hữu kinh nghiệm thực chiến với quy chuẩn **SFIA quốc tế** (chương trình AI Thực Chiến - Vingroup × VinUniversity), thiết kế đường ống RAG thông minh đạt độ chính xác phân luồng **98.46%** và hệ thống kiểm thử tự động **1.400+ test cases**.
+> Nếu URL GitHub Pages trả 404, bật Pages trong **Settings → Pages → Deploy from a branch → `main` / root**. Repo cần được push đầy đủ, gồm `assets/images/avatar.jpg`, `assets/cv/Bui-Gia-Uy-CV.pdf` và `assets/cv/Bui-Gia-Uy-CV-FullStack.pdf`.
 
 ---
 
-## 🚀 Các Dự Án Tiêu Biểu (Featured Projects)
+## Giao diện
 
-### 1. HR GENIE – Internal AI-Powered HR Policy Assistant
-- **Đơn vị / Bối cảnh:** VinUni AI Thực Chiến - Vingroup (Chuẩn SFIA Quốc tế)
-- **Tech Stack:** Python, FastAPI, LangGraph, LangChain, NestJS, Next.js, PostgreSQL (pgvector), Docker
-- **Điểm sáng Kỹ thuật:**
-  - **Multi-Stage RAG Pipeline:** Bộ phân loại ý định thông minh (*Smart Intent Router*) đạt độ chính xác **98.46%**.
-  - **Pre-query Authorized Retrieval:** Phân quyền dữ liệu đa tầng kết hợp `pgvector`, loại trừ rủi ro rò rỉ chính sách nhân sự nhạy cảm.
-  - **Evidence Gate & Deterministic Answer Verifier:** Cơ chế đối soát kép bảo đảm phản hồi trung thực, loại bỏ hoàn toàn hiện tượng ảo giác (*Zero Hallucination*).
-  - **Bộ kiểm thử tự động đồ sộ:** **1.453 tests** (1.036 Python tests và 417 NestJS tests) đảm bảo độ ổn định môi trường sản xuất.
+Thiết kế lại theo hướng **editorial + terminal/agent trace**, không dùng framework hay build step:
 
-### 2. VIENEU-TTS – Vietnamese Neural Text-to-Speech & Voice Cloning
-- **Tech Stack:** Python, PyTorch, LoRA Fine-Tuning, FastAPI, Gradio, Docker, WebSockets
-- **Điểm sáng Kỹ thuật:**
-  - Tinh chỉnh mô hình Acoustic và Vocoder tiếng Việt tự nhiên cho cả 3 miền Bắc - Trung - Nam bằng kỹ thuật LoRA/PEFT.
-  - **Zero-Shot Voice Cloning:** Tái tạo chính xác âm sắc giọng nói chỉ từ mẫu âm thanh đối chiếu **3 giây**.
-  - **Audio Streaming:** Phát âm thanh dạng chunked qua WebSockets với độ trễ suy luận dưới **160ms**.
+- Hero với portrait, agent trace demo và metrics thật.
+- 5 dự án dạng bento, modal chi tiết với problem → approach → architecture → outcome.
+- Timeline kinh nghiệm (Hoa Lan Cattleya, Propway, AI20K).
+- Stack matrix kèm evidence cho từng công nghệ.
+- Trợ lý AI demo offline (keyword matching, không gọi API).
+- Chuyển ngôn ngữ **VI / EN** ngay trên header; thuật ngữ kỹ thuật giữ nguyên tiếng Anh ở cả hai bản.
+- Theme sáng/tối, mobile menu, scrollspy, reveal on scroll.
+- Accessibility: skip link, focus trap trong modal, `aria-live`, reduced-motion fallback.
+- SEO/social: OG/Twitter card, canonical, JSON-LD Person, ảnh OG 1200×630.
+- Form liên hệ qua FormSubmit, fallback mở ứng dụng email.
 
-### 3. WINE E-COMMERCE PLATFORM
-- **Tech Stack:** Laravel 10, PHP 8.1, MySQL, Redis, Bootstrap, Vite, Pusher, VNPay
-- **Điểm sáng Kỹ thuật:**
-  - Kiến trúc chuẩn mực **Repository Pattern & Service Layer** trên nền tảng Laravel 10.
-  - Tích hợp cổng thanh toán trực tuyến **VNPay** với cơ chế xác thực chữ ký số HMAC-SHA512 và xử lý IPN webhook bất đồng bộ.
-  - Cập nhật thông báo đơn hàng và tồn kho thời gian thực với **Pusher WebSockets**.
-  - Tăng tốc truy vấn và giảm tải 70% database thông qua lớp **Redis Caching**.
-
-### 4. COLOSSEUM & CERTUS LABS (VinUni Track 2 Advanced)
-- **Tech Stack:** LangGraph, Multi-Agent Systems, LangSmith, Langfuse, Ragas, TruLens, Docker, FastAPI
-- **Điểm sáng Kỹ thuật:**
-  - Thiết kế mạng lưới tác nhân tự quản (*Planner, Researcher, Critic, Executor*) với đồ thị trạng thái chu trình qua LangGraph.
-  - Giám sát toàn diện (*Distributed Tracing*) dấu vết gọi mô hình, chi phí token và độ trễ qua **LangSmith** & **Langfuse**.
-  - Tự động hóa đánh giá chất lượng mô hình (*Context Precision, Faithfulness, Answer Relevance*) bằng bộ công cụ **Ragas & TruLens**.
-
-### 5. SMART ASSET & EXPENSE INTELLIGENCE
-- **Tech Stack:** Flutter, Dart, Node.js, Express, PostgreSQL, Docker, SQLite
-- **Điểm sáng Kỹ thuật:**
-  - Kiến trúc ứng dụng di động đa nền tảng (iOS & Android) chuẩn mực.
-  - Cơ chế **Offline-First Sync**: Ghi nhận giao dịch tức thì qua SQLite cục bộ và tự động hòa giải xung đột khi có kết nối mạng.
+Portfolio chính không còn Tailwind CDN, Lucide hay dependency runtime. `radar.html` vẫn dùng Tailwind CDN + `radar-base.css` riêng (legacy tokens) để không bị ảnh hưởng bởi redesign.
 
 ---
 
-## 🛠️ Kỹ Năng Chuyên Môn (Skills & Technologies)
+## Cấu trúc
 
-| Nhóm Năng Lực | Công Nghệ & Công Cụ Chủ Lực |
-| :--- | :--- |
-| **AI / GenAI & Multi-Agent** | LangGraph, LangChain, Multi-Stage RAG, pgvector, Multi-Agent Workflows, Guardrails, Evaluation (Ragas, TruLens), Tracing (LangSmith, Langfuse), PyTorch, LoRA |
-| **Backend & APIs** | FastAPI (Python), NestJS (TypeScript/Node.js), Laravel 10 (PHP 8.1), RESTful APIs, WebSockets, Redis, PostgreSQL, MySQL, JWT, RBAC |
-| **Frontend & Mobile** | React, Next.js, Vue.js, Flutter, Tailwind CSS, TypeScript, JavaScript ES6+, Vite |
-| **DevOps & MLOps** | Docker, Docker Compose, GitHub Actions (CI/CD), Nginx, Linux, Git |
+```text
+.
+├── index.html                 # Portfolio chính
+├── radar.html                 # Lab page (không link từ portfolio)
+├── assets/
+│   ├── css/style.css          # Design system + responsive (portfolio)
+│   ├── css/radar-base.css     # Legacy tokens cho radar.html
+│   ├── js/data.js             # Nội dung portfolio cho cả VI và EN
+│   ├── js/main.js             # Render, i18n, modal, theme, chat, form
+│   ├── images/avatar.jpg
+│   ├── images/og-cover.jpg    # Ảnh social 1200×630
+│   ├── cv/Bui-Gia-Uy-CV.pdf          # CV AI Engineer, 1 trang
+│   └── cv/Bui-Gia-Uy-CV-FullStack.pdf # CV Full-Stack Web, 1 trang
+├── cv/
+│   ├── build-cv.py            # Sinh CV AI (Markdown/HTML/DOCX/PDF)
+│   ├── build-cv-fullstack.py  # Sinh CV Full-Stack
+│   ├── requirements.txt       # python-docx + reportlab cho build CV
+│   ├── Bui-Gia-Uy-CV.md
+│   ├── Bui-Gia-Uy-CV.html
+│   ├── Bui-Gia-Uy-CV.docx
+│   ├── Bui-Gia-Uy-CV-FullStack.md
+│   ├── Bui-Gia-Uy-CV-FullStack.html
+│   ├── Bui-Gia-Uy-CV-FullStack.docx
+│   └── JD-fit.md              # Phân tích JD + keyword map
+├── tools/                     # Script thu thập dữ liệu cho radar
+├── LICENSE                    # MIT
+└── README.md
+```
 
----
+Sửa nội dung portfolio tại `assets/js/data.js`: mỗi chuỗi có bản `locales.vi` và `locales.en`, giữ thuật ngữ kỹ thuật (RAG, backend, deployment…) bằng tiếng Anh ở cả hai. Trang mặc định là tiếng Việt; thêm `?lang=en` để mở thẳng bản tiếng Anh. Lựa chọn được lưu trong `localStorage`. Sửa CV tại `cv/build-cv.py`, sau đó chạy:
 
-## 🎓 Học Vấn & Chứng Chỉ (Education & Certifications)
+```bash
+python -m pip install -r cv/requirements.txt
+python cv/build-cv.py
+python cv/build-cv-fullstack.py
+```
 
-- 🏅 **AI Thực Chiến (AITC)** — Vingroup × VinUniversity (*Chuẩn khung năng lực SFIA quốc tế*)
-- 📜 **PHP Full-Stack Web Development** — TechMaster Vietnam
-- 📜 **React.js Developer Certified** — W3Schools
-
----
-
-## 💻 Trải Nghiệm Website & Khởi Chạy Cục Bộ (Local Setup)
-
-Website được đóng gói dạng **Zero-Build Static Web Application** tối ưu, sẵn sàng phục vụ trực tiếp trên **GitHub Pages** hoặc mở trực tiếp trên mọi trình duyệt:
-
-1. **Clone repository:**
-   ```bash
-   git clone https://github.com/BuiGiaUy/portfolio-.git
-   cd portfolio-
-   ```
-
-2. **Chạy trực tiếp:**
-   - Mở file `index.html` trực tiếp bằng trình duyệt (Chrome, Edge, Firefox, Safari).
-   - Hoặc khởi chạy local server với Python hoặc Node.js:
-     ```bash
-     # Sử dụng Python
-     python -m http.server 3000
-     # Hoặc Node.js npx serve
-     npx serve .
-     ```
-   - Truy cập: `http://localhost:3000`
-
----
-
-## 📱 Điểm Nhấn Giao Diện (UI/UX Highlights)
-
-- 🌓 **Chuyển đổi giao diện Sáng / Tối (Dark / Light Theme)** lưu trữ tùy chọn người dùng qua `localStorage`.
-- 🎛️ **Bộ lọc dự án tương tác** theo danh mục: *All, AI / GenAI & RAG, Full-Stack & E-Commerce, Mobile & Multi-Agent*.
-- 🔍 **Modal chi tiết dự án** hiển thị sơ đồ luồng kỹ thuật trực quan (*Technical Architecture Pipeline*), các số liệu định lượng và trích dẫn mã nguồn.
-- 🤖 **Bộ mô phỏng Trợ lý AI (Ask Gia Uy's AI Assistant)** tương tác hỏi đáp trực quan về năng lực và giải pháp.
-- 📋 **Sao chép nhanh thông tin liên lạc (1-Click Copy)** kèm thông báo Toast Notification mượt mà.
+Hai lệnh build rebuild cả `.md`, `.html`, `.docx` và PDF tương ứng trong `assets/cv/`; script sẽ báo lỗi nếu PDF vượt quá 1 trang A4.
 
 ---
 
-## 📬 Liên Hệ (Contact)
+## Chạy local
 
-- **Họ và tên:** Bùi Gia Uy
-- **Email:** [giauy0987@gmail.com](mailto:giauy0987@gmail.com)
-- **Điện thoại:** `0947879049`
-- **Địa điểm:** TP. Hồ Chí Minh, Việt Nam
-- **LinkedIn:** [https://www.linkedin.com/in/uy-gia/](https://www.linkedin.com/in/uy-gia/)
-- **GitHub:** [https://github.com/BuiGiaUy](https://github.com/BuiGiaUy)
+```bash
+python -m http.server 3000
+# hoặc: npx serve .
+```
+
+Mở <http://localhost:3000>. Không cần cài dependency.
 
 ---
-*© 2026 Bùi Gia Uy. All rights reserved.*
+
+## Deploy GitHub Pages
+
+1. Commit/push toàn bộ thay đổi, gồm ảnh và CV PDF.
+2. Vào **Settings → Pages**.
+3. Chọn **Deploy from a branch** → `main` → `/ (root)`.
+4. Chờ GitHub Pages build, sau đó mở <https://buigiauy.github.io/portfolio-/>.
+
+Nếu chưa bật Pages, link trên sẽ 404 dù code đã đúng.
+
+---
+
+## CV & JD tailoring
+
+`cv/JD-fit.md` tổng hợp các JD đã dùng để viết lại CV:
+
+- FPT Software — AI Engineer (LLM/RAG)
+- MTI Technology — Middle/Senior AI Engineer (GenAI/LLM, English)
+- TecAlliance — Fullstack Dev, AI products (Python)
+- GoTymeX — Senior AI/ML Engineer (Agentic AI) — tham chiếu, lệch cấp bậc
+
+Hai bản CV, cùng 1 trang A4, single column, ATS-friendly:
+
+- `assets/cv/Bui-Gia-Uy-CV.pdf` — tối ưu cho **AI Engineer / LLM-RAG**.
+- `assets/cv/Bui-Gia-Uy-CV-FullStack.pdf` — tối ưu cho **Full-Stack Web Developer / TypeScript, NestJS, Next.js**.
+
+Các số liệu và kỹ năng cần xác minh được liệt kê trong `cv/JD-fit.md`.
+
+---
+
+## Ghi chú
+
+- Form liên hệ dùng FormSubmit; lần gửi đầu tiên cần bấm link kích hoạt trong email.
+- `radar.html` là lab page riêng, không được link từ portfolio.
+- Nội dung Facebook trong `assets/data/` nếu có chỉ nên dùng cho mục đích cá nhân; kiểm tra quyền/chính sách trước khi public.
+
+## License
+
+MIT — xem [LICENSE](LICENSE).

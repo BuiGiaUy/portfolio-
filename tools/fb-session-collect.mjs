@@ -43,10 +43,21 @@ function parseArgs(argv) {
 const args = parseArgs(process.argv);
 const port = Number(args.port || 9222);
 const limit = Math.max(1, Number(args.limit || 8));
-const pages = String(args.pages || 'topcv.vn')
+const tidy = (item) => item.trim().replace(/^https?:\/\/(www\.)?facebook\.com\//i, '').replace(/\/+$/, '');
+const pages = String(args.pages || '')
   .split(',')
-  .map((item) => item.trim().replace(/^https?:\/\/(www\.)?facebook\.com\//i, '').replace(/\/+$/, ''))
+  .map(tidy)
   .filter(Boolean);
+const groups = String(args.groups || '')
+  .split(',')
+  .map(tidy)
+  .map((item) => (item.startsWith('groups/') ? item : `groups/${item}`))
+  .filter(Boolean);
+const targets = [...pages, ...groups];
+if (!targets.length) targets.push('topcv.vn');
+
+const urlFor = (target) =>
+  target.startsWith('groups/') ? `https://www.facebook.com/${target}` : `https://www.facebook.com/${target}/posts`;
 const outPath = resolve(process.cwd(), String(args.out || 'assets/data/social-feed.json'));
 
 const sleep = (ms) => new Promise((done) => setTimeout(done, ms));
@@ -91,6 +102,11 @@ function cleanLines(text) {
     .filter(Boolean);
 }
 
+function authorOf(page, pageTitle) {
+  const cleaned = String(pageTitle || '').replace(/^\(\d+\+\)\s*/, '').replace(/\s*\|\s*Facebook\s*$/i, '').trim();
+  return cleaned || page;
+}
+
 function toItem(page, raw, pageTitle) {
   const lines = cleanLines(raw.text).filter((line) => line !== pageTitle);
   const title = (lines[0] || '').replace(/\s+/g, ' ').slice(0, 180);
@@ -100,7 +116,7 @@ function toItem(page, raw, pageTitle) {
     title,
     url: raw.href,
     summary,
-    author: page,
+    author: authorOf(page, pageTitle),
     tags: ['facebook'],
     createdAt: null,
     metrics: {}
@@ -115,7 +131,7 @@ async function orcaJson(argv) {
 }
 
 async function collectViaOrca(page) {
-  await orcaJson(['goto', '--url', `https://www.facebook.com/${page}/posts`]);
+  await orcaJson(['goto', '--url', urlFor(page)]);
   let payload = null;
   for (let attempt = 0; attempt < 20; attempt += 1) {
     await sleep(2000);
@@ -128,7 +144,7 @@ async function collectViaOrca(page) {
 }
 
 async function collectViaCdp(client, page) {
-  const url = `https://www.facebook.com/${page}/posts`;
+  const url = urlFor(page);
   const { targetId } = await client.send('Target.createTarget', { url: 'about:blank' });
   const { sessionId } = await client.send('Target.attachToTarget', { targetId, flatten: true });
   try {
@@ -189,7 +205,7 @@ async function main() {
 
   let fresh = [];
   try {
-    for (const page of pages) {
+    for (const page of targets) {
       fresh = fresh.concat(await collectPage(client, page));
       await sleep(1200);
     }

@@ -1,778 +1,1266 @@
-// Main Application Logic for Bùi Gia Uy Portfolio
+// Portfolio interactions — vanilla JS, no dependencies.
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
-  renderProfileStats();
-  renderProjects('all');
+  initLanguageSwitch();
+  renderStats();
+  renderProjects(activeFilter);
+  renderTimeline();
   renderSkills();
-  renderEducation();
-  initProjectFilter();
-  initModalEvents();
-  initAIAssistant();
-  initContactForm();
+  renderPrinciples();
+  renderChatPrompts();
+  initFilters();
+  initModal();
   initMobileMenu();
   initScrollSpy();
-  if (window.lucide) {
-    lucide.createIcons();
+  initReveal();
+  initTrace();
+  initChat();
+  initContactForm();
+  initCopyButtons();
+  initYear();
+});
+
+/* ==========================================================================
+   Language + content
+   ========================================================================== */
+
+const DATA_ROOT = window.PORTFOLIO_DATA || {
+  defaultLocale: 'vi',
+  locales: { vi: {} }
+};
+const LANG_STORAGE_KEY = 'lang';
+const SUPPORTED_LANGS = ['vi', 'en'];
+
+function readInitialLang() {
+  try {
+    const queryLang = new URLSearchParams(window.location.search).get('lang');
+    if (SUPPORTED_LANGS.includes(queryLang)) return queryLang;
+    const storedLang = localStorage.getItem(LANG_STORAGE_KEY);
+    if (SUPPORTED_LANGS.includes(storedLang)) return storedLang;
+  } catch (error) {
+    /* storage or URL parsing unavailable: use the default */
+  }
+  return DATA_ROOT.defaultLocale === 'en' ? 'en' : 'vi';
+}
+
+let currentLang = readInitialLang();
+let DATA = getLocale(currentLang);
+let activeFilter = 'all';
+let chatEntries = [];
+let contactFeedback = null;
+let contactSending = false;
+
+function persistLang(lang) {
+  try {
+    localStorage.setItem(LANG_STORAGE_KEY, lang);
+  } catch (error) {
+    /* private mode: keep the language for this session */
+  }
+}
+
+function syncLangUrl(lang) {
+  try {
+    const url = new URL(window.location.href);
+    url.searchParams.set('lang', lang);
+    window.history.replaceState(null, '', url);
+  } catch (error) {
+    /* history API unavailable: the language still applies for this session */
+  }
+}
+
+persistLang(currentLang);
+
+function getLocale(lang) {
+  const locales = DATA_ROOT.locales || {};
+  return locales[lang] || locales[DATA_ROOT.defaultLocale] || locales.vi || {};
+}
+
+function getPath(object, path) {
+  return String(path)
+    .split('.')
+    .reduce((value, key) => (value == null ? undefined : value[key]), object);
+}
+
+function t(path) {
+  const value = getPath(DATA.ui, path);
+  if (value !== undefined && value !== null && value !== '') return value;
+  const fallbackLocale = getLocale(DATA_ROOT.defaultLocale === 'en' ? 'en' : 'vi');
+  const fallback = getPath(fallbackLocale.ui, path);
+  return fallback === undefined || fallback === null ? '' : fallback;
+}
+
+function format(template, values) {
+  return String(template).replace(/\{(\w+)\}/g, (match, key) =>
+    Object.prototype.hasOwnProperty.call(values, key) ? String(values[key]) : match
+  );
+}
+
+function setMeta(attribute, name, value) {
+  const element = document.querySelector(`meta[${attribute}="${name}"]`);
+  if (element) element.setAttribute('content', value);
+}
+
+function updateMeta() {
+  document.title = t('meta.title');
+  document.documentElement.lang = currentLang;
+  setMeta('name', 'description', t('meta.description'));
+  setMeta('property', 'og:title', t('meta.ogTitle'));
+  setMeta('property', 'og:description', t('meta.ogDescription'));
+  setMeta('property', 'og:locale', t('meta.ogLocale'));
+  setMeta('name', 'twitter:title', t('meta.ogTitle'));
+  setMeta('name', 'twitter:description', t('meta.ogDescription'));
+}
+
+function applyStaticI18n() {
+  const year = String(new Date().getFullYear());
+
+  document.querySelectorAll('[data-i18n]').forEach((element) => {
+    const value = t(element.getAttribute('data-i18n'));
+    if (typeof value === 'string') element.textContent = value;
+  });
+
+  document.querySelectorAll('[data-i18n-html]').forEach((element) => {
+    const value = t(element.getAttribute('data-i18n-html'));
+    if (typeof value !== 'string') return;
+    element.innerHTML = value.replace(/\{year\}/g, year);
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((element) => {
+    element.setAttribute('placeholder', t(element.getAttribute('data-i18n-placeholder')));
+  });
+
+  document.querySelectorAll('[data-i18n-aria-label]').forEach((element) => {
+    element.setAttribute('aria-label', t(element.getAttribute('data-i18n-aria-label')));
+  });
+
+  document.querySelectorAll('[data-i18n-title]').forEach((element) => {
+    element.setAttribute('title', t(element.getAttribute('data-i18n-title')));
+  });
+
+  document.querySelectorAll('[data-i18n-alt]').forEach((element) => {
+    element.setAttribute('alt', t(element.getAttribute('data-i18n-alt')));
+  });
+}
+
+function updateLangButtons() {
+  document.querySelectorAll('[data-lang]').forEach((button) => {
+    const active = button.getAttribute('data-lang') === currentLang;
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
+}
+
+function updateThemeButton() {
+  const root = document.documentElement;
+  const button = document.getElementById('themeToggle');
+  const icon = document.getElementById('themeIcon');
+  const dark = root.classList.contains('dark');
+
+  if (icon) icon.innerHTML = dark ? ICON_MOON : ICON_SUN;
+  if (!button) return;
+
+  button.setAttribute('aria-pressed', String(dark));
+  button.setAttribute('aria-label', t('a11y.theme'));
+  button.setAttribute('title', dark ? t('theme.toLight') : t('theme.toDark'));
+}
+
+function updateMenuLabel() {
+  const toggle = document.getElementById('menuToggle');
+  if (!toggle) return;
+  const open = toggle.getAttribute('aria-expanded') === 'true';
+  toggle.setAttribute('aria-label', open ? t('a11y.closeMenu') : t('a11y.openMenu'));
+}
+
+function renderChatLog() {
+  const log = document.getElementById('chatLog');
+  if (!log) return;
+  if (activeTypewriter) activeTypewriter.finish();
+  activeTypewriter = null;
+
+  const greeting = `
+    <div class="msg msg-bot">
+      <span class="msg-avatar" aria-hidden="true">AI</span>
+      <div class="msg-bubble">${t('ask.greetingHtml')}</div>
+    </div>`;
+
+  const messages = chatEntries
+    .map((entry) => {
+      if (entry.role === 'user') {
+        return `
+          <div class="msg msg-user">
+            <span class="msg-avatar" aria-hidden="true">${t('ask.userAvatar')}</span>
+            <div class="msg-bubble">${escapeHtml(entry.text)}</div>
+          </div>`;
+      }
+      const answer =
+        entry.knowledgeIndex >= 0 && DATA.aiKnowledge
+          ? DATA.aiKnowledge[entry.knowledgeIndex]?.answer || t('ask.fallback')
+          : t('ask.fallback');
+      return `
+        <div class="msg msg-bot">
+          <span class="msg-avatar" aria-hidden="true">AI</span>
+          <div class="msg-bubble">${escapeHtml(answer)}</div>
+        </div>`;
+    })
+    .join('');
+
+  log.innerHTML = greeting + messages;
+  scrollChat();
+}
+
+function renderContactFeedback() {
+  const status = document.getElementById('contactStatus');
+  if (!status) return;
+  status.classList.remove('is-ok', 'is-error');
+  if (!contactFeedback) {
+    status.textContent = '';
+    return;
+  }
+  status.textContent = t(contactFeedback.key);
+  if (contactFeedback.tone) status.classList.add(contactFeedback.tone);
+}
+
+function setContactFeedback(key, tone) {
+  contactFeedback = key ? { key, tone } : null;
+  renderContactFeedback();
+}
+
+function renderAll() {
+  renderStats();
+  renderProjects(activeFilter);
+  renderTimeline();
+  renderSkills();
+  renderPrinciples();
+  renderChatPrompts();
+  renderChatLog();
+}
+
+function setLanguage(lang, options) {
+  const nextLang = SUPPORTED_LANGS.includes(lang) ? lang : 'vi';
+  const shouldPersist = !options || options.persist !== false;
+  const shouldSyncUrl = !options || options.syncUrl !== false;
+
+  if (nextLang === currentLang && !(options && options.force)) {
+    if (shouldPersist) persistLang(nextLang);
+    if (shouldSyncUrl) syncLangUrl(nextLang);
+    return;
+  }
+
+  currentLang = nextLang;
+  DATA = getLocale(currentLang);
+
+  const modal = document.getElementById('projectModal');
+  const openProjectId = activeProjectId;
+  const modalWasOpen = Boolean(modal && !modal.hidden && openProjectId);
+
+  if (shouldPersist) persistLang(currentLang);
+  if (shouldSyncUrl) syncLangUrl(currentLang);
+
+  updateMeta();
+  applyStaticI18n();
+  updateLangButtons();
+  updateThemeButton();
+  updateMenuLabel();
+  renderAll();
+  renderContactFeedback();
+  renderToast();
+
+  const submit = document.getElementById('contactSubmit');
+  if (submit) {
+    if (contactSending) {
+      submit.textContent = t('contact.sending');
+    } else if (!submit.disabled) {
+      submit.innerHTML = `<span>${t('contact.submit')}</span> <span aria-hidden="true">→</span>`;
+    }
+  }
+
+  if (modalWasOpen && openProjectId) {
+    const trigger = document.querySelector(`[data-project="${openProjectId}"]`);
+    openProject(openProjectId, trigger || lastFocused);
+  }
+}
+
+function initLanguageSwitch() {
+  document.querySelectorAll('[data-lang]').forEach((button) => {
+    button.addEventListener('click', () => setLanguage(button.getAttribute('data-lang')));
+  });
+  updateLangButtons();
+}
+
+window.addEventListener('popstate', () => {
+  const queryLang = new URLSearchParams(window.location.search).get('lang');
+  if (SUPPORTED_LANGS.includes(queryLang)) {
+    setLanguage(queryLang, { persist: false, syncUrl: false, force: true });
+    return;
+  }
+  let storedLang = null;
+  try {
+    storedLang = localStorage.getItem(LANG_STORAGE_KEY);
+  } catch (error) {
+    storedLang = null;
+  }
+  if (SUPPORTED_LANGS.includes(storedLang)) {
+    setLanguage(storedLang, { persist: false, syncUrl: false, force: true });
   }
 });
 
 /* ==========================================================================
-   THEME TOGGLE (Dark / Light Mode)
+   Utilities
    ========================================================================== */
+
+function escapeHtml(value) {
+  const div = document.createElement('div');
+  div.textContent = String(value ?? '');
+  return div.innerHTML;
+}
+
+function reduceMotion() {
+  return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+let revealObserver = null;
+
+function observeReveals() {
+  const elements = document.querySelectorAll('.reveal:not(.is-visible)');
+  if (!elements.length) return;
+  if (reduceMotion() || !('IntersectionObserver' in window)) {
+    elements.forEach((element) => element.classList.add('is-visible'));
+    return;
+  }
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+  }
+  elements.forEach((element) => revealObserver.observe(element));
+}
+
+function initReveal() {
+  observeReveals();
+}
+
+/* ==========================================================================
+   Theme
+   ========================================================================== */
+
+const THEME_STORAGE_KEY = 'theme';
+const ICON_MOON =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.8A8.6 8.6 0 1 1 11.2 3a6.7 6.7 0 0 0 9.8 9.8Z"/></svg>';
+const ICON_SUN =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+
 function initTheme() {
-  const themeToggleBtn = document.getElementById('themeToggleBtn');
-  const themeIcon = document.getElementById('themeIcon');
-  
-  // Check local storage or system preference
-  const savedTheme = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  
-  if (savedTheme === 'light') {
-    document.documentElement.classList.remove('dark');
-    updateThemeIcon(false);
-  } else {
-    document.documentElement.classList.add('dark');
-    updateThemeIcon(true);
-  }
+  const root = document.documentElement;
+  const button = document.getElementById('themeToggle');
 
-  if (themeToggleBtn) {
-    themeToggleBtn.addEventListener('click', () => {
-      const isDark = document.documentElement.classList.toggle('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      updateThemeIcon(isDark);
-    });
-  }
-}
+  updateThemeButton();
 
-function updateThemeIcon(isDark) {
-  const themeIcon = document.getElementById('themeIcon');
-  if (!themeIcon) return;
-  if (isDark) {
-    themeIcon.innerHTML = `<svg class="w-5 h-5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>`;
-  } else {
-    themeIcon.innerHTML = `<svg class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>`;
-  }
+  if (!button) return;
+  button.addEventListener('click', () => {
+    const dark = root.classList.toggle('dark');
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, dark ? 'dark' : 'light');
+    } catch (error) {
+      /* private mode: keep the theme for this session */
+    }
+    updateThemeButton();
+  });
 }
 
 /* ==========================================================================
-   RENDER PROFILE STATS
+   Render: stats, projects, timeline, skills, principles
    ========================================================================== */
-function renderProfileStats() {
-  const statsContainer = document.getElementById('heroStats');
-  if (!statsContainer || !window.PORTFOLIO_DATA) return;
-  
-  const stats = window.PORTFOLIO_DATA.profile.stats;
-  statsContainer.innerHTML = stats.map(s => `
-    <div class="glass-panel p-4 rounded-xl text-center glow-card border border-slate-700/40">
-      <div class="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-400 font-mono">
-        ${s.value}
-      </div>
-      <div class="text-xs sm:text-sm font-semibold text-slate-200 mt-1">${s.label}</div>
-      <div class="text-[11px] text-slate-400 mt-0.5 truncate">${s.sub}</div>
-    </div>
-  `).join('');
+
+function renderStats() {
+  const container = document.getElementById('metrics');
+  const stats = DATA.profile && DATA.profile.stats;
+  if (!container || !stats) return;
+  container.innerHTML = stats
+    .map(
+      (item) => `
+        <div class="metric">
+          <span class="metric-value">${item.value}</span>
+          <span class="metric-label">${item.label}</span>
+          <span class="metric-sub">${item.sub}</span>
+        </div>`
+    )
+    .join('');
+}
+
+function renderProjects(filter = 'all') {
+  const container = document.getElementById('projectsGrid');
+  if (!container || !DATA.projects) return;
+
+  activeFilter = filter;
+
+  const projects = DATA.projects.filter(
+    (project) => filter === 'all' || project.category === filter
+  );
+
+  if (!projects.length) {
+    container.innerHTML = `<p class="section-lede">${t('work.empty')}</p>`;
+    return;
+  }
+
+  container.innerHTML = projects
+    .map(
+      (project, index) => `
+        <article class="project-card ${project.size === 'wide' ? 'is-wide' : ''} reveal" style="--delay: ${index * 45}ms">
+          <div class="project-top">
+            <span class="project-index">${project.index}</span>
+            <span class="project-badge">${project.badge}</span>
+            <span class="project-status">${project.status}</span>
+          </div>
+          <h3 class="project-title">${project.title}</h3>
+          <p class="project-sub">${project.subtitle}</p>
+          <p class="project-summary">${project.summary}</p>
+          <div class="project-metrics">
+            ${project.metrics
+              .map(
+                (metric) => `
+                  <div class="project-metric">
+                    <span>${metric.label}</span>
+                    <strong>${metric.value}</strong>
+                  </div>`
+              )
+              .join('')}
+          </div>
+          <div class="project-tech">
+            ${project.tech
+              .slice(0, 8)
+              .map((tech) => `<span class="tech">${tech}</span>`)
+              .join('')}
+            ${project.tech.length > 8 ? `<span class="tech">+${project.tech.length - 8}</span>` : ''}
+          </div>
+          <div class="project-foot">
+            <button type="button" class="project-link" data-project="${project.id}">
+              ${t('work.view')} <span aria-hidden="true">↗</span>
+            </button>
+            <span class="project-note">${project.note}</span>
+          </div>
+        </article>`
+    )
+    .join('');
+
+  container.querySelectorAll('[data-project]').forEach((button) => {
+    button.addEventListener('click', () => openProject(button.getAttribute('data-project'), button));
+  });
+
+  observeReveals();
+}
+
+function renderTimeline() {
+  const container = document.getElementById('timeline');
+  if (!container || !DATA.experience) return;
+
+  container.innerHTML = DATA.experience
+    .map(
+      (item) => `
+        <article class="timeline-item reveal">
+          <div class="timeline-meta">
+            <span class="timeline-period">${item.period}</span>
+            <span class="timeline-location">${item.location}</span>
+            <span class="timeline-type">${item.type === 'program' ? t('experience.typeProgram') : t('experience.typeWork')}</span>
+          </div>
+          <div class="timeline-body">
+            <h3 class="timeline-company">${item.company}</h3>
+            <p class="timeline-role">${item.role}</p>
+            <p class="timeline-summary">${item.summary}</p>
+            <ul class="timeline-bullets">
+              ${item.bullets.map((bullet) => `<li>${bullet}</li>`).join('')}
+            </ul>
+            <div class="timeline-tags">
+              ${item.tech.map((tech) => `<span class="tech">${tech}</span>`).join('')}
+            </div>
+          </div>
+        </article>`
+    )
+    .join('');
+
+  observeReveals();
+}
+
+function renderSkills() {
+  const container = document.getElementById('skillsGrid');
+  if (!container || !DATA.skills) return;
+
+  container.innerHTML = DATA.skills
+    .map(
+      (group) => `
+        <article class="skill-card reveal">
+          <div class="skill-head">
+            <p class="skill-kicker">${group.kicker}</p>
+            <h3 class="skill-title">${group.title}</h3>
+            <span class="skill-count">${String(group.items.length).padStart(2, '0')}</span>
+          </div>
+          <ul class="skill-list">
+            ${group.items
+              .map(
+                (item) => `
+                  <li class="skill-item">
+                    <span class="skill-name">${item.name}</span>
+                    <span class="skill-evidence">${item.evidence}</span>
+                  </li>`
+              )
+              .join('')}
+          </ul>
+        </article>`
+    )
+    .join('');
+
+  observeReveals();
+}
+
+function renderPrinciples() {
+  const container = document.getElementById('principles');
+  if (!container || !DATA.principles) return;
+
+  container.innerHTML = DATA.principles
+    .map(
+      (item) => `
+        <article class="principle reveal">
+          <span class="principle-number">${item.number}</span>
+          <h3 class="principle-title">${item.title}</h3>
+          <p class="principle-text">${item.text}</p>
+        </article>`
+    )
+    .join('');
+
+  observeReveals();
 }
 
 /* ==========================================================================
-   PROJECT RENDERING & FILTERING
+   Filters
    ========================================================================== */
-function initProjectFilter() {
-  const filterBtns = document.querySelectorAll('.project-filter-btn');
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      filterBtns.forEach(b => {
-        b.classList.remove('bg-sky-500', 'text-white', 'shadow-lg', 'shadow-sky-500/25');
-        b.classList.add('bg-slate-800/60', 'text-slate-400', 'hover:text-slate-200');
+
+function initFilters() {
+  const buttons = Array.from(document.querySelectorAll('.filter'));
+  if (!buttons.length) return;
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter');
+      buttons.forEach((item) => {
+        const active = item === button;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-pressed', String(active));
       });
-      btn.classList.add('bg-sky-500', 'text-white', 'shadow-lg', 'shadow-sky-500/25');
-      btn.classList.remove('bg-slate-800/60', 'text-slate-400');
-      
-      const filter = btn.getAttribute('data-filter');
       renderProjects(filter);
     });
   });
 }
 
-function renderProjects(filter = 'all') {
-  const container = document.getElementById('projectsGrid');
-  if (!container || !window.PORTFOLIO_DATA) return;
-
-  const projects = window.PORTFOLIO_DATA.projects.filter(p => {
-    if (filter === 'all') return true;
-    return p.category === filter;
-  });
-
-  container.innerHTML = projects.map(p => `
-    <article class="glass-panel rounded-2xl overflow-hidden glow-card border border-slate-700/50 flex flex-col group transition-all duration-300">
-      <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
-        <div>
-          <!-- Top Badges -->
-          <div class="flex items-center justify-between gap-2 mb-3">
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-sky-500/15 text-sky-400 border border-sky-500/30">
-              ${p.categoryLabel}
-            </span>
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span>
-              ${p.badge}
-            </span>
-          </div>
-
-          <!-- Title -->
-          <h3 class="text-xl font-bold text-white group-hover:text-sky-400 transition-colors duration-200">
-            ${p.title}
-          </h3>
-          <p class="text-xs text-sky-400/80 font-medium mt-1 mb-3">
-            ${p.organization} • ${p.role}
-          </p>
-
-          <!-- Overview -->
-          <p class="text-sm text-slate-300 line-clamp-3 mb-4 leading-relaxed">
-            ${p.overview}
-          </p>
-
-          <!-- Metrics Row -->
-          <div class="grid grid-cols-2 gap-2 mb-5 p-3 rounded-lg bg-slate-900/60 border border-slate-800/80">
-            ${p.metrics.slice(0, 2).map(m => `
-              <div>
-                <div class="text-[11px] text-slate-400 truncate">${m.label}</div>
-                <div class="text-sm font-bold text-sky-300 font-mono">${m.val}</div>
-              </div>
-            `).join('')}
-          </div>
-
-          <!-- Tech Stack Tags -->
-          <div class="flex flex-wrap gap-1.5 mb-6">
-            ${p.tech.slice(0, 5).map(t => `
-              <span class="text-xs px-2.5 py-1 rounded-md bg-slate-800/80 text-slate-300 border border-slate-700/50">
-                ${t}
-              </span>
-            `).join('')}
-            ${p.tech.length > 5 ? `<span class="text-xs px-2 py-1 rounded-md bg-slate-800/40 text-slate-400">+${p.tech.length - 5}</span>` : ''}
-          </div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
-          <button onclick="openProjectModal('${p.id}')" class="inline-flex items-center text-sm font-semibold text-sky-400 hover:text-sky-300 transition-colors">
-            Xem kiến trúc & chi tiết
-            <svg class="w-4 h-4 ml-1.5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-          </button>
-          <a href="${p.github}" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors" title="GitHub Repository">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
-          </a>
-        </div>
-      </div>
-    </article>
-  `).join('');
-}
-
 /* ==========================================================================
-   PROJECT MODAL & ARCHITECTURE DIAGRAMS
+   Project modal
    ========================================================================== */
-function initModalEvents() {
-  const modal = document.getElementById('projectModal');
-  const closeBtn = document.getElementById('closeModalBtn');
-  const backdrop = document.getElementById('modalBackdrop');
 
-  if (closeBtn) closeBtn.addEventListener('click', closeProjectModal);
-  if (backdrop) backdrop.addEventListener('click', closeProjectModal);
-  
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
-      closeProjectModal();
-    }
+let lastFocused = null;
+let modalKeydownHandler = null;
+let activeProjectId = null;
+
+function initModal() {
+  const modal = document.getElementById('projectModal');
+  const closeButton = document.getElementById('modalClose');
+  if (!modal) return;
+
+  if (closeButton) closeButton.addEventListener('click', closeProjectModal);
+
+  modal.addEventListener('click', (event) => {
+    if (event.target.closest('[data-close-modal]')) closeProjectModal();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !modal.hidden) closeProjectModal();
   });
 }
 
-function openProjectModal(projectId) {
-  const modal = document.getElementById('projectModal');
-  const modalBody = document.getElementById('modalContent');
-  if (!modal || !modalBody || !window.PORTFOLIO_DATA) return;
+function buildArchitecture(project) {
+  const nodes = project.architecture && project.architecture.nodes ? project.architecture.nodes : [];
+  return nodes
+    .map((node, index) => {
+      const arrow = index < nodes.length - 1 ? '<span class="arch-arrow" aria-hidden="true">→</span>' : '';
+      return `<span class="arch-node">${node}</span>${arrow}`;
+    })
+    .join('');
+}
 
-  const project = window.PORTFOLIO_DATA.projects.find(p => p.id === projectId);
+function openProject(projectId, trigger) {
+  const modal = document.getElementById('projectModal');
+  const panel = document.getElementById('modalPanel');
+  const content = document.getElementById('modalContent');
+  if (!modal || !panel || !content) return;
+
+  const project = (DATA.projects || []).find((item) => item.id === projectId);
   if (!project) return;
 
-  // Build Architecture Diagram HTML
-  const diagramHtml = getArchitectureDiagramHtml(project.architectureDiagram, project);
+  activeProjectId = projectId;
+  lastFocused = trigger || document.activeElement;
 
-  modalBody.innerHTML = `
-    <!-- Header -->
-    <div class="border-b border-slate-700/60 pb-5 mb-6">
-      <div class="flex flex-wrap items-center gap-2 mb-2">
-        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-500/20 text-sky-400 border border-sky-500/30">
-          ${project.categoryLabel}
-        </span>
-        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30">
-          ${project.organization}
-        </span>
-        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-          ${project.status}
-        </span>
+  const links = (project.links || [])
+    .map(
+      (link) =>
+        `<a class="btn btn-ghost btn-sm" href="${link.url}" target="_blank" rel="noopener noreferrer">${link.label} <span aria-hidden="true">↗</span></a>`
+    )
+    .join('');
+
+  content.innerHTML = `
+    <header class="modal-header">
+      <div class="modal-meta">
+        <span>${project.categoryLabel}</span>
+        <span>${project.year}</span>
+        <span>${project.organization}</span>
+        <span>${project.role}</span>
       </div>
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">${project.title}</h2>
-      <p class="text-sm text-slate-300 mt-1">${project.subtitle}</p>
-    </div>
-
-    <!-- Metrics Row -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-      ${project.metrics.map(m => `
-        <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3 text-center">
-          <div class="text-xs text-slate-400 mb-0.5 truncate">${m.label}</div>
-          <div class="text-lg font-bold text-sky-400 font-mono">${m.val}</div>
-        </div>
-      `).join('')}
-    </div>
-
-    <!-- Architecture Visual Flow -->
-    <div class="mb-7">
-      <h4 class="text-xs font-bold uppercase tracking-wider text-sky-400 mb-3 flex items-center gap-2">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
-        Sơ đồ Kiến trúc & Luồng xử lý Kỹ thuật (Technical Architecture Pipeline)
-      </h4>
-      <div class="bg-slate-950/90 border border-slate-800 rounded-xl p-4 sm:p-5 overflow-x-auto">
-        ${diagramHtml}
+      <h2 class="modal-title" id="modalTitle">${project.title}</h2>
+      <p class="modal-sub">${project.subtitle}</p>
+      <p class="modal-summary">${project.summary}</p>
+      <div class="modal-metrics">
+        ${project.metrics
+          .map(
+            (metric) => `
+              <div class="modal-metric">
+                <span>${metric.label}</span>
+                <strong>${metric.value}</strong>
+              </div>`
+          )
+          .join('')}
       </div>
-    </div>
+    </header>
 
-    <!-- Technical Innovations & Highlights -->
-    <div class="mb-6">
-      <h4 class="text-xs font-bold uppercase tracking-wider text-purple-400 mb-3 flex items-center gap-2">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-        Điểm sáng Kỹ thuật & Đổi mới Giải pháp
-      </h4>
-      <ul class="space-y-2.5">
-        ${project.highlights.map(h => `
-          <li class="flex items-start text-sm text-slate-200 leading-relaxed">
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-sky-400 mt-2 mr-3 flex-shrink-0"></span>
-            <span>${h}</span>
-          </li>
-        `).join('')}
+    <section class="modal-section">
+      <h3 class="modal-section-title">${t('modal.problem')}</h3>
+      <p class="arch-note">${project.problem}</p>
+    </section>
+
+    <section class="modal-section">
+      <h3 class="modal-section-title">${t('modal.approach')}</h3>
+      <ul class="modal-list">
+        ${project.approach.map((item) => `<li>${item}</li>`).join('')}
       </ul>
-    </div>
+    </section>
 
-    <!-- Full Tech Stack -->
-    <div class="mb-7">
-      <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">Công nghệ & Công cụ (Tech Stack)</h4>
-      <div class="flex flex-wrap gap-2">
-        ${project.tech.map(t => `
-          <span class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-800 text-sky-300 border border-slate-700">
-            ${t}
-          </span>
-        `).join('')}
-      </div>
-    </div>
+    <section class="modal-section">
+      <h3 class="modal-section-title">${t('modal.architecture')}</h3>
+      <div class="arch-flow">${buildArchitecture(project)}</div>
+      <p class="arch-note">${project.architecture ? project.architecture.note : ''}</p>
+    </section>
 
-    <!-- Modal Footer Actions -->
-    <div class="pt-5 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
-      <div class="text-xs text-slate-400">
-        Vai trò: <span class="font-medium text-slate-200">${project.role}</span>
+    <section class="modal-section">
+      <h3 class="modal-section-title">${t('modal.outcome')}</h3>
+      <ul class="modal-list">
+        ${project.highlights.map((item) => `<li>${item}</li>`).join('')}
+      </ul>
+    </section>
+
+    <section class="modal-section">
+      <h3 class="modal-section-title">${t('modal.stack')}</h3>
+      <div class="modal-tech">
+        ${project.tech.map((tech) => `<span class="tech">${tech}</span>`).join('')}
       </div>
-      <div class="flex items-center gap-3">
-        <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white text-xs font-semibold inline-flex items-center gap-2 transition-colors">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
-          Mã nguồn GitHub
-        </a>
-        <a href="#contact" onclick="closeProjectModal()" class="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-white text-xs font-semibold inline-flex items-center gap-1.5 transition-colors shadow-lg shadow-sky-500/20">
-          Trao đổi về dự án này
-        </a>
-      </div>
+    </section>
+
+    <div class="modal-links">
+      ${links || `<span class="modal-note">${project.note}</span>`}
+      <button type="button" class="btn btn-primary btn-sm" data-modal-contact>${t('modal.discuss')} <span aria-hidden="true">→</span></button>
     </div>
+    ${links ? `<p class="modal-note">${project.note}</p>` : ''}
   `;
 
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
+  modal.hidden = false;
+  document.body.classList.add('modal-open');
 
-function closeProjectModal() {
-  const modal = document.getElementById('projectModal');
-  if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-}
-
-// Visual flow diagrams for each project
-function getArchitectureDiagramHtml(diagramType, project) {
-  if (diagramType === 'hr_genie_rag_flow') {
-    return `
-      <div class="flex flex-col gap-3 min-w-[620px] text-xs font-mono">
-        <!-- Stage 1 -->
-        <div class="grid grid-cols-4 gap-2">
-          <div class="p-3 bg-slate-900 border border-slate-700 rounded-lg text-center">
-            <span class="text-sky-400 font-bold block mb-1">1. User Query</span>
-            <span class="text-slate-400 text-[11px]">Next.js Client / SSO</span>
-          </div>
-          <div class="p-3 bg-sky-950/60 border border-sky-500/50 rounded-lg text-center col-span-2">
-            <span class="text-sky-300 font-bold block mb-1">2. Smart Intent Router (98.46%)</span>
-            <span class="text-slate-300 text-[11px]">LangGraph Classifier: Policy vs General vs Out-of-Scope</span>
-          </div>
-          <div class="p-3 bg-slate-900 border border-slate-700 rounded-lg text-center">
-            <span class="text-amber-400 font-bold block mb-1">3. RBAC Pre-Filter</span>
-            <span class="text-slate-400 text-[11px]">Employee Role & Org Unit</span>
-          </div>
-        </div>
-
-        <div class="flex justify-center text-sky-400 my-0.5">
-          <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-        </div>
-
-        <!-- Stage 2 -->
-        <div class="grid grid-cols-3 gap-2">
-          <div class="p-3 bg-slate-900 border border-indigo-500/40 rounded-lg text-center">
-            <span class="text-indigo-400 font-bold block mb-1">4. pgvector Hybrid Search</span>
-            <span class="text-slate-400 text-[11px]">HNSW Index + Full-Text Pre-query Authorized Retrieval</span>
-          </div>
-          <div class="p-3 bg-purple-950/60 border border-purple-500/50 rounded-lg text-center">
-            <span class="text-purple-300 font-bold block mb-1">5. Evidence Gate</span>
-            <span class="text-slate-300 text-[11px]">Context Relevance & Document Sufficiency Evaluation</span>
-          </div>
-          <div class="p-3 bg-emerald-950/60 border border-emerald-500/50 rounded-lg text-center">
-            <span class="text-emerald-300 font-bold block mb-1">6. Deterministic Verifier</span>
-            <span class="text-slate-300 text-[11px]">Zero-Hallucination Claim Validation & Citations</span>
-          </div>
-        </div>
-
-        <div class="flex justify-center text-emerald-400 my-0.5">
-          <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-        </div>
-
-        <!-- Stage 3 Output -->
-        <div class="p-3 bg-emerald-900/40 border border-emerald-500/60 rounded-lg flex items-center justify-between text-slate-200">
-          <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-            <span class="font-bold text-emerald-300">Verified Output:</span>
-            <span>Chính sách nhân sự chính xác 100% kèm số điều khoản & trích dẫn văn bản gốc</span>
-          </div>
-          <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-mono">1.400+ Automated Tests Passed</span>
-        </div>
-      </div>
-    `;
-  }
-
-  if (diagramType === 'vieneu_tts_flow') {
-    return `
-      <div class="flex flex-col gap-3 min-w-[600px] text-xs font-mono">
-        <div class="grid grid-cols-3 gap-2">
-          <div class="p-3 bg-slate-900 border border-slate-700 rounded-lg text-center">
-            <span class="text-sky-400 font-bold block mb-1">1. Vietnamese Text Input</span>
-            <span class="text-slate-400 text-[11px]">Phonemization & Tone Markers (Bắc - Trung - Nam)</span>
-          </div>
-          <div class="p-3 bg-purple-950/60 border border-purple-500/50 rounded-lg text-center">
-            <span class="text-purple-300 font-bold block mb-1">2. 3-Sec Reference Audio</span>
-            <span class="text-slate-300 text-[11px]">Zero-Shot Speaker Embedding Extraction</span>
-          </div>
-          <div class="p-3 bg-indigo-950/60 border border-indigo-500/50 rounded-lg text-center">
-            <span class="text-indigo-300 font-bold block mb-1">3. LoRA Neural Acoustic Model</span>
-            <span class="text-slate-300 text-[11px]">PyTorch Fine-tuned Weights for Vietnamese Prosody</span>
-          </div>
-        </div>
-
-        <div class="flex justify-center text-sky-400 my-0.5">
-          <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-        </div>
-
-        <div class="grid grid-cols-2 gap-2">
-          <div class="p-3 bg-slate-900 border border-sky-500/40 rounded-lg text-center">
-            <span class="text-sky-300 font-bold block mb-1">4. High-Fidelity Neural Vocoder</span>
-            <span class="text-slate-400 text-[11px]">Mel-Spectrogram to 24kHz Raw Waveform</span>
-          </div>
-          <div class="p-3 bg-emerald-950/60 border border-emerald-500/50 rounded-lg text-center">
-            <span class="text-emerald-300 font-bold block mb-1">5. Low Latency Streaming (&lt;160ms)</span>
-            <span class="text-slate-300 text-[11px]">Chunked WebSockets / Gradio Interactive Demo</span>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  if (diagramType === 'wine_ecommerce_flow') {
-    return `
-      <div class="flex flex-col gap-3 min-w-[600px] text-xs font-mono">
-        <div class="grid grid-cols-3 gap-2">
-          <div class="p-3 bg-slate-900 border border-slate-700 rounded-lg text-center">
-            <span class="text-sky-400 font-bold block mb-1">1. Frontend Client</span>
-            <span class="text-slate-400 text-[11px]">Vite, Bootstrap & Interactive Cart</span>
-          </div>
-          <div class="p-3 bg-rose-950/60 border border-rose-500/50 rounded-lg text-center">
-            <span class="text-rose-300 font-bold block mb-1">2. Laravel 10 Core</span>
-            <span class="text-slate-300 text-[11px]">Repository Pattern & Service Layer</span>
-          </div>
-          <div class="p-3 bg-red-950/60 border border-red-500/50 rounded-lg text-center">
-            <span class="text-red-300 font-bold block mb-1">3. Redis Caching</span>
-            <span class="text-slate-300 text-[11px]">Product Catalog & Cart Session Store</span>
-          </div>
-        </div>
-
-        <div class="flex justify-center text-rose-400 my-0.5">
-          <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-        </div>
-
-        <div class="grid grid-cols-2 gap-2">
-          <div class="p-3 bg-slate-900 border border-emerald-500/50 rounded-lg text-center">
-            <span class="text-emerald-400 font-bold block mb-1">4. VNPay IPN Webhook Verification</span>
-            <span class="text-slate-400 text-[11px]">HMAC-SHA512 Checksum, Secure Transaction Logs</span>
-          </div>
-          <div class="p-3 bg-slate-900 border border-sky-500/50 rounded-lg text-center">
-            <span class="text-sky-400 font-bold block mb-1">5. Real-Time Pusher WebSockets</span>
-            <span class="text-slate-400 text-[11px]">Live Order Status & Inventory Depletion Sync</span>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  // Default multi-agent flow
-  return `
-    <div class="flex flex-col gap-3 min-w-[600px] text-xs font-mono">
-      <div class="grid grid-cols-4 gap-2">
-        <div class="p-2.5 bg-slate-900 border border-sky-500/40 rounded-lg text-center">
-          <span class="text-sky-400 font-bold block">Planner Agent</span>
-          <span class="text-slate-400 text-[10px]">Task Decomposition</span>
-        </div>
-        <div class="p-2.5 bg-slate-900 border border-indigo-500/40 rounded-lg text-center">
-          <span class="text-indigo-400 font-bold block">Researcher Agent</span>
-          <span class="text-slate-400 text-[10px]">Knowledge Sourcing</span>
-        </div>
-        <div class="p-2.5 bg-slate-900 border border-purple-500/40 rounded-lg text-center">
-          <span class="text-purple-400 font-bold block">Critic Agent</span>
-          <span class="text-slate-400 text-[10px]">Sanity & Fact Checks</span>
-        </div>
-        <div class="p-2.5 bg-slate-900 border border-emerald-500/40 rounded-lg text-center">
-          <span class="text-emerald-400 font-bold block">Executor Agent</span>
-          <span class="text-slate-400 text-[10px]">Final Synthesis</span>
-        </div>
-      </div>
-      <div class="p-3 bg-slate-900/90 border border-slate-700 rounded-lg flex items-center justify-between">
-        <div class="text-slate-300">
-          <span class="text-amber-400 font-bold">Observability & Benchmarking:</span>
-          LangSmith / Langfuse Tracing + Ragas & TruLens Auto-Evaluation Pipeline
-        </div>
-        <span class="text-sky-400 text-[11px] font-mono">Golden Dataset Certified</span>
-      </div>
-    </div>
-  `;
-}
-
-/* ==========================================================================
-   RENDER SKILLS & PROFICIENCIES
-   ========================================================================== */
-function renderSkills() {
-  const container = document.getElementById('skillsContainer');
-  if (!container || !window.PORTFOLIO_DATA) return;
-
-  const skillGroups = [
-    { title: "AI / GenAI & Multi-Agent", icon: "cpu", key: "ai_genai", color: "from-sky-500 to-indigo-500" },
-    { title: "Backend Architecture & APIs", icon: "server", key: "backend", color: "from-purple-500 to-pink-500" },
-    { title: "Frontend & Mobile Engineering", icon: "layout", key: "frontend", color: "from-emerald-500 to-teal-500" },
-    { title: "DevOps & Cloud / LLMOps", icon: "box", key: "devops", color: "from-amber-500 to-orange-500" }
-  ];
-
-  container.innerHTML = skillGroups.map(g => {
-    const list = window.PORTFOLIO_DATA.skills[g.key] || [];
-    return `
-      <div class="glass-panel p-6 sm:p-7 rounded-2xl glow-card border border-slate-700/50">
-        <div class="flex items-center gap-3 mb-5">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br ${g.color} flex items-center justify-center text-white shadow-md">
-            <span class="font-mono text-sm font-bold">&lt;/&gt;</span>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold text-white">${g.title}</h3>
-            <span class="text-xs text-slate-400">${list.length} công nghệ chủ lực</span>
-          </div>
-        </div>
-
-        <div class="space-y-4">
-          ${list.map(s => `
-            <div>
-              <div class="flex items-center justify-between text-xs mb-1.5">
-                <span class="font-semibold text-slate-200">${s.name}</span>
-                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800 text-sky-400 border border-slate-700">
-                  ${s.tag}
-                </span>
-              </div>
-              <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden">
-                <div class="bg-gradient-to-r from-sky-400 to-indigo-500 h-1.5 rounded-full transition-all duration-1000" style="width: ${s.level}%"></div>
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1 leading-snug">${s.desc}</p>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-/* ==========================================================================
-   RENDER EDUCATION & CERTIFICATIONS
-   ========================================================================== */
-function renderEducation() {
-  const container = document.getElementById('educationContainer');
-  if (!container || !window.PORTFOLIO_DATA) return;
-
-  const list = window.PORTFOLIO_DATA.educationAndCerts || [];
-  container.innerHTML = list.map(item => `
-    <div class="glass-panel p-6 rounded-2xl glow-card border border-slate-700/50 flex flex-col justify-between">
-      <div>
-        <div class="flex items-center justify-between gap-2 mb-3">
-          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-sky-500/15 text-sky-400 border border-sky-500/30">
-            ${item.type === 'education' ? 'Đào tạo Chuyên sâu' : 'Chứng chỉ Năng lực'}
-          </span>
-          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-500/15 text-purple-300 border border-purple-500/30">
-            ${item.badge}
-          </span>
-        </div>
-        <h3 class="text-lg font-bold text-white mb-1">${item.title}</h3>
-        <p class="text-xs font-semibold text-sky-400 mb-2">${item.issuer} • ${item.period}</p>
-        <p class="text-sm text-slate-300 leading-relaxed mb-4">${item.details}</p>
-      </div>
-
-      <div class="pt-4 border-t border-slate-800/80">
-        <h4 class="text-xs font-semibold text-slate-400 mb-2">Điểm nhấn chương trình:</h4>
-        <ul class="space-y-1.5">
-          ${item.highlights.map(h => `
-            <li class="flex items-start text-xs text-slate-300">
-              <span class="text-sky-400 mr-2">✓</span>
-              <span>${h}</span>
-            </li>
-          `).join('')}
-        </ul>
-      </div>
-    </div>
-  `).join('');
-}
-
-/* ==========================================================================
-   AI ASSISTANT INTERACTIVE SIMULATOR (Ask Gia Uy's AI Assistant)
-   ========================================================================== */
-function initAIAssistant() {
-  const promptButtons = document.querySelectorAll('.ai-prompt-btn');
-  const chatOutput = document.getElementById('aiChatOutput');
-  const customInput = document.getElementById('aiCustomInput');
-  const sendBtn = document.getElementById('aiSendBtn');
-
-  if (!chatOutput || !window.PORTFOLIO_DATA) return;
-
-  // Add click listeners to quick prompts
-  promptButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const q = btn.getAttribute('data-question') || btn.innerText.trim();
-      handleAIQuery(q);
-    });
-  });
-
-  if (sendBtn && customInput) {
-    sendBtn.addEventListener('click', () => {
-      const val = customInput.value.trim();
-      if (val) {
-        handleAIQuery(val);
-        customInput.value = '';
+  const contactButton = content.querySelector('[data-modal-contact]');
+  if (contactButton) {
+    contactButton.addEventListener('click', () => {
+      const contact = document.getElementById('contact');
+      const contactTitle = document.getElementById('contactTitle');
+      closeProjectModal({ restoreFocus: false });
+      try {
+        window.history.replaceState(null, '', '#contact');
+      } catch (error) {
+        /* history API unavailable: keep the current URL */
       }
-    });
-
-    customInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const val = customInput.value.trim();
-        if (val) {
-          handleAIQuery(val);
-          customInput.value = '';
-        }
+      if (contact) contact.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth' });
+      if (contactTitle) {
+        const delay = reduceMotion() ? 0 : 350;
+        window.setTimeout(() => contactTitle.focus({ preventScroll: true }), delay);
       }
     });
   }
-}
 
-let isTyping = false;
-function handleAIQuery(query) {
-  if (isTyping) return;
-  const chatOutput = document.getElementById('aiChatOutput');
-  if (!chatOutput) return;
+  const focusTarget = document.getElementById('modalClose') || panel;
+  window.requestAnimationFrame(() => focusTarget.focus());
 
-  const knowledge = window.PORTFOLIO_DATA.aiAssistantKnowledge;
-  const lowerQ = query.toLowerCase();
-
-  // Find best match in dataset
-  let matched = knowledge.find(k => {
-    return k.keywords.some(kw => lowerQ.includes(kw));
-  });
-
-  let responseText = "";
-  if (matched) {
-    responseText = matched.answer;
-  } else {
-    responseText = `Cảm ơn bạn đã quan tâm! Bùi Gia Uy là AI Application Engineer & Full-Stack Developer chuyên về Multi-Agent Systems, Multi-stage RAG, FastAPI, NestJS và Laravel. Để nhận thông tin chi tiết hoặc trao đổi sâu hơn về yêu cầu của bạn, vui lòng liên hệ trực tiếp Uy qua email giauy0987@gmail.com hoặc số điện thoại 0947879049.`;
-  }
-
-  // Append user bubble and AI bubble
-  const queryHtml = `
-    <div class="flex items-start justify-end gap-2.5 mb-3">
-      <div class="bg-sky-600/80 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 text-xs sm:text-sm max-w-[85%] shadow-md">
-        ${escapeHtml(query)}
-      </div>
-      <div class="w-7 h-7 rounded-full bg-sky-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-        You
-      </div>
-    </div>
-  `;
-
-  const responseId = 'ai-res-' + Date.now();
-  const aiHtml = `
-    <div class="flex items-start gap-2.5 mb-4">
-      <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-purple-500 to-sky-400 flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0">
-        AI
-      </div>
-      <div class="bg-slate-900/90 border border-slate-700/70 text-slate-200 rounded-2xl rounded-tl-sm px-4 py-3 text-xs sm:text-sm max-w-[90%] leading-relaxed shadow-md">
-        <div id="${responseId}" class="whitespace-pre-line"></div>
-      </div>
-    </div>
-  `;
-
-  chatOutput.insertAdjacentHTML('beforeend', queryHtml + aiHtml);
-  chatOutput.scrollTop = chatOutput.scrollHeight;
-
-  // Typewriter effect
-  isTyping = true;
-  typeWriterEffect(responseId, responseText, () => {
-    isTyping = false;
-  });
-}
-
-function typeWriterEffect(elementId, text, onComplete) {
-  const el = document.getElementById(elementId);
-  if (!el) {
-    if (onComplete) onComplete();
-    return;
-  }
-
-  let i = 0;
-  const speed = 12; // ms per character
-  function type() {
-    if (i < text.length) {
-      el.textContent += text.charAt(i);
-      i++;
-      const chatOutput = document.getElementById('aiChatOutput');
-      if (chatOutput) chatOutput.scrollTop = chatOutput.scrollHeight;
-      setTimeout(type, speed);
-    } else {
-      if (onComplete) onComplete();
+  if (modalKeydownHandler) document.removeEventListener('keydown', modalKeydownHandler);
+  modalKeydownHandler = (event) => {
+    if (event.key === 'Escape') {
+      closeProjectModal();
+      return;
     }
-  }
-  type();
+    if (event.key !== 'Tab') return;
+    const focusables = Array.from(
+      panel.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+    ).filter((element) => element.offsetParent !== null);
+    if (!focusables.length) {
+      event.preventDefault();
+      panel.focus();
+      return;
+    }
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
+  document.addEventListener('keydown', modalKeydownHandler);
 }
 
-function escapeHtml(string) {
-  const div = document.createElement('div');
-  div.innerText = string;
-  return div.innerHTML;
+function closeProjectModal(options) {
+  const modal = document.getElementById('projectModal');
+  if (!modal || modal.hidden) return;
+  const restoreFocus = !options || options.restoreFocus !== false;
+  modal.hidden = true;
+  document.body.classList.remove('modal-open');
+  if (modalKeydownHandler) {
+    document.removeEventListener('keydown', modalKeydownHandler);
+    modalKeydownHandler = null;
+  }
+  if (restoreFocus && lastFocused && document.contains(lastFocused)) {
+    lastFocused.focus();
+  }
+  lastFocused = null;
+  activeProjectId = null;
 }
 
 /* ==========================================================================
-   CONTACT FORM & CLIPBOARD TOAST
+   Mobile menu
    ========================================================================== */
-function initContactForm() {
-  const form = document.getElementById('contactForm');
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('contactName')?.value.trim() || 'Người liên hệ';
-      const email = document.getElementById('contactEmail')?.value.trim() || '';
-      const subject = document.getElementById('contactSubject')?.value.trim() || 'Trao đổi cơ hội hợp tác';
-      const message = document.getElementById('contactMessage')?.value.trim() || '';
 
-      const mailtoUrl = `mailto:giauy0987@gmail.com?subject=${encodeURIComponent(subject + ' - Từ ' + name)}&body=${encodeURIComponent('Họ tên: ' + name + '\nEmail: ' + email + '\n\nNội dung liên hệ:\n' + message)}`;
-      
-      window.location.href = mailtoUrl;
-      showToast('Đã mở ứng dụng gửi email! Rất mong được kết nối cùng bạn.');
-      form.reset();
-    });
-  }
-}
+function initMobileMenu() {
+  const toggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('mobileMenu');
+  if (!toggle || !menu) return;
 
-function copyToClipboard(text, label = 'thông tin') {
-  navigator.clipboard.writeText(text).then(() => {
-    showToast(`Đã sao chép ${label}: ${text}`);
-  }).catch(() => {
-    // Fallback
-    const input = document.createElement('input');
-    input.value = text;
-    document.body.appendChild(input);
-    input.select();
-    document.execCommand('copy');
-    document.body.removeChild(input);
-    showToast(`Đã sao chép ${label}: ${text}`);
+  const setOpen = (open) => {
+    menu.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? t('a11y.closeMenu') : t('a11y.openMenu'));
+  };
+
+  toggle.addEventListener('click', () => setOpen(menu.hidden));
+
+  menu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setOpen(false));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !menu.hidden) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (menu.hidden) return;
+    if (menu.contains(event.target) || toggle.contains(event.target)) return;
+    setOpen(false);
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900 && !menu.hidden) setOpen(false);
   });
 }
 
-function showToast(message) {
-  let toast = document.getElementById('toast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.id = 'toast';
-    document.body.appendChild(toast);
-  }
-
-  toast.innerHTML = `
-    <div class="flex items-center gap-2.5 px-4 py-3 rounded-xl bg-slate-900 border border-sky-500/50 text-white text-xs sm:text-sm shadow-2xl backdrop-blur-md">
-      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-      <span>${message}</span>
-    </div>
-  `;
-
-  toast.classList.add('show');
-  setTimeout(() => {
-    toast.classList.remove('show');
-  }, 3500);
-}
-
 /* ==========================================================================
-   MOBILE MENU & SCROLLSPY
+   Scrollspy
    ========================================================================== */
-function initMobileMenu() {
-  const toggleBtn = document.getElementById('mobileMenuToggle');
-  const menu = document.getElementById('mobileMenu');
-  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
-
-  if (toggleBtn && menu) {
-    toggleBtn.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
-    });
-
-    mobileLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.add('hidden');
-      });
-    });
-  }
-}
 
 function initScrollSpy() {
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.desktop-nav-link');
+  const links = Array.from(document.querySelectorAll('.nav-link[data-section]'));
+  const sections = Array.from(document.querySelectorAll('main section[id]'));
+  if (!links.length || !sections.length || !('IntersectionObserver' in window)) return;
 
-  window.addEventListener('scroll', () => {
-    let current = '';
-    const scrollY = window.pageYOffset;
-
-    sections.forEach(section => {
-      const sectionHeight = section.offsetHeight;
-      const sectionTop = section.offsetTop - 120;
-      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-        current = section.getAttribute('id');
-      }
+  const setActive = (id) => {
+    links.forEach((link) => {
+      const active = link.getAttribute('data-section') === id;
+      if (active) link.setAttribute('aria-current', 'true');
+      else link.removeAttribute('aria-current');
     });
+  };
 
-    navLinks.forEach(link => {
-      link.classList.remove('text-sky-400', 'font-semibold');
-      link.classList.add('text-slate-300');
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('text-sky-400', 'font-semibold');
-        link.classList.remove('text-slate-300');
-      }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    },
+    { rootMargin: '-28% 0px -62% 0px', threshold: 0 }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+}
+
+/* ==========================================================================
+   Agent trace animation
+   ========================================================================== */
+
+function initTrace() {
+  const trace = document.getElementById('agentTrace');
+  if (!trace || reduceMotion()) return;
+  const lines = Array.from(trace.querySelectorAll('.trace-line'));
+  if (lines.length < 2) return;
+
+  let index = 0;
+  let timer = null;
+
+  const paint = () => {
+    lines.forEach((line, lineIndex) => {
+      line.classList.toggle('is-active', lineIndex === index);
+    });
+    index = (index + 1) % lines.length;
+  };
+
+  const start = () => {
+    if (timer) return;
+    timer = window.setInterval(paint, 2100);
+  };
+
+  const stop = () => {
+    if (!timer) return;
+    window.clearInterval(timer);
+    timer = null;
+  };
+
+  const visibility = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) start();
+        else stop();
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  visibility.observe(trace);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+    else start();
+  });
+}
+
+/* ==========================================================================
+   AI assistant (offline keyword demo)
+   ========================================================================== */
+
+let activeTypewriter = null;
+
+function normalizeText(value) {
+  return String(value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function isWordChar(char) {
+  return /[a-z0-9]/.test(char);
+}
+
+function hasWholeWord(text, keyword) {
+  let from = 0;
+  while (from <= text.length) {
+    const at = text.indexOf(keyword, from);
+    if (at === -1) return false;
+    const before = at === 0 ? ' ' : text[at - 1];
+    const after = at + keyword.length >= text.length ? ' ' : text[at + keyword.length];
+    if (!isWordChar(before) && !isWordChar(after)) return true;
+    from = at + 1;
+  }
+  return false;
+}
+
+function keywordScore(text, keyword) {
+  const normalized = normalizeText(keyword);
+  if (!normalized) return 0;
+  if (normalized.length <= 3) return hasWholeWord(text, normalized) ? 2 : 0;
+  if (!text.includes(normalized)) return 0;
+  return normalized.length >= 8 ? 3 : normalized.length >= 5 ? 2 : 1;
+}
+
+function findAnswer(query) {
+  const knowledge = DATA.aiKnowledge || [];
+  const text = normalizeText(query);
+  let best = null;
+  let bestIndex = -1;
+  let bestScore = 0;
+  knowledge.forEach((entry, index) => {
+    const score = (entry.keywords || []).reduce(
+      (total, keyword) => total + keywordScore(text, keyword),
+      0
+    );
+    if (score > bestScore) {
+      bestScore = score;
+      best = entry;
+      bestIndex = index;
+    }
+  });
+  return best
+    ? { answer: best.answer, knowledgeIndex: bestIndex }
+    : { answer: t('ask.fallback'), knowledgeIndex: -1 };
+}
+
+function renderChatPrompts() {
+  const container = document.getElementById('chatPrompts');
+  if (!container || !DATA.aiPrompts) return;
+  container.innerHTML = DATA.aiPrompts
+    .map(
+      (prompt) => `<button type="button" class="prompt-chip">${escapeHtml(prompt)}</button>`
+    )
+    .join('');
+  container.querySelectorAll('.prompt-chip').forEach((button) => {
+    button.addEventListener('click', () => {
+      sendChat(button.textContent || '');
     });
   });
 }
 
-// Global functions exposed to window for inline onclick handlers
-window.openProjectModal = openProjectModal;
-window.closeProjectModal = closeProjectModal;
-window.copyToClipboard = copyToClipboard;
-window.showToast = showToast;
+function initChat() {
+  const form = document.getElementById('chatForm');
+  const input = document.getElementById('chatInput');
+  if (!form || !input) return;
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const value = input.value.trim();
+    if (!value) return;
+    sendChat(value);
+    input.value = '';
+  });
+}
+
+function scrollChat() {
+  const log = document.getElementById('chatLog');
+  if (log) log.scrollTop = log.scrollHeight;
+}
+
+function appendChatMessage(role, text, animate = false) {
+  const log = document.getElementById('chatLog');
+  if (!log) return null;
+
+  const wrapper = document.createElement('div');
+  wrapper.className = `msg ${role === 'user' ? 'msg-user' : 'msg-bot'}`;
+
+  const avatar = document.createElement('span');
+  avatar.className = 'msg-avatar';
+  avatar.setAttribute('aria-hidden', 'true');
+  avatar.textContent = role === 'user' ? t('ask.userAvatar') : 'AI';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+
+  wrapper.append(avatar, bubble);
+
+  if (animate && !reduceMotion()) {
+    bubble.setAttribute('aria-hidden', 'true');
+    const announcement = document.createElement('span');
+    announcement.className = 'sr-only';
+    announcement.textContent = text;
+    wrapper.appendChild(announcement);
+  }
+
+  log.appendChild(wrapper);
+  scrollChat();
+
+  if (!animate || reduceMotion()) {
+    bubble.textContent = text;
+    scrollChat();
+    return null;
+  }
+
+  return typewrite(bubble, text);
+}
+
+function typewrite(element, text) {
+  let index = 0;
+  let timer = null;
+  let done = false;
+
+  const complete = () => {
+    if (done) return;
+    done = true;
+    if (timer) window.clearTimeout(timer);
+    timer = null;
+    if (activeTypewriter === typer) activeTypewriter = null;
+  };
+
+  const finish = () => {
+    if (done) return;
+    element.textContent = text;
+    scrollChat();
+    complete();
+  };
+
+  const tick = () => {
+    if (done) return;
+    if (index >= text.length) {
+      finish();
+      return;
+    }
+    element.textContent += text.charAt(index);
+    index += 1;
+    scrollChat();
+    timer = window.setTimeout(tick, 8);
+  };
+
+  const typer = { finish };
+  tick();
+  return typer;
+}
+
+function sendChat(rawQuery) {
+  const query = String(rawQuery || '').trim();
+  if (!query) return;
+
+  if (activeTypewriter) activeTypewriter.finish();
+
+  chatEntries.push({ role: 'user', text: query });
+  const answer = findAnswer(query);
+  chatEntries.push({ role: 'bot', knowledgeIndex: answer.knowledgeIndex });
+
+  appendChatMessage('user', query);
+  activeTypewriter = appendChatMessage('bot', answer.answer, true);
+}
+
+/* ==========================================================================
+   Contact form
+   ========================================================================== */
+
+function initContactForm() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  const submit = document.getElementById('contactSubmit');
+  const nameInput = document.getElementById('contactName');
+  const emailInput = document.getElementById('contactEmail');
+  const messageInput = document.getElementById('contactMessage');
+  const requiredInputs = [nameInput, emailInput, messageInput].filter(Boolean);
+
+  requiredInputs.forEach((input) => {
+    input.addEventListener('input', () => input.removeAttribute('aria-invalid'));
+  });
+
+  const openMailClient = (payload) => {
+    const email = (DATA.profile && DATA.profile.email) || 'giauy0987@gmail.com';
+    const body = `${t('contact.mailName')}: ${payload.name}\n${t('contact.mailEmail')}: ${payload.email}\n\n${t('contact.mailBody')}:\n${payload.message}`;
+    const subject = format(t('contact.mailSubject'), {
+      subject: payload.subject,
+      name: payload.name
+    });
+    const url = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = url;
+  };
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const honey = document.getElementById('contactHoney');
+    if (honey && honey.value.trim()) {
+      setContactFeedback('contact.statusSent', 'is-ok');
+      form.reset();
+      return;
+    }
+
+    const payload = {
+      name: nameInput ? nameInput.value : '',
+      email: emailInput ? emailInput.value : '',
+      subject: (document.getElementById('contactSubject') || {}).value || '',
+      message: messageInput ? messageInput.value : ''
+    };
+
+    payload.name = payload.name.trim();
+    payload.email = payload.email.trim();
+    payload.subject = payload.subject.trim() || t('contact.subjectDefault');
+    payload.message = payload.message.trim();
+
+    requiredInputs.forEach((input) => input.removeAttribute('aria-invalid'));
+
+    if (!payload.name || !payload.email || !payload.message) {
+      setContactFeedback('contact.statusRequired', 'is-error');
+      let firstInvalid = null;
+      requiredInputs.forEach((input) => {
+        if (input.value.trim()) return;
+        input.setAttribute('aria-invalid', 'true');
+        if (!firstInvalid) firstInvalid = input;
+      });
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    if (emailInput && emailInput.validity && emailInput.validity.typeMismatch) {
+      setContactFeedback('contact.statusEmail', 'is-error');
+      emailInput.setAttribute('aria-invalid', 'true');
+      emailInput.focus();
+      return;
+    }
+
+    const endpoint = DATA.contact && DATA.contact.endpoint;
+    if (!endpoint) {
+      setContactFeedback('contact.statusOpening');
+      openMailClient(payload);
+      return;
+    }
+
+    contactSending = true;
+    if (submit) {
+      submit.disabled = true;
+      submit.textContent = t('contact.sending');
+    }
+    setContactFeedback('contact.statusSending');
+
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 15000);
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        signal: controller.signal,
+        body: JSON.stringify({
+          name: payload.name,
+          email: payload.email,
+          subject: payload.subject,
+          message: payload.message,
+          _subject: `[Portfolio] ${payload.subject} — ${payload.name}`,
+          _template: 'table',
+          _captcha: 'false'
+        })
+      });
+      window.clearTimeout(timer);
+
+      const data = await response.json().catch(() => ({}));
+      const sent = response.ok && (data.success === true || data.success === 'true');
+      if (!sent) throw new Error(data.message || `HTTP ${response.status}`);
+
+      setContactFeedback('contact.statusSent', 'is-ok');
+      showToast('contact.toastSent');
+      form.reset();
+    } catch (error) {
+      window.clearTimeout(timer);
+      setContactFeedback('contact.statusFallback', 'is-error');
+      showToast('contact.toastFallback');
+      window.setTimeout(() => openMailClient(payload), 600);
+    } finally {
+      contactSending = false;
+      if (submit) {
+        submit.disabled = false;
+        submit.innerHTML = `<span>${t('contact.submit')}</span> <span aria-hidden="true">→</span>`;
+      }
+    }
+  });
+}
+
+/* ==========================================================================
+   Clipboard + toast
+   ========================================================================== */
+
+function initCopyButtons() {
+  document.querySelectorAll('[data-copy]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const value = button.getAttribute('data-copy') || '';
+      const labelKey = button.getAttribute('data-label-key') || 'email';
+      copyText(value, labelKey, button);
+    });
+  });
+}
+
+function copyText(value, labelKey, trigger) {
+  const done = () => showToast('copy.done', { labelKey, value });
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard
+      .writeText(value)
+      .then(done)
+      .catch(() => fallbackCopy(value, done, trigger));
+    return;
+  }
+  fallbackCopy(value, done, trigger);
+}
+
+function fallbackCopy(value, done, trigger) {
+  const input = document.createElement('input');
+  input.value = value;
+  document.body.appendChild(input);
+  input.select();
+  let copied = false;
+  try {
+    copied = document.execCommand('copy');
+  } catch (error) {
+    copied = false;
+  }
+  document.body.removeChild(input);
+  if (trigger && typeof trigger.focus === 'function') trigger.focus();
+  if (copied) done();
+  else showToast('copy.error');
+}
+
+let toastState = null;
+let toastTimer = null;
+
+function renderToast() {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  if (!toastState) {
+    toast.textContent = '';
+    toast.classList.remove('show');
+    return;
+  }
+  const values = { ...toastState.params };
+  if (values.labelKey) {
+    values.label = t(`copy.${values.labelKey}`);
+    delete values.labelKey;
+  }
+  toast.textContent = format(t(toastState.key), values);
+}
+
+function showToast(key, params = {}) {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  toastState = { key, params };
+  renderToast();
+  toast.classList.add('show');
+  if (toastTimer) window.clearTimeout(toastTimer);
+  toastTimer = window.setTimeout(() => {
+    toastState = null;
+    toast.classList.remove('show');
+  }, 3200);
+}
+
+/* ==========================================================================
+   Misc
+   ========================================================================== */
+
+function initYear() {
+  const year = document.getElementById('year');
+  if (year) year.textContent = String(new Date().getFullYear());
+}
+
+// Apply the persisted language to static markup before first paint.
+applyStaticI18n();
+updateMeta();
+updateLangButtons();
+updateThemeButton();
+updateMenuLabel();
