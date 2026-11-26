@@ -32,4 +32,4 @@ python cv/build-cv.py
 python cv/build-cv-fullstack.py
 ~~~
 
-PDF, DOCX mở trong Microsoft Word và bản in HTML đều vừa một trang A4. Kiểm tra trực quan xác nhận các dòng nằm trọn trong trang. Mỗi bản có 34 đoạn văn bản; thứ tự khớp giữa Markdown, HTML, DOCX và PDF. pypdf trích xuất 2.586 ký tự ở bản AI và 2.640 ký tự ở bản Full-Stack. Các liên kết GitHub, portfolio live và W3Schools trả về HTTP 200; LinkedIn chặn request tự động nên cần kiểm tra bằng tay.
+PDF, DOCX mở trong Microsoft Word và bản in HTML đều vừa một trang A4. Kiểm tra trực quan xác nhận các dòng nằm trọn trong trang. Mỗi bản có 34 đoạn văn bản; thứ tự khớp giữa Markdown, HTML, DOCX và PDF. pypdf trích xuất 2.564 ký tự ở bản AI và 2.618 ký tự ở bản Full-Stack. Các liên kết GitHub, portfolio live và W3Schools trả về HTTP 200; LinkedIn chặn request tự động nên cần kiểm tra bằng tay.

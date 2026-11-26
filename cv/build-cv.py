@@ -113,7 +113,7 @@ EDUCATION = (
     ("Information Technology, undergraduate coursework · Industrial University of Ho Chi Minh City · 2021–2023",),
     ("Certified React Developer · W3Schools · Sep 2022 · Credential ", CREDENTIAL),
 )
-LANGUAGES = "Vietnamese (native) · English (technical reading and writing)"
+LANGUAGES = "English (technical reading and writing)"
 
 
 def entry_lines(heading: str, entries: tuple[Entry, ...]) -> list[Line]:

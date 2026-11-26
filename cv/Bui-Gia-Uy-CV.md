@@ -59,4 +59,4 @@ Certified React Developer · W3Schools · Sep 2022 · Credential [1MZD8JNIZC](ht
 
 ## Languages
 
-Vietnamese (native) · English (technical reading and writing)
+English (technical reading and writing)
