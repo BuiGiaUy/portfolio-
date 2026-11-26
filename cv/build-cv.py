@@ -52,7 +52,7 @@ EMAIL = Link("giauy0987@gmail.com", "mailto:giauy0987@gmail.com")
 PHONE = Link("+84 947 879 049", "tel:+84947879049")
 GITHUB = Link("github.com/BuiGiaUy", "https://github.com/BuiGiaUy")
 LINKEDIN = Link("linkedin.com/in/uy-gia", "https://www.linkedin.com/in/uy-gia/")
-PORTFOLIO = Link("Portfolio repository", "https://github.com/BuiGiaUy/portfolio-")
+PORTFOLIO = Link("buigiauy.github.io/portfolio-/", "https://buigiauy.github.io/portfolio-/")
 CREDENTIAL = Link("1MZD8JNIZC", "https://verify.w3schools.com/1MZD8JNIZC")
 
 BASENAME = "Bui-Gia-Uy-CV"

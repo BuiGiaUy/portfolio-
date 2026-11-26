@@ -4,7 +4,7 @@ AI Engineer | LLM & RAG Systems
 
 Ho Chi Minh City, Vietnam · [+84 947 879 049](tel:+84947879049) · [giauy0987@gmail.com](mailto:giauy0987@gmail.com)
 
-[github.com/BuiGiaUy](https://github.com/BuiGiaUy) · [linkedin.com/in/uy-gia](https://www.linkedin.com/in/uy-gia/) · [Portfolio repository](https://github.com/BuiGiaUy/portfolio-)
+[github.com/BuiGiaUy](https://github.com/BuiGiaUy) · [linkedin.com/in/uy-gia](https://www.linkedin.com/in/uy-gia/) · [buigiauy.github.io/portfolio-/](https://buigiauy.github.io/portfolio-/)
 
 AI Engineer focused on RAG and backend platforms, with production experience since 2024. Backend Core & Testing on HR GENIE, a 4-person AI20K capstone: NestJS core, RBAC and pgvector retrieval.
 

@@ -4,7 +4,7 @@ Full-Stack Web Developer | TypeScript, NestJS & Next.js
 
 Ho Chi Minh City, Vietnam · [+84 947 879 049](tel:+84947879049) · [giauy0987@gmail.com](mailto:giauy0987@gmail.com)
 
-[github.com/BuiGiaUy](https://github.com/BuiGiaUy) · [linkedin.com/in/uy-gia](https://www.linkedin.com/in/uy-gia/) · [Portfolio repository](https://github.com/BuiGiaUy/portfolio-)
+[github.com/BuiGiaUy](https://github.com/BuiGiaUy) · [linkedin.com/in/uy-gia](https://www.linkedin.com/in/uy-gia/) · [buigiauy.github.io/portfolio-/](https://buigiauy.github.io/portfolio-/)
 
 Full-Stack Web Developer with production experience since 2024. At Hoa Lan Cattleya, shipped e-commerce features across Next.js, TypeScript APIs and PostgreSQL; previously built internal mobile tools at Propway Vietnam. Backend Core & Testing on HR GENIE, a 4-person AI20K capstone with permission-aware retrieval and cited answers.
 

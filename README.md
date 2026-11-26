@@ -2,12 +2,12 @@
 
 AI Engineer & Full-Stack Web Developer based in Ho Chi Minh City.
 
-- Portfolio (intended GitHub Pages URL): <https://buigiauy.github.io/portfolio-/>
+- Portfolio (live): <https://buigiauy.github.io/portfolio-/>
 - GitHub: <https://github.com/BuiGiaUy>
 - LinkedIn: <https://www.linkedin.com/in/uy-gia/>
 - Email: <giauy0987@gmail.com>
 
-> Nếu URL GitHub Pages trả 404, bật Pages trong **Settings → Pages → Deploy from a branch → `main` / root**. Repo cần được push đầy đủ, gồm `assets/images/avatar.jpg`, `assets/cv/Bui-Gia-Uy-CV.pdf` và `assets/cv/Bui-Gia-Uy-CV-FullStack.pdf`.
+> Portfolio đang chạy GitHub Pages từ nhánh `main`, thư mục root. Khi cập nhật, push lên `main` để GitHub Pages build lại; cần có `assets/images/avatar.jpg`, `assets/cv/Bui-Gia-Uy-CV.pdf` và `assets/cv/Bui-Gia-Uy-CV-FullStack.pdf`.
 
 ---
 
