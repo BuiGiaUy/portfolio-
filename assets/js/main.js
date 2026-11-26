@@ -107,6 +107,7 @@ function updateMeta() {
   setMeta('property', 'og:title', t('meta.ogTitle'));
   setMeta('property', 'og:description', t('meta.ogDescription'));
   setMeta('property', 'og:locale', t('meta.ogLocale'));
+  setMeta('property', 'og:locale:alternate', currentLang === 'en' ? 'vi_VN' : 'en_US');
   setMeta('name', 'twitter:title', t('meta.ogTitle'));
   setMeta('name', 'twitter:description', t('meta.ogDescription'));
 }

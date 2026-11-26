@@ -95,8 +95,8 @@ window.PORTFOLIO_DATA = {
           send: "Gửi",
           asideKicker: "Demo này biết gì",
           know: [
-            "HR GENIE, RAG pipeline, router 98.46% và 1,453 kiểm thử",
-            "Multi-agent, LangGraph, Ragas/TruLens, tracing",
+            "HR GENIE, RAG pipeline, intent eval 64/65 (08/2026) và 1,453 kiểm thử của nhóm",
+            "Agent gateway, guardrails, permission/budget checks",
             "Kinh nghiệm tại Hoa Lan Cattleya, Propway, AI20K",
             "Stack backend, frontend, DevOps và cách liên hệ"
           ],
@@ -170,7 +170,7 @@ window.PORTFOLIO_DATA = {
         },
         trace: {
           plan: "truy xuất tài liệu chính sách HR",
-          route: "policy · 98.46%",
+          route: "policy · routed",
           retrieve: "pgvector + RBAC filter",
           verify: "đã qua evidence gate",
           answer: "3 citation · đã trả lời"
@@ -196,19 +196,19 @@ window.PORTFOLIO_DATA = {
         cv: "assets/cv/Bui-Gia-Uy-CV.pdf",
         stats: [
           {
-            value: "98.46%",
-            label: "Độ chính xác intent routing",
-            sub: "HR GENIE Smart Router"
+            value: "64/65",
+            label: "Intent eval 08/2026",
+            sub: "28/08 · chưa chạy lại"
           },
           {
             value: "1,453",
-            label: "Kiểm thử tự động",
+            label: "Kiểm thử của nhóm",
             sub: "1,036 Python · 417 NestJS"
           },
           {
-            value: "70%",
-            label: "Giảm tải database",
-            sub: "Redis cache · Wine platform"
+            value: "VNPay",
+            label: "Checkout sandbox",
+            sub: "HMAC-SHA512 · Wine"
           },
           {
             value: "2 năm",
@@ -264,8 +264,8 @@ window.PORTFOLIO_DATA = {
           summary: "Chương trình AI engineering thực chiến và capstone HR GENIE.",
           bullets: [
             "Backend Core & Testing cho HR GENIE: NestJS core, RBAC, audit log, ticket và CI.",
-            "Tích hợp FastAPI/LangGraph agent sau NestJS API; viết integration test và kiểm chứng production.",
-            "Docker, GitHub Actions, CI/CD, testing và kiểm chứng production."
+            "Tích hợp FastAPI/LangGraph agent sau NestJS API và viết integration test.",
+            "Docker, GitHub Actions, CI/CD và kiểm chứng production."
           ],
           tech: ["RAG", "LLM", "LangGraph", "NestJS", "Next.js", "PostgreSQL", "Docker", "CI/CD"]
         }
@@ -281,32 +281,33 @@ window.PORTFOLIO_DATA = {
           categoryLabel: "AI / RAG",
           year: "2026",
           organization: "AI20K · Vingroup × VinUniversity",
-          role: "Backend Core & Testing · 4-person team",
+          role: "Backend Core & Testing · nhóm 4 người",
           badge: "Dự án chính",
-          status: "Định hướng production",
+          status: "Capstone",
           size: "wide",
           summary:
-            "Trợ lý chính sách nhân sự trả lời từ tài liệu nội bộ với citation, evidence gate và escalation cho câu hỏi nhạy cảm hoặc ngoài phạm vi.",
+            "Trợ lý chính sách nhân sự trả lời từ tài liệu nội bộ với citation, evidence gate, refusal khi thiếu căn cứ và chuyển HR cho câu hỏi nhạy cảm.",
           problem:
             "Chính sách HR dài, nhiều phiên bản và phân quyền phức tạp. Một chatbot thông thường dễ bịa hoặc trả về tài liệu mà nhân viên không được xem.",
           approach: [
             "Hybrid retrieval trên pgvector, lọc quyền ngay trong truy vấn (pre-query authorization).",
             "Smart intent router phân loại policy / general / out-of-scope trước khi retrieval.",
             "Evidence gate và deterministic verifier đối soát câu trả lời với trích dẫn gốc.",
-            "Escalation cho câu hỏi nhạy cảm, thiếu bằng chứng hoặc ngoài phạm vi.",
+            "Câu trả lời policy có căn cứ phải kèm trích dẫn; thiếu bằng chứng thì từ chối, câu hỏi cá nhân/nhạy cảm chuyển HR.",
             "NestJS + Next.js + PostgreSQL + Docker + GitHub Actions cho vòng đời production."
           ],
           metrics: [
-            { label: "Độ chính xác router", value: "98.46%" },
-            { label: "Kiểm thử tự động", value: "1,453" },
+            { label: "Intent eval · 28/08/2026", value: "64/65" },
+            { label: "Kiểm thử của nhóm", value: "1,453" },
             { label: "Kiểm thử Python", value: "1,036" },
             { label: "Kiểm thử NestJS", value: "417" }
           ],
           highlights: [
             "Citation-first: mỗi câu trả lời phải chỉ ra điều khoản và tài liệu nguồn.",
             "Guardrails + escalation thay vì cố trả lời mọi câu hỏi.",
-            "1,453 kiểm thử tự động bao phủ backend, retrieval và API flow.",
-            "Phân quyền dữ liệu nhân sự ngay tại lớp retrieval, không chỉ ở UI."
+            "1,453 kiểm thử của nhóm bao phủ backend, retrieval và API flow.",
+            "Backend Core & Testing: NestJS core, RBAC, audit log, ticket và CI.",
+            "Hiện trạng eval: retrieval Recall@8 100% nhưng chỉ 30/80 câu grounded (37,5%); acceptance gate NO-GO."
           ],
           tech: [
             "Python",
@@ -322,7 +323,7 @@ window.PORTFOLIO_DATA = {
           ],
           architecture: {
             nodes: ["Query", "Intent router", "Authorized retrieval", "Evidence gate", "Verifier", "Cited answer"],
-            note: "RBAC pre-filter + hybrid search trên pgvector; request thiếu bằng chứng hoặc nhạy cảm sẽ escalation."
+            note: "RBAC pre-filter + hybrid search trên pgvector; thiếu bằng chứng thì refusal, câu hỏi cá nhân/nhạy cảm chuyển HR."
           },
           links: [],
           note: "Dự án nội bộ — trao đổi trực tiếp để xem mã nguồn."
@@ -352,14 +353,14 @@ window.PORTFOLIO_DATA = {
             "Admin CMS cho product, category, brand, user, order và content."
           ],
           metrics: [
-            { label: "Giảm tải DB", value: "70%" },
+            { label: "Signature", value: "HMAC-SHA512" },
             { label: "Thanh toán", value: "VNPay IPN" },
             { label: "Realtime", value: "Pusher WS" },
             { label: "Framework", value: "Laravel 10" }
           ],
           highlights: [
             "Luồng thanh toán có xác thực chữ ký và đối soát giao dịch.",
-            "Redis cache giảm khoảng 70% truy vấn database.",
+            "Redis cache cho catalog/cart; checkout VNPay ký HMAC-SHA512.",
             "Realtime comment và trạng thái đơn hàng qua Pusher.",
             "Admin đầy đủ cho catalog, người dùng và đơn hàng."
           ],
@@ -376,42 +377,42 @@ window.PORTFOLIO_DATA = {
         {
           id: "colosseum-certus",
           index: "03",
-          title: "COLOSSEUM & CERTUS",
-          subtitle: "Workflow multi-agent có tracing và evaluation tự động",
+          title: "COLOSSEUM | AGENT GATEWAY",
+          subtitle: "Python gateway với permission, budget và guardrails cho agent tool calls",
           category: "ai",
-          categoryLabel: "Multi-Agent",
+          categoryLabel: "Agent Infra",
           year: "2026",
           organization: "VinUni Track 2 Advanced",
-          role: "AI Engineer · Multi-Agent & Evaluation",
+          role: "AI Engineer · Agent Gateway & Guardrails",
           badge: "Lab nghiên cứu",
           status: "Track nâng cao",
           size: "normal",
           summary:
-            "Mạng lưới agent tự quản với Planner, Researcher, Critic và Executor; tracing và benchmark tự động cho chất lượng câu trả lời.",
+            "Python gateway kiểm tra permission, budget và citation trước khi forward agent tool calls; ghi lý do khi agent abstain.",
           problem:
-            "Cần một hệ multi-agent có thể phối hợp tác vụ phức tạp, đồng thời đo được chất lượng, chi phí token và độ trễ thay vì chỉ demo.",
+            "Agent gọi tool MCP/A2A; nếu không kiểm soát quyền, budget và citation, tool call có thể vượt phạm vi hoặc trả lời không grounded.",
           approach: [
-            "Thiết kế graph có state bằng LangGraph với bốn vai trò agent rõ ràng.",
-            "Distributed tracing qua LangSmith và Langfuse cho từng LLM call.",
-            "Đánh giá tự động Context Precision, Faithfulness và Answer Relevance bằng Ragas & TruLens.",
-            "Golden dataset và benchmark để phát hiện regression trước khi release."
+            "Gateway nhận mọi MCP/A2A/DISCOVER command trước khi execute.",
+            "Kiểm tra permission, budget, lease và citation/sensitive data; quyết định deny/rewrite/forward.",
+            "Ghi lý do khi agent abstain; telemetry riêng cho từng decision.",
+            "Test bằng pytest cho gateway và guardrails."
           ],
           metrics: [
-            { label: "Vai trò agent", value: "4" },
-            { label: "Evaluation", value: "Ragas + TruLens" },
-            { label: "Tracing", value: "LangSmith + Langfuse" },
-            { label: "Orchestration", value: "LangGraph" }
+            { label: "Gateway", value: "Python" },
+            { label: "Guardrails", value: "Permission + budget" },
+            { label: "Checks", value: "Citation + PII" },
+            { label: "Telemetry", value: "Decision trace" }
           ],
           highlights: [
-            "Planner → Researcher → Critic → Executor với vòng lặp critique.",
-            "Tracing chi phí token và latency theo từng bước.",
-            "Benchmark tự động trên golden dataset.",
-            "Phát hiện drift ngữ nghĩa và regression chất lượng prompt."
+            "Permission + budget checks trước mỗi tool call.",
+            "Citation và sensitive-data checks trong guardrails.",
+            "Ghi lý do khi agent abstain.",
+            "Pytest cho gateway và guardrails."
           ],
-          tech: ["LangGraph", "LangChain", "LangSmith", "Langfuse", "Ragas", "TruLens", "Docker", "FastAPI"],
+          tech: ["Python", "MCP", "A2A", "Guardrails", "Pytest", "Telemetry"],
           architecture: {
-            nodes: ["Planner", "Researcher", "Critic", "Executor", "Eval"],
-            note: "Graph có state, lặp theo chu kỳ; mỗi bước được trace và chấm điểm trên golden dataset."
+            nodes: ["Agent", "Gateway", "Decision", "Tool call", "Telemetry"],
+            note: "Mọi MCP/A2A/DISCOVER command đi qua gateway trước khi execute; decision deny/rewrite/forward được ghi lại."
           },
           links: [
             {
@@ -425,42 +426,42 @@ window.PORTFOLIO_DATA = {
           id: "portfolio-backend",
           index: "04",
           title: "PORTFOLIO BACKEND",
-          subtitle: "API NestJS với Prisma, rate limit trên Redis và Docker",
+          subtitle: "API NestJS với Prisma, Redis rate limit, locking và Docker",
           category: "fullstack",
           categoryLabel: "Backend",
-          year: "2026",
+          year: "2025",
           organization: "Cá nhân · repo public",
           role: "Backend Developer",
           badge: "NestJS",
-          status: "Đang làm",
+          status: "Hoàn thành",
           size: "normal",
           summary:
-            "REST API quản lý dự án và lượt xem, JWT guard, rate limit theo IP trên Redis, Prisma/PostgreSQL và Docker.",
+            "REST API quản lý dự án và lượt xem, rate limit theo IP trên Redis, Prisma/PostgreSQL, Docker và hai chiến lược locking cho view count.",
           problem:
-            "Cần một backend nhỏ nhưng đủ chuẩn production cho portfolio: auth, phân quyền, rate limit, migration và test.",
+            "Cần một backend nhỏ nhưng đủ chuẩn production cho portfolio: rate limit, migration, locking và test.",
           approach: [
-            "NestJS modules cho project, view tracking và auth.",
-            "JWT guard bảo vệ route riêng tư; RBAC ở tầng service.",
+            "NestJS modules cho project, view tracking và health.",
             "Rate limit theo IP lưu trên Redis, chặn spam ở gateway.",
+            "Hai chiến lược locking cho view count: optimistic (version) và pessimistic.",
             "Prisma + PostgreSQL cho schema, migration và seed.",
-            "Docker + test tự động chạy giống nhau ở local và CI."
+            "Jest e2e gửi 50 request đồng thời cho mỗi chiến lược, kiểm tra counter đạt 50."
           ],
           metrics: [
             { label: "API", value: "NestJS" },
             { label: "ORM", value: "Prisma" },
             { label: "Rate limit", value: "Redis" },
-            { label: "Runtime", value: "Docker" }
+            { label: "Locking", value: "2 strategies" }
           ],
           highlights: [
-            "JWT guard + rate limit theo IP.",
-            "Prisma schema, migration và seed data.",
-            "Dockerized service với test tự động.",
-            "Cùng codebase chạy local và CI."
+            "Redis rate limit theo IP.",
+            "Optimistic + pessimistic locking cho view count.",
+            "Jest e2e 50 concurrent requests mỗi chiến lược.",
+            "Prisma schema, migration và seed data."
           ],
           tech: ["NestJS", "TypeScript", "Prisma", "PostgreSQL", "Redis", "Docker", "Jest"],
           architecture: {
-            nodes: ["Client", "JWT guard", "Rate limit", "Service", "Prisma", "PostgreSQL"],
-            note: "Rate limit theo IP trên Redis trước khi vào controller; Prisma quản lý schema và migration."
+            nodes: ["Client", "Rate limit", "Service", "Prisma", "PostgreSQL"],
+            note: "Rate limit Redis trước controller; optimistic/pessimistic locking cho view count; Prisma quản lý schema."
           },
           links: [
             { label: "GitHub", url: "https://github.com/BuiGiaUy/portfolio-backend" }
@@ -524,15 +525,15 @@ window.PORTFOLIO_DATA = {
           items: [
             {
               name: "RAG pipelines",
-              evidence: "Hybrid retrieval, reranking và câu trả lời citation-first cho HR GENIE."
+              evidence: "RAG agent pgvector đầu tiên và đường query NestJS–FastAPI cho HR GENIE."
             },
             {
-              name: "Multi-agent workflows",
-              evidence: "Graph có state bằng LangGraph: Planner → Researcher → Critic → Executor."
+              name: "Agent workflows",
+              evidence: "Agent gateway/guardrail lab với permission, budget và citation checks."
             },
             {
               name: "Vector search",
-              evidence: "pgvector, HNSW và filter phân quyền trước truy vấn."
+              evidence: "Tích hợp pgvector cho RAG agent đầu tiên của HR GENIE."
             },
             {
               name: "Evaluation & tracing",
@@ -540,11 +541,11 @@ window.PORTFOLIO_DATA = {
             },
             {
               name: "Guardrails",
-              evidence: "Evidence gate, deterministic verifier và escalation."
+              evidence: "RBAC, audit log, ticket escalation và Agent boundary trong NestJS."
             },
             {
               name: "Python / FastAPI",
-              evidence: "Suy luận AI và streaming service cho RAG pipeline."
+              evidence: "FastAPI agent contract và tích hợp query path cho HR GENIE."
             }
           ]
         },
@@ -625,7 +626,7 @@ window.PORTFOLIO_DATA = {
             },
             {
               name: "Testing",
-              evidence: "1,453 kiểm thử tự động; unit, integration và API flow."
+              evidence: "1,453 kiểm thử của nhóm; unit, integration và API flow."
             },
             {
               name: "Observability",
@@ -700,12 +701,12 @@ window.PORTFOLIO_DATA = {
         {
           keywords: ["hr genie", "rag", "retrieval", "router", "vinuni", "vingroup", "ai20k"],
           answer:
-            "HR GENIE là trợ lý chính sách nhân sự mình làm Backend Core & Testing trong AI20K (Vingroup × VinUniversity). Pipeline gồm Smart Intent Router đạt 98.46% accuracy, retrieval có phân quyền trên pgvector, Evidence Gate và deterministic verifier để câu trả lời luôn kèm citation. Hệ thống có 1,453 kiểm thử tự động (1,036 Python + 417 NestJS), guardrails và escalation cho câu hỏi nhạy cảm hoặc ngoài phạm vi."
+            "HR GENIE là trợ lý chính sách nhân sự mình làm Backend Core & Testing trong AI20K (Vingroup × VinUniversity, 08/2026 – Hiện tại). Intent router được đánh giá 64/65 (98,46%) trong lần eval ngày 28/08/2026; README của dự án ghi đây là số cũ, chưa chạy lại trên snapshot hiện tại. Hệ thống có 1,453 kiểm thử của nhóm (1,036 Python + 417 NestJS); acceptance gate hiện tại NO-GO, retrieval Recall@8 100% nhưng chỉ 30/80 câu grounded. Câu trả lời policy có căn cứ kèm citation; thiếu bằng chứng thì refusal, câu hỏi cá nhân/nhạy cảm chuyển HR."
         },
         {
           keywords: ["multi-agent", "agent", "langgraph", "langchain", "colosseum", "critic", "planner"],
           answer:
-            "Mình làm multi-agent với LangGraph trong Colosseum & Certus Labs (VinUni Track 2 Advanced). Graph có state với bốn vai trò Planner, Researcher, Critic và Executor. Mỗi bước được trace bằng LangSmith/Langfuse, và chất lượng được đánh giá tự động bằng Ragas & TruLens trên golden dataset."
+            "Mình làm agent gateway/guardrail trong Colosseum (VinUni Track 2 Advanced): Python gateway kiểm tra permission, budget, citation và sensitive data trước khi forward MCP/A2A tool calls; ghi lý do khi agent abstain và test bằng pytest."
         },
         {
           keywords: ["backend", "fullstack", "nestjs", "nextjs", "laravel", "postgresql", "redis", "api"],
@@ -715,12 +716,12 @@ window.PORTFOLIO_DATA = {
         {
           keywords: ["kinh nghiệm", "experience", "làm ở đâu", "công ty", "propway", "hoa lan"],
           answer:
-            "Mình có khoảng 2 năm kinh nghiệm production: Junior Full-Stack tại Hoa Lan Cattleya (Next.js, NestJS, Prisma, PostgreSQL) và Propway Vietnam (Flutter, Vue.js, REST API, Golang backend). Sau đó mình tham gia AI20K và làm Backend Core & Testing cho HR GENIE — trợ lý RAG có citation, guardrails và 1,453 kiểm thử."
+            "Mình có khoảng 2 năm kinh nghiệm production: Junior Full-Stack tại Hoa Lan Cattleya (Next.js, NestJS, Prisma, PostgreSQL) và Propway Vietnam (Flutter, Vue.js, REST API, Golang backend). Sau đó mình tham gia AI20K (08/2026 – Hiện tại) và làm Backend Core & Testing cho HR GENIE — trợ lý RAG có citation, guardrails và 1,453 kiểm thử của nhóm."
         },
         {
           keywords: ["dự án", "project", "portfolio", "sản phẩm", "wine", "crypto"],
           answer:
-            "Portfolio có 5 dự án tiêu biểu: HR GENIE (RAG/LLM), Wine E-Commerce (Laravel, VNPay, Redis, Pusher), Colosseum & Certus (multi-agent, evaluation), Portfolio Backend (NestJS, Prisma, Redis rate limit) và Crypto Trade (React, Next.js, Express/MongoDB). Bấm vào từng thẻ để xem vấn đề, cách tiếp cận, số liệu và kiến trúc."
+            "Portfolio có 5 dự án tiêu biểu: HR GENIE (RAG/LLM), Wine E-Commerce (Laravel, VNPay, Redis, Pusher), Colosseum agent gateway (guardrails), Portfolio Backend (NestJS, Prisma, Redis rate limit, locking) và Crypto Trade (React, Next.js, Express/MongoDB). Bấm vào từng thẻ để xem vấn đề, cách tiếp cận, số liệu và kiến trúc."
         },
         {
           keywords: ["liên hệ", "contact", "email", "phone", "tuyển dụng", "hợp tác", "cv"],
@@ -735,7 +736,7 @@ window.PORTFOLIO_DATA = {
         {
           keywords: ["học vấn", "chứng chỉ", "bằng cấp", "đào tạo", "education", "certificate"],
           answer:
-            "Học vấn & chứng chỉ: AI20K — AI Engineering & Product Build (Vingroup × VinUniversity, 08/2026 – Hiện tại), Professional Certificate PHP Full-Stack Web Development (TechMaster, 2023–2024), React.js Developer Certificate (W3Schools, 2022). Ngoài ra mình có coursework IT tại Đại học Công nghiệp TP. Hồ Chí Minh (2021–2023)."
+            "Học vấn & chứng chỉ: AI20K — AI Engineering & Product Build (Vingroup × VinUniversity, 08/2026 – Hiện tại), Professional Certificate PHP Full-Stack Web Development (TechMaster, 2023–2024), Certified React Developer (W3Schools, Sep 2022). Ngoài ra mình có coursework IT tại Đại học Công nghiệp TP. Hồ Chí Minh (2021–2023)."
         },
         {
           keywords: ["chào", "hello", "hi", "hey", "alo", "bot ơi"],
@@ -751,7 +752,7 @@ window.PORTFOLIO_DATA = {
 
       aiPrompts: [
         "HR GENIE & RAG pipeline hoạt động thế nào?",
-        "Kinh nghiệm multi-agent và LangGraph của Uy?",
+        "Kinh nghiệm agent gateway và guardrails của Uy?",
         "Stack backend/frontend gồm những gì?",
         "Làm sao để liên hệ hoặc tải CV?"
       ]
@@ -846,8 +847,8 @@ window.PORTFOLIO_DATA = {
           send: "Send",
           asideKicker: "What this demo knows",
           know: [
-            "HR GENIE, RAG pipeline, 98.46% router and 1,453 tests",
-            "Multi-agent, LangGraph, Ragas/TruLens, tracing",
+            "HR GENIE, RAG pipeline, earlier intent eval 64/65 (Aug 2026) and 1,453 team tests",
+            "Agent gateway, guardrails, permission/budget checks",
             "Experience at Hoa Lan Cattleya, Propway, AI20K",
             "Backend, frontend, DevOps stack and contact details"
           ],
@@ -921,7 +922,7 @@ window.PORTFOLIO_DATA = {
         },
         trace: {
           plan: "retrieve HR policy docs",
-          route: "policy · 98.46%",
+          route: "policy · routed",
           retrieve: "pgvector + RBAC filter",
           verify: "evidence gate passed",
           answer: "3 citations · shipped"
@@ -947,19 +948,19 @@ window.PORTFOLIO_DATA = {
         cv: "assets/cv/Bui-Gia-Uy-CV.pdf",
         stats: [
           {
-            value: "98.46%",
-            label: "Intent routing accuracy",
-            sub: "HR GENIE Smart Router"
+            value: "64/65",
+            label: "Earlier intent eval (Aug 2026)",
+            sub: "28 Aug 2026 · not rerun"
           },
           {
             value: "1,453",
-            label: "Automated tests",
+            label: "Team tests passed",
             sub: "1,036 Python · 417 NestJS"
           },
           {
-            value: "70%",
-            label: "Database load cut",
-            sub: "Redis cache · Wine platform"
+            value: "VNPay",
+            label: "Signed sandbox checkout",
+            sub: "HMAC-SHA512 · Wine"
           },
           {
             value: "2 yrs",
@@ -1015,8 +1016,8 @@ window.PORTFOLIO_DATA = {
           summary: "Hands-on AI engineering program and the HR GENIE capstone.",
           bullets: [
             "Backend Core & Testing for HR GENIE: NestJS core, RBAC, audit logs, tickets and CI.",
-            "Integrated the FastAPI/LangGraph agent behind the NestJS API; wrote integration tests and production verification.",
-            "Worked with Docker, GitHub Actions, CI/CD, testing and production verification."
+            "Integrated the FastAPI/LangGraph agent behind the NestJS API and wrote integration tests.",
+            "Worked with Docker, GitHub Actions, CI/CD and production verification."
           ],
           tech: ["RAG", "LLM", "LangGraph", "NestJS", "Next.js", "PostgreSQL", "Docker", "CI/CD"]
         }
@@ -1034,30 +1035,31 @@ window.PORTFOLIO_DATA = {
           organization: "AI20K · Vingroup × VinUniversity",
           role: "Backend Core & Testing · 4-person team",
           badge: "Flagship",
-          status: "Production-oriented",
+          status: "Capstone",
           size: "wide",
           summary:
-            "An HR policy assistant that answers from internal documents with citations, an evidence gate and escalation for sensitive or out-of-scope questions.",
+            "An HR policy assistant that answers from internal documents with citations; insufficient evidence triggers refusal and sensitive personal cases go to HR.",
           problem:
             "HR policies are long, versioned and permissioned. A generic chatbot easily hallucinates or returns documents an employee is not allowed to see.",
           approach: [
             "Hybrid retrieval on pgvector with permission filters applied inside the query (pre-query authorization).",
             "A Smart Intent Router classifies policy / general / out-of-scope before retrieval.",
             "An evidence gate and deterministic verifier check the answer against source citations.",
-            "Escalation for sensitive questions, missing evidence or out-of-scope requests.",
+            "Grounded policy answers cite sources; insufficient evidence triggers refusal; sensitive personal cases go to HR.",
             "NestJS + Next.js + PostgreSQL + Docker + GitHub Actions across the production lifecycle."
           ],
           metrics: [
-            { label: "Router accuracy", value: "98.46%" },
-            { label: "Automated tests", value: "1,453" },
+            { label: "Intent eval · 28 Aug 2026", value: "64/65" },
+            { label: "Team tests passed", value: "1,453" },
             { label: "Python tests", value: "1,036" },
             { label: "NestJS tests", value: "417" }
           ],
           highlights: [
             "Citation-first: every answer must point to the source clause and document.",
             "Guardrails and escalation instead of answering everything.",
-            "1,453 automated tests covering backend, retrieval and API flows.",
-            "HR data permissions enforced at retrieval, not only in the UI."
+            "1,453 team tests covering backend, retrieval and API flows.",
+            "Backend Core & Testing: NestJS core, RBAC, audit logs, tickets and CI.",
+            "Current eval: retrieval Recall@8 100%, but only 30/80 grounded answers (37.5%); acceptance gate NO-GO."
           ],
           tech: [
             "Python",
@@ -1073,7 +1075,7 @@ window.PORTFOLIO_DATA = {
           ],
           architecture: {
             nodes: ["Query", "Intent router", "Authorized retrieval", "Evidence gate", "Verifier", "Cited answer"],
-            note: "RBAC pre-filter + hybrid search on pgvector; unsupported or sensitive requests escalate."
+            note: "RBAC pre-filter + hybrid search on pgvector; insufficient evidence triggers refusal, sensitive personal cases go to HR."
           },
           links: [],
           note: "Internal project — happy to walk through the source in a conversation."
@@ -1103,14 +1105,14 @@ window.PORTFOLIO_DATA = {
             "Admin CMS for products, categories, brands, users, orders and content."
           ],
           metrics: [
-            { label: "DB load reduced", value: "70%" },
+            { label: "Signature", value: "HMAC-SHA512" },
             { label: "Payment", value: "VNPay IPN" },
             { label: "Realtime", value: "Pusher WS" },
             { label: "Framework", value: "Laravel 10" }
           ],
           highlights: [
             "Payment flow with signature validation and transaction reconciliation.",
-            "Redis cache cut database queries by roughly 70%.",
+            "Redis cache for catalog/cart; signed VNPay checkout with HMAC-SHA512.",
             "Real-time comments and order status through Pusher.",
             "Full admin for catalog, users and orders."
           ],
@@ -1127,42 +1129,42 @@ window.PORTFOLIO_DATA = {
         {
           id: "colosseum-certus",
           index: "03",
-          title: "COLOSSEUM & CERTUS",
-          subtitle: "Multi-agent workflows with tracing and automated evaluation",
+          title: "COLOSSEUM | AGENT GATEWAY",
+          subtitle: "Python gateway with permissions, budgets and guardrails for agent tool calls",
           category: "ai",
-          categoryLabel: "Multi-Agent",
+          categoryLabel: "Agent Infra",
           year: "2026",
           organization: "VinUni Track 2 Advanced",
-          role: "AI Engineer · Multi-Agent & Evaluation",
+          role: "AI Engineer · Agent Gateway & Guardrails",
           badge: "Research lab",
           status: "Advanced track",
           size: "normal",
           summary:
-            "A self-managing agent network with Planner, Researcher, Critic and Executor roles, plus tracing and automated benchmarks for answer quality.",
+            "A Python gateway that checks permissions, budgets and citations before forwarding agent tool calls; records the reason when the agent abstains.",
           problem:
-            "Needed a multi-agent system that could coordinate complex tasks and measure quality, token cost and latency instead of stopping at a demo.",
+            "Agent tool calls over MCP/A2A need permission, budget and citation checks; otherwise calls can exceed scope or return ungrounded answers.",
           approach: [
-            "Designed a stateful graph with LangGraph and four clear agent roles.",
-            "Distributed tracing through LangSmith and Langfuse for every LLM call.",
-            "Automated evaluation of Context Precision, Faithfulness and Answer Relevance with Ragas & TruLens.",
-            "Golden dataset and benchmarks to catch regressions before release."
+            "Gateway receives every MCP/A2A/DISCOVER command before execution.",
+            "Checks permissions, budgets, leases and citation/sensitive data; returns deny/rewrite/forward.",
+            "Records the reason when the agent abstains; decision-level telemetry.",
+            "Pytest coverage for the gateway and guardrails."
           ],
           metrics: [
-            { label: "Agent roles", value: "4" },
-            { label: "Evaluation", value: "Ragas + TruLens" },
-            { label: "Tracing", value: "LangSmith + Langfuse" },
-            { label: "Orchestration", value: "LangGraph" }
+            { label: "Gateway", value: "Python" },
+            { label: "Guardrails", value: "Permission + budget" },
+            { label: "Checks", value: "Citation + PII" },
+            { label: "Telemetry", value: "Decision trace" }
           ],
           highlights: [
-            "Planner → Researcher → Critic → Executor with a critique loop.",
-            "Token cost and latency traced at every step.",
-            "Automated benchmarks on a golden dataset.",
-            "Detects semantic drift and prompt quality regressions."
+            "Permission and budget checks before every tool call.",
+            "Citation and sensitive-data checks in guardrails.",
+            "Records the reason when the agent abstains.",
+            "Pytest coverage for gateway and guardrails."
           ],
-          tech: ["LangGraph", "LangChain", "LangSmith", "Langfuse", "Ragas", "TruLens", "Docker", "FastAPI"],
+          tech: ["Python", "MCP", "A2A", "Guardrails", "Pytest", "Telemetry"],
           architecture: {
-            nodes: ["Planner", "Researcher", "Critic", "Executor", "Eval"],
-            note: "Stateful cyclical graph; every step is traced and scored against a golden dataset."
+            nodes: ["Agent", "Gateway", "Decision", "Tool call", "Telemetry"],
+            note: "Every MCP/A2A/DISCOVER command passes through the gateway before execution; deny/rewrite/forward decisions are recorded."
           },
           links: [
             {
@@ -1176,42 +1178,42 @@ window.PORTFOLIO_DATA = {
           id: "portfolio-backend",
           index: "04",
           title: "PORTFOLIO BACKEND",
-          subtitle: "NestJS API with Prisma, Redis rate limiting and Docker",
+          subtitle: "NestJS API with Prisma, Redis rate limiting, locking and Docker",
           category: "fullstack",
           categoryLabel: "Backend",
-          year: "2026",
+          year: "2025",
           organization: "Personal · public repo",
           role: "Backend Developer",
           badge: "NestJS",
-          status: "In progress",
+          status: "Completed",
           size: "normal",
           summary:
-            "A project and view-tracking REST API with JWT guards, Redis-backed IP rate limiting, Prisma/PostgreSQL and Docker.",
+            "A project and view-tracking REST API with Redis-backed IP rate limiting, Prisma/PostgreSQL, Docker and two locking strategies for view counts.",
           problem:
-            "Needed a small but production-grade backend for the portfolio: auth, authorization, rate limiting, migrations and tests.",
+            "Needed a small but production-grade backend for the portfolio: rate limiting, migrations, locking and tests.",
           approach: [
-            "NestJS modules for projects, view tracking and auth.",
-            "JWT guards protect private routes; RBAC at the service layer.",
+            "NestJS modules for projects, view tracking and health.",
             "IP-based rate limiting stored in Redis, blocking spam at the gateway.",
+            "Two view-count locking strategies: optimistic (version) and pessimistic.",
             "Prisma + PostgreSQL for schema, migrations and seed data.",
-            "Docker + automated tests that run the same locally and in CI."
+            "Jest e2e test sends 50 concurrent requests per strategy and checks both counters reach 50."
           ],
           metrics: [
             { label: "API", value: "NestJS" },
             { label: "ORM", value: "Prisma" },
             { label: "Rate limit", value: "Redis" },
-            { label: "Runtime", value: "Docker" }
+            { label: "Locking", value: "2 strategies" }
           ],
           highlights: [
-            "JWT guards + IP-based rate limiting.",
-            "Prisma schema, migrations and seed data.",
-            "Dockerized service with automated tests.",
-            "The same codebase runs locally and in CI."
+            "Redis-backed IP rate limiting.",
+            "Optimistic + pessimistic locking for view counts.",
+            "Jest e2e with 50 concurrent requests per strategy.",
+            "Prisma schema, migrations and seed data."
           ],
           tech: ["NestJS", "TypeScript", "Prisma", "PostgreSQL", "Redis", "Docker", "Jest"],
           architecture: {
-            nodes: ["Client", "JWT guard", "Rate limit", "Service", "Prisma", "PostgreSQL"],
-            note: "Redis-backed IP rate limiting before controller work; Prisma handles schema and migrations."
+            nodes: ["Client", "Rate limit", "Service", "Prisma", "PostgreSQL"],
+            note: "Redis rate limiting before controller work; optimistic/pessimistic view-count locking; Prisma handles schema."
           },
           links: [
             { label: "GitHub", url: "https://github.com/BuiGiaUy/portfolio-backend" }
@@ -1275,15 +1277,15 @@ window.PORTFOLIO_DATA = {
           items: [
             {
               name: "RAG pipelines",
-              evidence: "Hybrid retrieval, reranking and citation-first answers for HR GENIE."
+              evidence: "First pgvector RAG agent and the NestJS–FastAPI query path for HR GENIE."
             },
             {
-              name: "Multi-agent workflows",
-              evidence: "Stateful LangGraph graph: Planner → Researcher → Critic → Executor."
+              name: "Agent workflows",
+              evidence: "Agent gateway/guardrail lab with permission, budget and citation checks."
             },
             {
               name: "Vector search",
-              evidence: "pgvector, HNSW and pre-query authorization filters."
+              evidence: "pgvector integration for the first HR GENIE RAG agent."
             },
             {
               name: "Evaluation & tracing",
@@ -1291,11 +1293,11 @@ window.PORTFOLIO_DATA = {
             },
             {
               name: "Guardrails",
-              evidence: "Evidence gate, deterministic verifier and escalation."
+              evidence: "RBAC, audit logs, ticket escalation and the Agent boundary in NestJS."
             },
             {
               name: "Python / FastAPI",
-              evidence: "AI inference and streaming service for the RAG pipeline."
+              evidence: "FastAPI agent contract and query-path integration for HR GENIE."
             }
           ]
         },
@@ -1376,7 +1378,7 @@ window.PORTFOLIO_DATA = {
             },
             {
               name: "Testing",
-              evidence: "1,453 automated tests; unit, integration and API flows."
+              evidence: "1,453 team tests; unit, integration and API flows."
             },
             {
               name: "Observability",
@@ -1451,12 +1453,12 @@ window.PORTFOLIO_DATA = {
         {
           keywords: ["hr genie", "rag", "retrieval", "router", "vinuni", "vingroup", "ai20k"],
           answer:
-            "HR GENIE is an HR policy assistant I worked on as Backend Core & Testing in AI20K (Vingroup × VinUniversity). The pipeline includes a Smart Intent Router at 98.46% accuracy, permission-aware retrieval on pgvector, an Evidence Gate and a deterministic verifier so every answer carries citations. The system has 1,453 automated tests (1,036 Python + 417 NestJS), guardrails and escalation for sensitive or out-of-scope questions."
+            "HR GENIE is an HR policy assistant I worked on as Backend Core & Testing in AI20K (Vingroup × VinUniversity, Aug 2026 – Present). The intent router scored 64/65 (98.46%) in the 28 Aug 2026 evaluation; the project README notes this is an earlier score and has not been rerun on the current snapshot. The system has 1,453 team tests (1,036 Python + 417 NestJS); the current acceptance gate is NO-GO, with retrieval Recall@8 at 100% but only 30/80 grounded answers. Grounded policy answers cite sources; insufficient evidence triggers refusal; sensitive personal cases go to HR."
         },
         {
           keywords: ["multi-agent", "agent", "langgraph", "langchain", "colosseum", "critic", "planner"],
           answer:
-            "I build multi-agent systems with LangGraph in Colosseum & Certus Labs (VinUni Track 2 Advanced). The stateful graph has four roles: Planner, Researcher, Critic and Executor. Every step is traced with LangSmith/Langfuse, and quality is evaluated automatically with Ragas & TruLens on a golden dataset."
+            "I build an agent gateway/guardrail lab in Colosseum (VinUni Track 2 Advanced): a Python gateway checks permissions, budgets, citations and sensitive data before forwarding MCP/A2A tool calls, records the reason when the agent abstains, and is covered by pytest."
         },
         {
           keywords: ["backend", "fullstack", "nestjs", "nextjs", "laravel", "postgresql", "redis", "api"],
@@ -1466,12 +1468,12 @@ window.PORTFOLIO_DATA = {
         {
           keywords: ["kinh nghiệm", "experience", "where", "company", "propway", "hoa lan"],
           answer:
-            "I have about 2 years of production experience: Junior Full-Stack at Hoa Lan Cattleya (Next.js, NestJS, Prisma, PostgreSQL) and Propway Vietnam (Flutter, Vue.js, REST APIs, Golang backend). I then joined AI20K and worked on HR GENIE as Backend Core & Testing — a RAG assistant with citations, guardrails and 1,453 tests."
+            "I have about 2 years of production experience: Junior Full-Stack at Hoa Lan Cattleya (Next.js, NestJS, Prisma, PostgreSQL) and Propway Vietnam (Flutter, Vue.js, REST APIs, Golang backend). I then joined AI20K (Aug 2026 – Present) and worked on HR GENIE as Backend Core & Testing — a RAG assistant with citations, guardrails and 1,453 team tests."
         },
         {
           keywords: ["dự án", "project", "portfolio", "product", "wine", "crypto"],
           answer:
-            "The portfolio has five featured projects: HR GENIE (RAG/LLM), Wine E-Commerce (Laravel, VNPay, Redis, Pusher), Colosseum & Certus (multi-agent, evaluation), Portfolio Backend (NestJS, Prisma, Redis rate limiting) and Crypto Trade (React, Next.js, Express/MongoDB). Open any card for the problem, approach, metrics and architecture."
+            "The portfolio has five featured projects: HR GENIE (RAG/LLM), Wine E-Commerce (Laravel, VNPay, Redis, Pusher), Colosseum agent gateway (guardrails), Portfolio Backend (NestJS, Prisma, Redis rate limiting, locking) and Crypto Trade (React, Next.js, Express/MongoDB). Open any card for the problem, approach, metrics and architecture."
         },
         {
           keywords: ["liên hệ", "contact", "email", "phone", "hiring", "cv"],
@@ -1486,7 +1488,7 @@ window.PORTFOLIO_DATA = {
         {
           keywords: ["học vấn", "education", "certificate", "degree", "training"],
           answer:
-            "Education & certificates: AI20K — AI Engineering & Product Build (Vingroup × VinUniversity, Aug 2026 – Present), Professional Certificate in PHP Full-Stack Web Development (TechMaster, 2023–2024), React.js Developer Certificate (W3Schools, 2022). I also completed IT coursework at Industrial University of HCMC (2021–2023)."
+            "Education & certificates: AI20K — AI Engineering & Product Build (Vingroup × VinUniversity, Aug 2026 – Present), Professional Certificate in PHP Full-Stack Web Development (TechMaster, 2023–2024), Certified React Developer (W3Schools, Sep 2022). I also completed IT coursework at Industrial University of HCMC (2021–2023)."
         },
         {
           keywords: ["chào", "hello", "hi", "hey", "alo"],
@@ -1502,7 +1504,7 @@ window.PORTFOLIO_DATA = {
 
       aiPrompts: [
         "How does the HR GENIE & RAG pipeline work?",
-        "What is Uy's multi-agent and LangGraph experience?",
+        "What is Uy's agent gateway and guardrails experience?",
         "What is in the backend/frontend stack?",
         "How can I get in touch or download the CV?"
       ]

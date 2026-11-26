@@ -68,12 +68,12 @@ PROJECTS = (
         "HR GENIE | HR policy assistant",
         "AI20K capstone · 4-person team · Aug 2026 – Present",
         (
-            "Backend Core & Testing: initialized the NestJS core, Dockerized PostgreSQL + pgvector "
-            "and the first RAG agent in a 3-service Next.js, NestJS and FastAPI/LangGraph stack.",
+            "Backend Core & Testing: set up PostgreSQL with pgvector in Docker and built the team's "
+            "first RAG agent in a 3-service Next.js, NestJS and FastAPI/LangGraph stack.",
             "Built JWT/RBAC, admin/analytics, append-only audit logs, ticket/conversation modules and "
-            "CI; co-owned integration testing (1,036 Python + 417 NestJS tests).",
+            "CI; co-owned integration testing; team suite: 1,036 Python + 417 NestJS tests.",
             "Integrated the FastAPI/LangGraph agent behind the NestJS API with an internal service "
-            "token and typed request contracts; project's 65-case intent eval at 64/65 (98.46%).",
+            "token and typed request contracts; earlier intent-routing evaluation: 64/65 (98.46%) on 28 Aug 2026.",
         ),
     ),
     Entry(

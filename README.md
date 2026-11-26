@@ -42,7 +42,7 @@ Portfolio chính không còn Tailwind CDN, Lucide hay dependency runtime. `radar
 │   ├── js/data.js             # Nội dung portfolio cho cả VI và EN
 │   ├── js/main.js             # Render, i18n, modal, theme, chat, form
 │   ├── images/avatar.jpg
-│   ├── images/og-cover.jpg    # Ảnh social 1200×630
+│   ├── images/og-cover-ai-web.jpg # Ảnh social 1200×630
 │   ├── cv/Bui-Gia-Uy-CV.pdf          # CV AI Engineer, 1 trang
 │   └── cv/Bui-Gia-Uy-CV-FullStack.pdf # CV Full-Stack Web, 1 trang
 ├── cv/
@@ -61,7 +61,7 @@ Portfolio chính không còn Tailwind CDN, Lucide hay dependency runtime. `radar
 └── README.md
 ```
 
-Sửa nội dung portfolio tại `assets/js/data.js`: mỗi chuỗi có bản `locales.vi` và `locales.en`, giữ thuật ngữ kỹ thuật (RAG, backend, deployment…) bằng tiếng Anh ở cả hai. Trang mặc định là tiếng Việt; thêm `?lang=en` để mở thẳng bản tiếng Anh. Lựa chọn được lưu trong `localStorage`. Sửa CV tại `cv/build-cv.py`, sau đó chạy:
+Sửa nội dung portfolio tại `assets/js/data.js`: mỗi chuỗi có bản `locales.vi` và `locales.en`, giữ thuật ngữ kỹ thuật (RAG, backend, deployment…) bằng tiếng Anh ở cả hai. Trang mặc định là tiếng Việt; thêm `?lang=en` để mở thẳng bản tiếng Anh. Lựa chọn được lưu trong `localStorage`. Sửa nội dung chung và bản AI tại `cv/build-cv.py`; sửa phần Full-Stack Web tại `cv/build-cv-fullstack.py`, sau đó chạy:
 
 ```bash
 python -m pip install -r cv/requirements.txt
